@@ -1,0 +1,111 @@
+<%- include('header', {seoDetails}) %>
+
+<style>
+    .thankyou-page {
+        min-height: 100vh;
+        display: flex;
+        margin-top: -125px;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #0f0f0f 100%);
+        padding: 80px 20px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .thankyou-container {
+        max-width: 800px;
+        width: 100%;
+        text-align: center;
+        z-index: 1;
+        position: relative;
+    }
+    
+    .thankyou-content {
+    
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 60px 40px;
+  
+    }
+    
+    .thankyou-title {
+        font-family: var(--heading-font);
+        color: var(--white-color);
+        font-size: 72px;
+        font-weight: 700;
+        margin-bottom: 30px;
+        line-height: 1.2;
+    }
+    
+    @media (max-width: 768px) {
+        .thankyou-title {
+            font-size: 48px;
+        }
+    }
+    
+    .thankyou-message {
+        font-family: var(--body-font);
+        color: var(--text-color);
+        font-size: 18px;
+        line-height: 1.6;
+        margin-bottom: 40px;
+        color: rgba(255, 255, 255, 0.8);
+    }
+    
+    .thankyou-button {
+        display: inline-block;
+        padding: 18px 40px;
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        font-family: var(--body-font);
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+    }
+    
+    .thankyou-button:hover {
+        background-color: #e6392e;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(255, 65, 54, 0.4);
+        color: var(--white-color);
+    }
+    
+    .thankyou-icon {
+        font-size: 100px;
+        color: var(--primary-color);
+        margin-bottom: 30px;
+        display: block;
+    }
+</style>
+
+<div class="thankyou-page">
+    <div class="thankyou-container">
+        <div class="thankyou-content">
+            <i class="fa-solid fa-check-circle thankyou-icon"></i>
+            <h1 class="thankyou-title">Thank You!</h1>
+            <p id="thank-you-message" class="thankyou-message">Your message has been sent successfully. We'll get back to you soon.</p>
+            <a href="/" class="thankyou-button">Go to Home</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const message = sessionStorage.getItem("thankYouMessage");
+        
+        if (message) {
+            // Display the message in an element with ID 'thank-you-message'
+            document.getElementById("thank-you-message").textContent = message;
+    
+            // Optionally clear the message after it's shown (to avoid persisting after page reload)
+            sessionStorage.removeItem("thankYouMessage");
+        }
+    });
+</script>
+
+<%- include('footer') %>

@@ -1,0 +1,56 @@
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+            <!--======  Start Page Hero Section  ======-->
+            <section class="page-hero bg_cover p-r z-1" data-src="/assets/images/innerpage/bg/page-bg.jpg">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!--=== Page Content ===-->
+                            <div class="page-content text-center">
+                                <h1>Posts</h1>
+                                <ul>
+                                    <li><a href="/">Home</a></li>
+                                    <li>Posts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!--======  End Page Hero Section  ======-->
+            <!--======  Start Blog Section  ======-->
+            <section class="renvia-blog-grid-sec pt-120 pb-120">
+                <div class="container">
+                    <div class="row ">
+
+                        <% blogs.forEach(item => { %>
+                        <div class="col-xl-4 col-md-6 col-sm-12">
+                            <!-- Renvia Blog Item -->
+                            <div class="renvia-blog-post-item style-one mb-30" onclick="window.location.href='/post/<%= item.seoDetails.slug %>'" data-aos="fade-up" data-aos-duration="800">
+                                <div class="post-thumbnail">
+                                    <img src="<%= process.env.S3_BASE_URL + item.banner.image %>" alt="<%= item.title %>">
+                                </div>
+                                <div class="post-content">
+                                    <div class="post-tags">
+                                        <span><a href="javascript:void(0)"><%= item.category %></a></span>
+                                    </div>
+                                    <h4 class="title"><a href="/post/<%= item.seoDetails.slug %>"><%= item.title %></a></h4>
+                                    <a href="/post/<%= item.seoDetails.slug %>" class="read-more style-one">Read Details<i class="far fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                      
+                        <% }) %>
+                    </div>
+                  
+                </div>
+            </section><!--======  End Blog Section  ======-->
+        </main>
+
+
+
+   
+   
+           
+
+     

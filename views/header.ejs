@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="zxx">
+    
+<!-- Mirrored from nayonacademy.com/html/renvia-html/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 31 Dec 2025 18:41:05 GMT -->
+<head>
+        <!--====== Required meta tags ======-->
+        <title>
+            <%= seoDetails?.title %>
+        </title>
+        <meta name="description" content="<%= seoDetails?.metaDescription || '' %>">
+        <meta name="keywords" content="<%= seoDetails?.keywords || '' %>">
+        
+        <!-- Open Graph meta tags for social sharing -->
+        <meta property="og:title" content="<%= seoDetails?.title || '' %>">
+        <meta property="og:description" content="<%= seoDetails?.metaDescription || '' %>">
+        <meta property="og:image" content="<%= seoDetails?.metaImage || '' %>">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="<%= seoDetails?.canonical || '' %>">
+        
+        <!-- Canonical URL -->
+        <link rel="canonical" href="<%= seoDetails?.canonical || '' %>">
+        
+        
+        <link href="/assets/images/Logo/Tikariha_favicon.jpg" rel="icon">
+        
+        
+        <!--====== Favicon Icon ======-->
+        <link rel="shortcut icon" href="/assets/images/Logo/Tikariha_favicon.jpg" type="image/jpg">
+        <!--====== Google Fonts ======-->
+        <link href="https://fonts.googleapis.com/css2?family=Cal+Sans&amp;family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&amp;display=swap" rel="stylesheet">
+        <!--====== FontAwesome css ======-->
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+
+        <link rel="stylesheet" href="/assets/fonts/fontawesome/css/all.min.css">
+        <!--====== Bootstrap css ======-->
+        <link rel="stylesheet" href="/assets/css/plugins/bootstrap.min.css">
+        <!--====== Slick-popup css ======-->
+        <link rel="stylesheet" href="/assets/css/plugins/slick.css">
+        <!--====== Magnific-popup css ======-->
+        <link rel="stylesheet" href="/assets/css/plugins/magnific-popup.css">
+        <!--====== Aos css ======-->
+        <link rel="stylesheet" href="/assets/css/plugins/aos.css">
+        <!--====== Default css ======-->
+        <link rel="stylesheet" href="/assets/css/spacings.css">
+        <!--====== Default css ======-->
+        <link rel="stylesheet" href="/assets/css/style.css">
+    </head>
+    <body>
+        <!--====== Start Preloader ======-->
+        <div class="preloader">
+            <div class="loading-wrapper">
+                <div class="loading"></div>
+                <div id="loading-icon"><img src="/assets/images/loader.png" alt="loader"></div>
+            </div>
+        </div><!--====== End Preloader ======-->
+        <!--====== Renvia Offcanvas Panel ======-->
+        <div class="renvia-offcanvas-panel">
+            <div class="offcanvas-panel-inner">
+                <div class="panel-header d-flex justify-content-between align-items-center">
+                    <a href="index.html" class="brand-logo"><img src="/assets/images/innerpage/logo/logo-main.png" alt="Brand Logo"></a>
+                    <div class="panel-close-btn"><i class="far fa-times"></i></div>
+                </div>
+                <div class="offcanvas-body">
+                    <!-- Panel Box -->
+                    <div class="panel-box mb-40">
+                        <h4 class="panel-widget-title mb-10">Who Renvia Agency?</h4>
+                        <p>We turn your dream vacations into unforgettable realities. Whether you're seeking a relaxing beach escape, a thrilling adventure</p>
+                    </div>
+                    <!-- Panel Box -->
+                    <div class="panel-box mb-40">
+                        <h4 class="panel-widget-title mb-20">Popular Rent</h4>
+                        <!-- Renvia Project Item -->
+                        <div class="renvia-project-item mb-20">
+                            <div class="project-thumbnail">
+                                <img src="/assets/images/offcanvas/project-img1.jpg" alt="tour image">
+                                <div class="hover-content">
+                                    <div class="project-content">
+                                        <span class="location"><i class="far fa-map-marker-alt"></i>New York, NY</span>
+                                        <h4 class="title"><a href="project-details.html">Apartment Building</a></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Renvia Project Item -->
+                        <div class="renvia-project-item">
+                            <div class="project-thumbnail">
+                                <img src="/assets/images/offcanvas/project-img2.jpg" alt="tour image">
+                                <div class="hover-content">
+                                    <div class="project-content">
+                                        <span class="location"><i class="far fa-map-marker-alt"></i>New York, NY</span>
+                                        <h4 class="title"><a href="project-details.html">Commercial Space</a></h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Panel Box -->
+                <div class="panel-box">
+                    <h4>Newsletter</h4>
+                    <p class="mb-15">Get every travel news update</p>
+                    <form autocomplete="off">
+                        <div class="form-group">
+                            <input type="text" class="form_control" placeholder="Email address" name="search">
+                            <button class="theme-btn style-one">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--====== Start Overlay ======-->
+        <div class="offcanvas__overlay"></div>
+        <!--=== Start  Header Area  ===-->
+        <header class="header-area header-one">
+            <!--====  Header Navigation  ===-->
+            <div class="container-fluid">
+                <div class="header-navigation">
+                    <!--====  Primary Menu  ===-->
+                    <div class="primary-menu">
+                        <!--====  Site Branding  ===-->
+                        <div class="site-branding">
+                            <a href="/" class="brand-logo"><img src="/assets/images/Logo/Tikariha_Logo.png" alt="Brand Logo"></a>
+                        </div>
+                        <!--=== Main Menu ===-->
+                        <div class="theme-nav-menu">
+                            <!--=== Menu Top ===-->
+                            <div class="theme-menu-top d-block d-xl-none">
+                                <div class="site-branding">
+                                    <a href="/" class="brand-logo"><img src="/assets/images/Logo/Tikariha_Logo.png" alt="Brand Logo"></a>
+                                </div>
+                            </div>
+                            <!--=== Main Menu ===-->
+                            <nav class="main-menu">
+                                <ul>
+                                    <li class="menu-item "><a href="/">Home</a>
+                                      
+                                    </li>
+                                    <li class="menu-item"><a href="about.html">About</a></li>
+                                    <li class="menu-item has-children"><a href="#">Services</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="services.html">Our Services</a></li>
+                                            <li><a href="service-details.html">Service Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item has-children"><a href="#">Projects</a>
+                                        <ul class="sub-menu">
+                                            <li><a href="projects.html">Our Projects</a></li>
+                                            <li><a href="project-details.html">Project Details</a></li>
+                                        </ul>
+                                    </li>
+                                    <li class="menu-item "><a href="/career">Career</a>
+                                     
+                                    </li>
+                                    <li class="menu-item"><a href="/posts">Posts</a></li>
+                                    <li class="menu-item"><a href="/contact">Contact</a></li>
+                                </ul>
+                            </nav>
+                            <!--=== Nav Button ===-->
+                            <div class="theme-nav-button mt-20 d-block d-md-none">
+                                <a href="/contact" class="theme-btn style-one">Get Started<i class="far fa-arrow-right"></i></a>
+                            </div>
+                            <!--===  Menu Bottom ===-->
+                            <div class="theme-menu-bottom mt-50 d-block d-xl-none">
+                                <h5>Follow Us</h5>
+                                <ul class="social-link">
+                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!--=== Header Nav Right ===-->
+                        <div class="nav-right-item">
+                            <div class="nav-button d-none d-md-block">
+                                <a href="/contact" class="theme-btn style-one">Get Started<i class="far fa-arrow-right"></i></a>
+                            </div>
+                            <div class="offcanvas-toggle">
+                                <i class="fas fa-th"></i>
+                            </div>
+                            <div class="navbar-toggler">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </header><!--=== End  Header Area  ===-->

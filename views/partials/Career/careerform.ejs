@@ -1,0 +1,67 @@
+ <!-- Job Application Form -->
+ <div class="job-section">
+    <h3 class="job-section-title">Apply for this Position</h3>
+    <div class="job-application-form">
+        <p class="form-description">Fill out the form below to apply for this position. We'll review your application and get back to you soon.</p>
+        <form id="jobApplicationForm">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.NAME %>" placeholder="Full Name*" required>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <input type="tel" class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER %>" placeholder="Contact Number*" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" maxlength="10" required>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.EMAIL %>" placeholder="Email Address*" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" required>
+                    </div>
+                </div>
+                
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <input type="file" class="form-control" id="resumeUpload" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.RESUME %>" accept=".pdf,.doc,.docx" required style="display: none;">
+                        <input type="text" class="form-control" id="resumePlaceholder" placeholder="Upload Resume*" readonly style="cursor: pointer; background-color: #fff;">
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <input type="hidden" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.JOB_ID %>" value="<%= job._id %>">
+                    <div class="form-group">
+                        <textarea class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.MESSAGE %>" placeholder="Tell us about yourself and why you're interested in this position" rows="5"></textarea>
+                    </div>
+                </div>
+                
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <button class="btn btn__primary" type="submit" id="jobApplicationSubmitBtn">
+                        <span id="jobApplicationBtnText">Submit</span>
+                        <span class="submit-loader" id="jobApplicationSubmitLoader" style="display: none;">
+                            <svg width="20" height="20" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g transform="translate(1 1)" stroke-width="2">
+                                        <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+                                        <path d="M36 18c0-9.94-8.06-18-18-18">
+                                            <animateTransform
+                                                attributeName="transform"
+                                                type="rotate"
+                                                from="0 18 18"
+                                                to="360 18 18"
+                                                dur="1s"
+                                                repeatCount="indefinite"/>
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <p class="form-messege mt-3"></p>
+    </div>
+</div>

@@ -1,0 +1,137 @@
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+            <!--======  Start Page Hero Section  ======-->
+            <section class="page-hero bg_cover p-r z-1" data-src="/assets/images/innerpage/bg/page-bg.jpg">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!--=== Page Content ===-->
+                            <div class="page-content text-center">
+                                <h1>Contact Us</h1>
+                                <ul>
+                                    <li><a href="/">Home</a></li>
+                                    <li>Contact Us</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!--======  End Page Hero Section  ======-->
+            <!--======  Start Contact Info Section  ======-->
+            <section class="renvia-contact-info-sec pt-105">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <!--=== Section Title ===-->
+                            <div class="section-title text-center mb-50" data-aos="fade-up" data-aos-duration="1000">
+                                <h2>Our Contact Information</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-xl-4 col-md-6 col-sm-12">
+                            <!--=== Renvia Info Box ===-->
+                            <div class="renvia-info-left-box mb-40" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="icon">
+                                    <i class="far fa-map-marker-alt"></i>
+                                </div>
+                                <div class="content">
+                                    <h5>Our Address</h5>
+                                    <p>374 William S Canning Blvd, Fall River MA 2721, USA</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6 col-sm-12">
+                            <!--=== Renvia Info Box ===-->
+                            <div class="renvia-info-left-box mb-40" data-aos="fade-up" data-aos-duration="1200">
+                                <div class="icon">
+                                    <i class="far fa-phone-alt"></i>
+                                </div>
+                                <div class="content">
+                                    <h5>Contact Number</h5>
+                                    <p><span>Mobile: <a href="tel:+13217322978">+13217322978</a></span></p>
+                                    <p><span>Email: <a href="mailto:">saorhelp@gmail.com</a></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6 col-sm-12">
+                            <!--=== Renvia Info Box ===-->
+                            <div class="renvia-info-left-box mb-40" data-aos="fade-up" data-aos-duration="1400">
+                                <div class="icon">
+                                    <i class="far fa-clock"></i>
+                                </div>
+                                <div class="content">
+                                    <h5>Opening Hour</h5>
+                                    <p>Mon - Sat: 9:00 - 18:00</p>
+                                    <p>Sunday: Closed</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section><!--======  End Contact Info Section  ======-->
+            <!--======  Start Contact Section  ======-->
+            <section class="renvia-contact_three pt-80 pb-120">
+                <div class="container">
+                    <!--=== Contact Wrapper ===-->
+                    <div class="contact-wrapper" data-aos="fade-up" data-aos-duration="1000">
+                        <h3>Get In Touch</h3>
+                        <form id="contactForm" class="contact-form" method="POST">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label><i class="far fa-user"></i></label>
+                                        <input type="text" class="form_control" placeholder="Your Name" name="<%= CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.name %>" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label><i class="far fa-envelope"></i></label>
+                                        <input type="email" class="form_control" placeholder="Email Address" name="<%= CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.email %>" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label><i class="far fa-phone"></i></label>
+                                        <input type="tel" class="form_control" placeholder="Phone Number" name="<%= CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone %>" 
+                                               pattern="[0-9]{10}" 
+                                               maxlength="10" 
+                                               minlength="10" 
+                                               title="Please enter exactly 10 digits" 
+                                               required
+                                               oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label><i class="far fa-map-marker-alt"></i></label>
+                                        <input type="text" class="form_control" placeholder="Address" name="<%= CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.address %>" required>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label><i class="far fa-pen"></i></label>
+                                        <textarea class="form_control" placeholder="Message" name="<%= CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.remarks %>" rows="5" cols="8"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group text-center">
+                                        <button class="theme-btn style-one">Send Message Us <i class="far fa-arrow-right"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section><!--======  End Contact Section  ======-->
+            <section class="contact-map-sec" data-aos="fade-up" data-aos-duration="1000">
+                <!--=== Map Box ===-->
+                <div class="map-box mt-5 mt-xl-0" data-aos="fade-up" data-aos-duration="1200">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d96777.16150026117!2d-74.00840582560909!3d40.71171357405996!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sbd!4v1706508986625!5m2!1sen!2sbd" loading="lazy">
+                    </iframe>
+                </div>
+            </section>
+        </main>
+
+

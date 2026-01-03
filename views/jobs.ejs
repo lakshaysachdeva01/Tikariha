@@ -1,0 +1,142 @@
+<%- include('header'), {seoDetails} %>
+
+
+        <!-- PAGE TITLE
+        ================================================== -->
+        <section class="page-title-section top-position1 bg-img cover-background left-overlay-secondary" data-overlay-dark="85" data-background="/assets/img/banner/page-title-01.jpg">
+          <div class="container">                
+              <h1>Work With Us!</h1>
+              <ul>
+                  <li><a href="/">Home</a></li>
+                  <li>Career</li>
+              </ul>                
+          </div>
+      </section>
+
+      <!-- BLOG LIST
+      ================================================== -->
+      <% if (jobs && jobs.length > 0) { %>
+      <section>
+          <div class="container">
+              <div class="row mt-n2-9">
+                  <div class="col-lg-8 mt-2-9">
+
+                    <% jobs.forEach(job => { %>
+                      <div class="row mt-n1-9">
+                          <div class="col-12 mt-1-9 wow fadeIn" data-wow-delay="200ms">
+                              <article class="card card-style04 h-100">
+                                  
+                                  <div class="card-body position-relative pt-2-6 pb-1-9 pb-xl-2-6 px-1-9 px-xl-2-4">
+                                     
+                                      <div class="mb-3">
+                                          <a href="javascript:void(0)" class="text-uppercase fw-bold display-31"><%= job.jobPosition %></a>
+                                          <a href="javascript:void(0)" class="text-uppercase fw-bold display-31 blog-tag ps-4 position-relative">Experience : <%= job.experienceLevel %></a>
+                                          <a href="javascript:void(0)" class="text-uppercase fw-bold display-31 blog-tag ps-4 position-relative">Location : <%= job.location.cities[0].name %></a>
+                                      </div>
+                                      <h3 class="h2 mb-3"><a href="/job/<%= job.seoDetails?.slug %>"><%= job.title %></a></h3>
+                                      <p><%= job.subTitle %></p>
+                                      <a class="apply" href="/job/<%= job.seoDetails?.slug %>">Apply Now <i class="fa-solid fa-angles-right"></i></a>
+                                  </div>
+                                 
+                              </article>
+                          </div>
+                      </div>
+                      <% }) %>
+<style>
+  .apply{
+    margin-top: 30px;
+    color: #a1a76b;
+  }
+</style>
+                  </div>
+                  <div class="col-lg-4 mt-2-9">
+                      <div class="blog-sidebar mt-n1-9 ps-xl-5">
+                          <div class="widget bg-secondary mt-1-9 wow fadeInUp" data-wow-delay="200ms">
+                              <div class="section-title-01 mb-1-9">
+                                  <span class="text-primary font-weight-600 text-uppercase letter-spacing-1 position-relative ps-2">Search</span>
+                              </div>
+                              <div class="input-group">
+                                  <input type="text" class="form-control rounded-start border-0" placeholder="Search here...">
+                                  <div class="input-group-append">
+                                      <button class="btn-style1 border-primary rounded-end" type="button"><span><i class="fa fa-search"></i></span></button>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="widget bg-secondary mt-1-9 wow fadeInUp" data-wow-delay="200ms">
+                              <div class="section-title-01 mb-1-9">
+                                  <span class="text-primary font-weight-600 text-uppercase letter-spacing-1 position-relative ps-2">Recent Posts</span>
+                              </div>
+                              <div class="d-flex mb-4">
+                                  <div class="flex-shrink-0 me-3">
+                                      <img src="img/blog/blog-thumb-01.jpg" alt="...">
+                                  </div>
+                                  <div class="flex-grow-1">
+                                      <h4 class="mb-2 h6"><a href="#" class="text-white text-white-hover-light">Innovations in energy production.</a></h4>
+                                      <span class="text-white opacity8 small">June 01, 2025</span>
+                                  </div>
+                              </div>
+                              <div class="d-flex mb-4">
+                                  <div class="flex-shrink-0 me-3">
+                                      <img src="img/blog/blog-thumb-02.jpg" alt="...">
+                                  </div>
+                                  <div class="flex-grow-1">
+                                      <h4 class="mb-2 h6"><a href="#" class="text-white text-white-hover-light">Changing engine gear & grinding machine.</a></h4>
+                                      <span class="text-white opacity8 small">June 05, 2025</span>
+                                  </div>
+                              </div>
+                              <div class="d-flex">
+                                  <div class="flex-shrink-0 me-3">
+                                      <img src="img/blog/blog-thumb-03.jpg" alt="...">
+                                  </div>
+                                  <div class="flex-grow-1">
+                                      <h4 class="mb-2 h6"><a href="#" class="text-white text-white-hover-light">Trends in oil & gas exploration.</a></h4>
+                                      <span class="text-white opacity8 small">June 06, 2025</span>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="widget bg-secondary mt-1-9 wow fadeInUp" data-wow-delay="200ms">
+                              <div class="section-title-01 mb-1-9">
+                                  <span class="text-primary font-weight-600 text-uppercase letter-spacing-1 position-relative ps-2">Categories</span>
+                              </div>
+                              <ul class="category-list list-unstyled mb-0">
+                                  <li><a href="#"><span>Business</span></a></li>
+                                  <li><a href="#"><span>Digital Agency</span></a></li>
+                                  <li><a href="#"><span>Introductions</span></a></li>
+                                  <li><a href="#"><span>New Technologies</span></a></li>
+                                  <li><a href="#"><span>Web Development</span></a></li>
+                              </ul>
+                          </div>
+                          <div class="widget bg-secondary mt-1-9 wow fadeInUp" data-wow-delay="200ms">
+                              <div class="section-title-01 mb-1-9">
+                                  <span class="text-primary font-weight-600 text-uppercase letter-spacing-1 position-relative ps-2">Categories</span>
+                              </div>
+                              <div class="blog-tags mt-n2">
+                                  <a href="#">Consulting</a>
+                                  <a href="#">Agency</a>
+                                  <a href="#">Business</a>
+                                  <a href="#">Digital</a>
+                                  <a href="#">Experience</a>
+                                  <a href="#">Technology</a>
+                              </div>
+                          </div>
+                          <div class="widget bg-secondary mt-1-9 wow fadeInUp" data-wow-delay="200ms">
+                              <div class="section-title-01 mb-1-9">
+                                  <span class="text-primary font-weight-600 text-uppercase letter-spacing-1 position-relative ps-2">Follow Us</span>
+                              </div>
+                              <ul class="social-icon-style2 ps-0">
+                                  <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                  <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                  <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                                  <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <% } %>
+
+
+
+<%- include('footer') %>
