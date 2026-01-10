@@ -59,19 +59,50 @@ app.get('/', async (req, res) => {
 });
 
 
-// app.get('/about', async (req, res) => {
-//     const baseUrl = req.protocol + '://' + req.get('Host');
-//     const seoDetails = {
-//         title: "",
-//         metaDescription: "",
-//         metaImage: `${baseUrl}/${metaLogoPath}`,
-//         keywords: "",
-//         canonical: `${baseUrl}/about`,
-//     };
+app.get('/about', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const seoDetails = {
+        title: "",
+        metaDescription: "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: "",
+        canonical: `${baseUrl}/about`,
+    };
     
    
-//     res.render('about', {body: "",baseUrl, seoDetails});
-// });
+    res.render('about', {body: "",baseUrl, seoDetails});
+});
+
+
+app.get('/projects', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const seoDetails = {
+        title: "",
+        metaDescription: "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: "",
+        canonical: `${baseUrl}/about`,
+    };
+    
+   
+    res.render('locations', {body: "",baseUrl, seoDetails});
+});
+
+
+
+app.get('/services', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const seoDetails = {
+        title: "",
+        metaDescription: "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: "",
+        canonical: `${baseUrl}/about`,
+    };
+    
+   
+    res.render('services', {body: "",baseUrl, seoDetails});
+});
 
 
 

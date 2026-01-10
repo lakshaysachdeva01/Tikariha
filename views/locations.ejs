@@ -1,61 +1,194 @@
 <%- include('header'), {seoDetails} %>
 
-<div class="page-title-area bg_cover mb-90" style="background-image: url(assets/images/page-title-bg.jpg);">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="page-title-content">
-                    <h1 class="title">Locations</h1>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="/">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Locations</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<section class="news-2-area news-page">
-    <div class="container">
-        <div class="row justify-content-center">
-            <% location.forEach(item => { %>
-            <div class="col-lg-4 col-md-7 col-sm-9" >
-                <div class="news-item mt-30">
-                    <div class="news-thumb" onclick="window.location.href='/locationdetails/<%= item.basicDetails.name %>';">
-                        <img src="<%= process.env.S3_BASE_URL + item.basicDetails.logo %>" alt="karyasiddhi_bannerimage">
-                    </div>
-                    <div class="news-content" style="padding-bottom: 40px;">
-                        <ul>
-                           <li><%= item.basicDetails.city %></li>
-                        </ul>
-                        <h3 class="title" style="padding-top: 5px; padding-bottom:10px"><%= item.basicDetails.name %></h3>
-                        <ul style="line-height: 30px;">
-                            <li><%= item.basicDetails.address %></li>
-                         </ul>
-                         
-                        <a href="/locationdetails/<%= item.basicDetails.name %>" style="padding-top: 15px;     transform: translate(0px, 17px);"><i class="flaticon-right-arrow"></i></a>
-                        <div class="blog-details__share locations" style="justify-content: flex-end; transform: translate(10px, -20px);" >
-                            <ul>
-                                <li  style="margin-right: 0;"><a href="tel:<%= item.basicDetails.mobileNumber %>"><i class="fa fa-phone"></i></a></li>
-                                <li style="margin-right: 0;"><a href="https://api.whatsapp.com/send?phone=<%= item.basicDetails.mobileNumber %>&text=Hello,%20I’m%20reaching%20out%20to%20Karyasiddhi%20Co-working%20Space%20for%20more%20information.%20Could%20you%20please%20provide%20details%20about%20availability%20and%20other%20relevant%20information?" target="_blank"><i class="fa fa-whatsapp"></i></a></li>
-                                <li style="margin-right: 0;"><a href="mailto:<%= item.basicDetails.email %>"><i class="fa fa-envelope"></i></a></li>
-                                <li style="margin-right: 0;"><a href="<%= item.locationLink %>"><i class="fa fa-map-marker"></i></a></li>
-                                
-                            </ul>
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+            <!--======  Start Page Hero Section  ======-->
+            <section class="page-hero bg_cover p-r z-1" data-src="assets/images/innerpage/bg/page-bg.html">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!--=== Page Content ===-->
+                            <div class="page-content text-center">
+                                <h1>Project</h1>
+                                <ul>
+                                    <li><a href="index.html">Home</a></li>
+                                    <li>Project Details</li>
+                                </ul>
+                            </div>
                         </div>
-            </div>
-                       
                     </div>
                 </div>
-            
-            <% }) %>
-        </div>
-        </div>
-    </div>
-</section>
-
+            </section><!--======  End Page Hero Section  ======-->
+            <section class="renvia-projects-sec pt-120 pb-120">
+                <div class="container">
+                    <!-- Projects Item Filter -->
+                    <div class="projects-item-filter mb-50" data-aos="fade-up" data-aos-duration="1000">
+                        <form>
+                            <div class="row align-items-end">
+                                <div class="col-xl-10">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="wide">
+                                                    <option data-display="Project Status">All Status</option>
+                                                    <option value="02">Ongoing</option>
+                                                    <option value="03">Completed</option>
+                                                    <option value="04">Upcoming</option>
+                                                    <option value="05">Ready to Move</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="wide">
+                                                    <option data-display="Property Type">All Types</option>
+                                                    <option value="02">Apartment / Flat</option>
+                                                    <option value="03">Commercial Space</option>
+                                                    <option value="04">Plot / Land</option>
+                                                    <option value="05">Duplex / Villa</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="wide">
+                                                    <option data-display="Select Location">All Locations</option>
+                                                    <option value="02">United States</option>
+                                                    <option value="03">United Kingdom</option>
+                                                    <option value="04">Canada</option>
+                                                    <option value="05">Australia</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="wide">
+                                                    <option data-display="Project Budget">All Budgets</option>
+                                                    <option value="01">Below $100,000</option>
+                                                    <option value="01">$100,000 – $250,000</option>
+                                                    <option value="01">$250,000 – $500,000</option>
+                                                    <option value="01">$500,000 – $1 Million</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2">
+                                    <div class="renvia-button text-center text-xl-start mb-30">
+                                        <button class="theme-btn style-one">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Projects Wrapper -->
+                    <div class="projects-wrapper">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <!-- Renvia Project Item -->
+                                <div class="renvia-project-item style-four" data-aos="fade-up" data-aos-duration="1000">
+                                    <div class="project-thumbnail">
+                                        <img src="assets/images/innerpage/project/project-img1.html" alt="project-thumbnail">
+                                        <div class="location"><i class="far fa-map-marker-alt"></i> New York, NY</div>
+                                        <div class="hover-content">
+                                            <a href="project-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="project-content">
+                                        <h3 class="title"><a href="project-details.html">Apartment Building</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <!-- Renvia Project Item -->
+                                <div class="renvia-project-item style-four" data-aos="fade-up" data-aos-duration="1200">
+                                    <div class="project-thumbnail">
+                                        <img src="assets/images/innerpage/project/project-img2.html" alt="project-thumbnail">
+                                        <div class="location"><i class="far fa-map-marker-alt"></i> New York, NY</div>
+                                        <div class="hover-content">
+                                            <a href="project-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="project-content">
+                                        <h3 class="title"><a href="project-details.html">Eden Estate</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <!-- Renvia Project Item -->
+                                <div class="renvia-project-item style-four" data-aos="fade-up" data-aos-duration="1400">
+                                    <div class="project-thumbnail">
+                                        <img src="assets/images/innerpage/project/project-img3.html" alt="project-thumbnail">
+                                        <div class="location"><i class="far fa-map-marker-alt"></i> New York, NY</div>
+                                        <div class="hover-content">
+                                            <a href="project-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="project-content">
+                                        <h3 class="title"><a href="project-details.html">Vista at Councill Square</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <!-- Renvia Project Item -->
+                                <div class="renvia-project-item style-four" data-aos="fade-up" data-aos-duration="1600">
+                                    <div class="project-thumbnail">
+                                        <img src="assets/images/innerpage/project/project-img4.html" alt="project-thumbnail">
+                                        <div class="location"><i class="far fa-map-marker-alt"></i> New York, NY</div>
+                                        <div class="hover-content">
+                                            <a href="project-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="project-content">
+                                        <h3 class="title"><a href="project-details.html">Office Building</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <!-- Renvia Project Item -->
+                                <div class="renvia-project-item style-four" data-aos="fade-up" data-aos-duration="1800">
+                                    <div class="project-thumbnail">
+                                        <img src="assets/images/innerpage/project/project-img5.html" alt="project-thumbnail">
+                                        <div class="location"><i class="far fa-map-marker-alt"></i> New York, NY</div>
+                                        <div class="hover-content">
+                                            <a href="project-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="project-content">
+                                        <h3 class="title"><a href="project-details.html">Luxury Apartment</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <!-- Renvia Project Item -->
+                                <div class="renvia-project-item style-four" data-aos="fade-up" data-aos-duration="2000">
+                                    <div class="project-thumbnail">
+                                        <img src="assets/images/innerpage/project/project-img6.html" alt="project-thumbnail">
+                                        <div class="location"><i class="far fa-map-marker-alt"></i> New York, NY</div>
+                                        <div class="hover-content">
+                                            <a href="project-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="project-content">
+                                        <h3 class="title"><a href="project-details.html">Eden Estate</a></h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pagination -->
+                    <div class="theme-pagination text-center" data-aos="fade-up" data-aos-duration="2200">
+                        <ul>
+                            <li><a href="#"><i class="far fa-arrow-left"></i></a></li>
+                            <li><a href="#">01</a></li>
+                            <li><a href="#">02</a></li>
+                            <li><a href="#">03</a></li>
+                            <li><a href="#"><i class="far fa-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </main>
 
 <%- include('footer') %>
