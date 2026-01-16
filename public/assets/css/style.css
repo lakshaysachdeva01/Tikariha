@@ -6868,14 +6868,14 @@ label {
 }
 /*# sourceMappingURL=style.css.map */
 
-.top-180-90{
+#top-180-90{
   padding-top: 180px;
   padding-bottom: 30px;
 }
 
 
   @media screen and (max-width: 768px) {
-    .top-180-90{
+    #top-180-90{
       padding-top: 90px;
     }
   }
