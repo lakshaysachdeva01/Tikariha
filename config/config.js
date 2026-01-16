@@ -53,6 +53,15 @@ const BANNER_TYPES = {
     serviceType: "enqfor",
    };
 
+   const PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS={
+    name : "name",
+    email: "emailId",
+    phone : "contactNo",
+    city: "city",
+    remarks: "remakrs",
+    projectName:"projectName",
+   };
+
 
 module.exports={
   API_BASE_URL,
@@ -65,5 +74,6 @@ module.exports={
     CAREER_ENQUIRY_DYNAMIC_FIELDS_KEYS,
     BOOKING_ENQUIRY_DYNAMIC_FIELDS_KEYS,
     SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,
+    PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS,
  
 };

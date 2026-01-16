@@ -32,8 +32,8 @@
                                                                 .replace(/\b\w/g, char => char.toUpperCase());
                                                                 %>
 
-                                                                <div style="display: flex; gap: 10px;">
-                                                                    <div class="renvia-info-item   style-three mb-30">
+                                                                <div style="display: flex;flex-wrap: wrap; gap: 10px;">
+                                                                    <div class="renvia-info-item   style-three ">
 
                                                                         <div class="info">
                                                                             <h6>
@@ -42,7 +42,7 @@
                                                                             </h6>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="renvia-info-item style-three mb-30">
+                                                                    <div class="renvia-info-item style-three ">
 
                                                                         <div class="info">
                                                                             <h6>
@@ -51,7 +51,7 @@
                                                                             </h6>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="renvia-info-item style-three mb-30">
+                                                                    <div class="renvia-info-item style-three ">
                                                                         <div class="info">
                                                                             <h6>
                                                                                 <%= titleCase(projectDetails.locality)
@@ -63,7 +63,7 @@
                                                                     </div>
                                                                 </div>
 
-                                                                <div class="renvia-info-item style-three mb-30">
+                                                                <div class="renvia-info-item style-three ">
 
                                                                     <div class="info download-brochure">
                                                                         <h6
@@ -118,7 +118,7 @@
                                                             <% if (projectDetails.projectHighlight) { %>
                                                                 <h3  class="ah-title">Highlights</h3>
 
-                                                                <ul class="highlights-list">
+                                                                <ul class="highlights-list" style="padding-bottom: 60px;">
                                                                     <% projectDetails.projectHighlight .split(',')
                                                                         .map(h=> h.trim())
                                                                         .filter(Boolean)
@@ -148,41 +148,41 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <form>
+                                                                <form id="productform">
                                                                     <div class="row">
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
-                                                                                <input type="text" class="form_control" placeholder="Full Name*" name="name"
+                                                                                <input type="text" class="form_control" placeholder="Full Name*" name="<%= PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.name %>"
                                                                                     required>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
-                                                                                <input type="tel" class="form_control" placeholder="Contact Number*" name="contactNumber"
+                                                                                <input type="tel" class="form_control" placeholder="Contact Number*" name="<%= PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone %>"
                                                                                     required>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
-                                                                                <input type="email" class="form_control" placeholder="Email Address*" name="email"
+                                                                                <input type="email" class="form_control" placeholder="Email Address*" name="<%= PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.email %>"
                                                                                     required>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
-                                                                                <input type="text" class="form_control" placeholder="Subject*" name="subject"
-                                                                                    required>
+                                                                                <input type="text" class="form_control" placeholder="City" name="<%= PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.city %>"
+                                                                                    >
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group">
-                                                                                <textarea name="message" placeholder="Your Massage" rows="4"
+                                                                                <textarea name="<%= PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.remarks %>" placeholder="Your Massage" rows="4"
                                                                                     class="form_control"></textarea>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-lg-12">
                                                                             <div class="form-group text-end">
-                                                                                <button class="theme-btn style-one">Send A Request<i
+                                                                                <button class="theme-btn style-one" id="submit">Send A Request<i
                                                                                         class="far fa-arrow-right"></i></button>
                                                                             </div>
                                                                         </div>
@@ -208,13 +208,13 @@
       
         </section><!--======  End Project Details Section  ======-->
         <!--======  Start Contact Section  ======-->
-        <section class="renvia-project_two pt-115 pb-80 overflow-hidden">
+        <section class="renvia-project_two pt-115 pb-80 overflow-hidden" style="background-color: #0b0629;">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-xl-6 col-lg-8">
                         <div class="section-title text-white text-center mb-55">
-                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">Selected Project</span>
-                            <h2 class="text-anm">Discover luxury living at an affordable price</h2>
+                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">Project at a Glance</span>
+                            <h2 class="text-anm">Key visuals showcasing value, layout, and lifestyle appeal.</h2>
                         </div>
                     </div>
                 </div>
@@ -235,43 +235,8 @@
             <div class="container">
                 <!-- Counter Wrapper -->
                 <div class="counter-wrapper pt-80 text-white" data-aos="fade-up" data-aos-duration="1200">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-12 item-border">
-                            <!-- Renvia Counter Item -->
-                            <div class="renvia-counter-item style-one text-center mb-40">
-                                <div class="content">
-                                    <h2><span class="counter">145</span><span class="symbol">+</span></h2>
-                                    <p>Completed Projects</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 item-border">
-                            <!-- Renvia Counter Item -->
-                            <div class="renvia-counter-item style-one text-center mb-40">
-                                <div class="content">
-                                    <h2><span class="counter">129</span><span class="symbol">+</span></h2>
-                                    <p>Completed Projects</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 item-border">
-                            <!-- Renvia Counter Item -->
-                            <div class="renvia-counter-item style-one text-center mb-40">
-                                <div class="content">
-                                    <h2><span class="counter">4.3</span>B<span class="symbol">+</span></h2>
-                                    <p>Completed Projects</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-sm-12 item-border">
-                            <!-- Renvia Counter Item -->
-                            <div class="renvia-counter-item style-one text-center mb-40">
-                                <div class="content">
-                                    <h2><span class="counter">25</span>M<span class="symbol">+</span></h2>
-                                    <p>Completed Projects</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="row" style="display: flex; justify-content: center;">
+                       <a class="theme-btn style-one" style="max-width: 280px;" href="https://api.whatsapp.com/send?phone=+919893651234&amp;text=Hello%20Tikariha%20Advisors,%20I'd%20like%20assistance%20with%20a%you%20or%20enquiry." target="_blank">Chat on WhatsApp<i class="far fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -288,6 +253,21 @@
     <%- include('./partials/popup') %>
 
     <style>
+        /* Solution 1 - Simple fixed height */
+.project-slider .project-thumbnail img {
+    width: 100%;
+    height: 500px;
+    width: 700px;
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* Optional: Add hover effect */
+.project-slider .project-thumbnail img {
+    transition: transform 0.3s ease;
+}
+
         .top-button .info {
             background-color: #efefef;
             padding: 4px 16px;
@@ -343,4 +323,101 @@ li::marker{
             max-height: 85vh;
             object-fit: cover;
         }
+
+
+        .top-button{
+            margin-bottom: 30px;
+        }
+        @media (max-width: 768px) {
+    .project-slider{
+        padding:0  15px ;
+    }
+    .project-slider .project-thumbnail img{
+        max-width: 100%;
+        height: 350px;
+
+    }
+    .top-button{
+            margin-bottom: 0px;
+        }
+    .highlights-list {
+        
+            grid-template-columns: repeat(1, 1fr);
+          
+        }
+
+        .highlights-list {
+            grid-template-columns: repeat(1, 1fr);
+         
+        }
+        .download-brochure{
+            margin-top: 12px;
+            margin-bottom: 30px;
+        }
+
+}
     </style>
+
+<script>
+    document.getElementById('productform').addEventListener('submit', async function (e) { 
+          e.preventDefault(); // Prevent the default form submission
+      
+          try {
+              const API_BASE_URL = "<%= API_BASE_URL %>";
+              const websiteID = "<%= websiteID %>";
+              const WEBSITEIDKEY = "<%= WEBSITE_ID_KEY %>";
+              const PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS = <%- JSON.stringify(PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS) %>;
+      
+              const CREATE_PROJECT_ENQUIRY_END_POINT = `${API_BASE_URL}/website/${websiteID}/affiliation-enquiry/create`;
+      
+              const productform = e.target; // Reference to the form element
+              const WEBSITE_ID_KEY = WEBSITEIDKEY;
+      
+              // Prepare the payload from the form fields
+              const payload = {
+                    [PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.name]: productform.querySelector(
+                      `input[name="${PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.name}"]`
+                  ).value,
+                  [PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone]: Number(productform.querySelector(
+                      `input[name="${PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone}"]`
+                  ).value),
+                  [PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.email]: productform.querySelector(
+                      `input[name="${PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.email}"]`
+                  ).value,
+                  [PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.city]: productform.querySelector(
+                      `input[name="${PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.city}"]`
+                  ).value,
+                  [PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.remarks]: productform.querySelector(
+                      `textarea[name="${PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.remarks}"]`
+                  ).value,
+                  [PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS.projectName]: "<%= projectDetails._id %>",
+              };
+      
+              // Set headers for the request
+              const headers = new Headers({
+                  "Content-Type": "application/json",
+              });
+      
+              // Send POST request to the API
+              const response = await fetch(CREATE_PROJECT_ENQUIRY_END_POINT, {
+                  method: "POST",
+                  headers,
+                  body: JSON.stringify(payload),
+              });
+      
+              // Handle response
+              if (!response.ok) {
+                  throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+      
+              const data = await response.json();
+      
+              // Redirect to the thank-you page on success
+              sessionStorage.setItem("thankYouMessage", "We've Recieved Your Message and will Contact you soon.");
+              window.location.href = "/thankyou";
+          } catch (error) {
+              console.error("Form submission error", error);
+              // Optionally, you can show an error message or log the error
+          }
+      });
+</script>

@@ -5,7 +5,7 @@ const { getHomeDesktopBanner ,gettestimonial ,getAdBanner,getHomepopupBanner ,ge
 const { getBlog ,getBlogfull, getlatestblogs} = require('./controller/blogcontroller');
 const { getgallery,getLatestGalleryImages} = require('./controller/gallerycontroller');
 const { getProducts, getProductDetails, getProductsByCategory, getCategories ,getjobs,getjobdetails,getotherjobs} = require('./controller/productcontroller');
-const { CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS  , BOOKING_ENQUIRY_DYNAMIC_FIELDS_KEYS, SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS} = require('./config/config');
+const { CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS,PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS  , BOOKING_ENQUIRY_DYNAMIC_FIELDS_KEYS, SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS} = require('./config/config');
 
 const express = require('express');
 const path = require('path');
@@ -116,6 +116,7 @@ app.get('/project/:id', async (req, res) => {
         body: "",
         baseUrl,
         project: projectDetails,
+PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS,
         seoDetails,
         S3_BASE_URL,
         API_BASE_URL,

@@ -4142,7 +4142,7 @@ label {
 }
 @media (max-width: 767.98px) {
   .project-details-wrapper .project-content .project-meta-list .renvia-info-item {
-    width: 50%;
+    width: auto;
   }
   .project-details-wrapper .project-content .project-meta-list .renvia-info-item .icon {
     margin-right: 10px;
