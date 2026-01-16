@@ -59,14 +59,64 @@
                         </div>
                     </div>
 
-                    <!-- Job Description -->
-                    <% if (job.description) { %>
-                    <div class="job-section">
-                        <h3 class="job-section-title">Job Description</h3>
-                        <div class="job-description">
-                            <%- job.description %>
+                    <!-- Dynamic Job Description Sections -->
+                    <% if (job.jobDescription && job.jobDescription.length > 0) { %>
+                        <% job.jobDescription.forEach((section, index) => { %>
+                            <div class="job-section">
+                                <% if (section.singleImage) { %>
+                                    <!-- Single Image Section -->
+                                    <div class="job-image-section">
+                                        <% if (section.singleImage.image) { %>
+                                            <div class="job-single-image">
+                                                <img src="<%= process.env.S3_BASE_URL + section.singleImage.image %>" alt="Job Image <%= index + 1 %>" class="img-fluid" style=" object-fit: contain;">
+                                            </div>
+                                        <% } %>
+                                        <% if (section.description) { %>
+                                            <div class="job-description">
+                                                <%- section.description %>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                <% } else if (section.multipleImages) { %>
+                                    <!-- Multiple Images Section -->
+                                    <div class="job-image-section">
+                                        <% if (section.multipleImages && section.multipleImages.length > 0) { %>
+                                            <div class="job-multiple-images">
+                                                <div class="row">
+                                                    <% section.multipleImages.forEach((image, imgIndex) => { %>
+                                                        <div class="col-md-4 col-sm-6 mb-4">
+                                                            <div class="job-image-thumbnail">
+                                                                <img src="<%= process.env.S3_BASE_URL + image %>" alt="Job Image <%= imgIndex + 1 %>" class="img-fluid" style="height: 280px; object-fit: cover; width: 100%; border-radius: 8px;">
+                                                            </div>
+                                                        </div>
+                                                    <% }); %>
+                                                </div>
+                                            </div>
+                                        <% } %>
+                                        <% if (section.description) { %>
+                                            <div class="job-description">
+                                                <%- section.description %>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                <% } else if (section.description) { %>
+                                    <!-- Text Only Section -->
+                                    <div class="job-section">
+                                        <div class="job-description">
+                                            <%- section.description %>
+                                        </div>
+                                    </div>
+                                <% } %>
+                            </div>
+                        <% }); %>
+                    <% } else if (job.description) { %>
+                        <!-- Fallback to old description field -->
+                        <div class="job-section">
+                            <h3 class="job-section-title">Job Description</h3>
+                            <div class="job-description">
+                                <%- job.description %>
+                            </div>
                         </div>
-                    </div>
                     <% } %>
 
                     <div class="job-section">
@@ -75,7 +125,6 @@
                             <div class="row">
                                 <div class="col-12 col-md-4 mb-4">
                                     <div class="property-detail-feature-list-item d-flex align-items-center">
-                                        <i class="fa-solid fa-clock"></i>
                                         <div>
                                             <h6 class="fs-6 m-0">Work Mode</h6>
                                             <h6 class="fs-6 mt-1" style="margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;">
@@ -92,7 +141,6 @@
 
                                 <div class="col-12 col-md-4 mb-4">
                                     <div class="property-detail-feature-list-item d-flex align-items-center">
-                                        <i class="fa-solid fa-sack-xmark"></i>
                                         <div>
                                             <h6 class="fs-6 m-0">Salary Range</h6>
                                             <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;" ><%=job.salaryRange %> </h6>
@@ -105,7 +153,6 @@
                                 <% if (job.qualreq && job.qualreq.length > 0) { %>
                                 <div class="col-12 col-md-4 mb-4">
                                     <div class="property-detail-feature-list-item d-flex align-items-center">
-                                        <i class="fa-solid fa-award"></i>
                                         <div>
                                             <h6 class="fs-6 m-0">Qualification</h6>
                                             <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;" >
@@ -118,7 +165,6 @@
                         
                                 <div class="col-12 col-md-4 mb-4">
                                     <div class="property-detail-feature-list-item d-flex align-items-center">
-                                        <i class="fa-solid fa-clock-rotate-left"></i>
                                         <div style="display: flex; justify-content: center; align-items: center;">
                                             <div style="display: flex; flex-direction: column; text-align: center;">
                                                 <h6 class="fs-6 m-0" style="margin-bottom: 0;">Experience</h6>
@@ -334,6 +380,47 @@
 .job-description {
     line-height: 1.6;
     font-size: 16px;
+    margin-top: 20px;
+}
+
+.job-image-section {
+    margin-bottom: 30px;
+}
+
+.job-single-image {
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.job-single-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.job-multiple-images {
+    margin-bottom: 20px;
+}
+
+.job-image-thumbnail {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.job-image-thumbnail:hover {
+    transform: translateY(-5px);
+}
+
+.job-image-thumbnail img {
+    transition: transform 0.3s ease;
+}
+
+.job-image-thumbnail:hover img {
+    transform: scale(1.05);
 }
 
 /* Form styles from renvia-contact_three */
@@ -434,6 +521,14 @@
     
     .renvia-contact_three .contact-wrapper h3 {
         font-size: 28px;
+    }
+    
+    .job-single-image img {
+        max-height: 300px;
+    }
+    
+    .job-image-thumbnail img {
+        height: 150px;
     }
 }
 
