@@ -5,22 +5,22 @@
             <div class="row align-items-center">
                 <div class="col-lg-8">
                     <div class="section-title text-white mb-55 text-center text-lg-start" data-aos="fade-up" data-aos-duration="800">
-                        <% if (contact && contact.title) { %>
+                        <% if (typeof contact !== 'undefined' && contact && contact.title) { %>
                             <h2><%= contact.title %></h2>
                         <% } else { %>
                             <h2>Let’s Get Started on Your Project?</h2>
                         <% } %>
                         
-                        <% if (contact && contact.subtitle) { %>
+                        <% if (typeof contact !== 'undefined' && contact && contact.subtitle) { %>
                             <p><%= contact.subtitle %></p>
                         <% } else { %>
-                            <p>Let’s talk to us, share your dream project and we will transform it into reality</p>
+                            <p>Let's talk to us, share your dream project and we will transform it into reality</p>
                         <% } %>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="renvia-button text-lg-end mb-60 text-center" data-aos="fade-up" data-aos-duration="800">
-                        <% if (contact && contact.buttonName && contact.buttonLink) { %>
+                        <% if (typeof contact !== 'undefined' && contact && contact.buttonName && contact.buttonLink) { %>
                             <a href="<%= contact.buttonLink %>" class="theme-btn style-one">
                                 <%= contact.buttonName %><i class="far fa-arrow-right"></i>
                             </a>

@@ -47,7 +47,7 @@ Version: 1.0
 ----*/
 /* Base CSS */
 :root {
-  --primary-color: #FF4136;
+  --primary-color: #FF923F;
   --heading-color: #1C1C25;
   --primary-black-color: #1C1C25;
   --gray-color: #F7F5EF;
@@ -884,7 +884,7 @@ label {
   transition: all 0.35s;
 }
 .theme-btn.style-one {
-  background-color: var(--primary-color);
+  background-color: #4b3bad;
   color: var(--white-color);
 }
 .theme-btn.style-one:hover {
@@ -6522,7 +6522,7 @@ label {
 
 /* Footer V1 */
 .footer-v1 {
-  background-color: var(--primary-black-color);
+  background-color: #0b0629;
 }
 .footer-v1 .footer-top {
   padding-bottom: 25px;
