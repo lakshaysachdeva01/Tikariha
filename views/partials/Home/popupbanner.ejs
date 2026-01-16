@@ -2,6 +2,8 @@
 <div class="popup-overlay" id="popup-overlay">
     <div class="popup-banner">
         <!-- Desktop Swiper -->
+
+        <button class="close-button" id="popup-close-btn"><i class="fa-solid fa-xmark"></i></button>
         <div class="popup-desktop-banner">
             <div class="swiper popup-desktop-swiper" id="popup-desktop-swiper">
                 <div class="swiper-wrapper">
@@ -11,6 +13,7 @@
                         </div>
                     <% }) %>
                 </div>
+                
             </div>
         </div>
   
@@ -27,7 +30,7 @@
                 <div class="swiper-pagination popup-pagination-mobile"></div>
             </div>
         </div>
-        <button class="close-button" id="popup-close-btn">C L O S E</button>
+
     </div>
   </div>
   
@@ -66,11 +69,16 @@
         background-color: transparent;
         text-align: center;
         border: none;
-        color: white;
-        width: 100%;
+        background: #fff;
+        color: #000;
         margin: 20px 0;
+        padding: 10px 14px;
+        border-radius: 100%;
+        position: absolute;
+        top: -50px;
+        right: 20px;
         cursor: pointer;
-        font-size: 16px;
+        font-size: 24px;
         font-weight: bold;
         letter-spacing: 2px;
     }

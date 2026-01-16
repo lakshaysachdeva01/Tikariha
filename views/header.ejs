@@ -50,6 +50,8 @@
         <link rel="stylesheet" href="/assets/css/spacings.css">
         <!--====== Default css ======-->
         <link rel="stylesheet" href="/assets/css/style.css">
+
+        <link rel="stylesheet" href="/assets/swiper-bundle.css">
     </head>
     <body>
         
@@ -131,7 +133,7 @@
                             </div>
                             <!--=== Main Menu ===-->
                             <nav class="main-menu">
-                                <ul>
+                                <ul style="margin-bottom: 0;">
                                     <li class="menu-item "><a href="/">Home</a>
                                       
                                     </li>
@@ -154,7 +156,7 @@
                             </nav>
                             <!--=== Nav Button ===-->
                             <div class="theme-nav-button mt-20 d-block d-md-none">
-                                <a href="/contact" class="theme-btn style-one">Get Started<i class="far fa-arrow-right"></i></a>
+                                <a href="/contact" class="theme-btn style-one">Get Started<i class="fa-solid fa-phone"></i></a>
                             </div>
                             <!--===  Menu Bottom ===-->
                             <div class="theme-menu-bottom mt-50 d-block d-xl-none">
@@ -170,11 +172,17 @@
                         <!--=== Header Nav Right ===-->
                         <div class="nav-right-item">
                             <div class="nav-button d-none d-md-block">
-                                <a href="tel:+919893651234" class="theme-btn style-one">+91 9893651234<i class="far fa-arrow-right"></i></a>
+                                <a href="tel:+919893651234" class="theme-btn header style-one"><i style="margin-right: 10px;" class="fa-solid fa-phone"></i> +91 9893651234</a>
                             </div>
                             <div class="offcanvas-toggle">
                                 <i class="fa-solid fa-bars"></i>
                             </div>
+                            <style>
+                                .theme-btn.header:hover i {
+                                    -webkit-transform: rotate(0deg);
+                                    transform: rotate(0deg);
+                                }
+                            </style>
                             <div class="navbar-toggler">
                                 <span></span>
                                 <span></span>

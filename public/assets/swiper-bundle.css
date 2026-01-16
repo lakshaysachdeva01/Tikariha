@@ -72,10 +72,11 @@
 .swiper-slide {
     flex-shrink: 0;
     width: 100%;
+    display: flex;
+    justify-content: center;
     height: 100%;
     position: relative;
     transition-property: transform;
-    display: block
 }
 
 .swiper-slide-invisible-blank {
