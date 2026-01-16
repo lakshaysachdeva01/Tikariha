@@ -4,4 +4,9 @@
 
 <%- include('./partials/contact/contactendpoint') %>
 
-<%- include('footer') %>
+<%- include('footer', { contact: {
+    title: "Looking for Expert Consultation?",
+    subtitle: "Let’s connect on WhatsApp and discuss your requirements. Share your vision, and we’ll guide you toward the right solution.",
+    buttonName: "Chat on Whatsapp",
+    buttonLink: "https://api.whatsapp.com/send?phone=+919893651234&amp;text=Hello%20Tikariha%20Advisors,%20I'd%20like%20assistance%20with%20a%you%20or%20enquiry."
+} }) %>
