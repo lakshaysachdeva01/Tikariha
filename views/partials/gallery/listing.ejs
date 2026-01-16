@@ -1,5 +1,5 @@
 
-<p style="color:red">Gallery count: <%= gallery.length %></p>
+
 <style>
     .form-switch .switch {
         cursor: pointer;
@@ -227,23 +227,8 @@ border: 1px solid rgb(0, 0, 0) !important;
 </style>
 <div id="smooth-wrapper">
     <div id="smooth-content">
-        <main>
-<section class="page-hero bg_cover p-r z-1" data-src="/assets/images/innerpage/bg/page-bg.jpg">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <!--=== Page Content ===-->
-                <div class="page-content text-center">
-                    <h1>Gallery</h1>
-                    <ul>
-                        <li><a href="/">Home</a></li>
-                        <li>Gallery</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</section><!--======  End Page Hero Section  ======-->
+        <main style="padding: 180px 0 30px;">
+<!--======  End Page Hero Section  ======-->
 <% 
 // Use passed variables
 const displayGallery = rawGallery || gallery || []; 

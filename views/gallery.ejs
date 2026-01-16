@@ -149,24 +149,10 @@
 
 <div id="smooth-wrapper">
     <div id="smooth-content">
-        <main>
-            <section class="page-hero bg_cover p-r z-1" data-src="/assets/images/innerpage/bg/page-bg.jpg">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <div class="page-content text-center">
-                                <h1>Gallery</h1>
-                                <ul>
-                                    <li><a href="/">Home</a></li>
-                                    <li>Gallery</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <div class="page-title-area bg_cover mb-30 mt-30" style="margin-top: 20px;">
+        <main style="padding: 180px 0 30px;">
+        
+         
+            <div class="page-title-area bg_cover mb-30" >
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
@@ -220,11 +206,14 @@
                                         %>
                                             <div class="gallery-thumb image-item"
                                                 data-title="<%= albumName.toLowerCase() %>">
-                                                
+                                                <a href="#" class="property-media-trigger" 
+                                                                       data-type="image" 
+                                                                       data-src="<%= process.env.S3_BASE_URL + imageSrc %>">
                                                 <img 
                                                     src="<%= process.env.S3_BASE_URL + imageSrc %>"
                                                     alt="<%= albumName %>"
                                                     class="thumbnail-image" />
+                                                    </a>
                                             </div>
                                         <% }); %>
                                     <% } %>
@@ -254,13 +243,17 @@
                                             <div class="gallery-thumb video-item"
                                                 data-title="<%= albumName.toLowerCase() %>">
 
+                                             
                                                 <div class="thumbnail-container">
-                                                    <img 
+                                                    <a href="#" class="property-media-trigger" 
+                                                    data-type="video" 
+                                                    data-src="<%= embedUrl %>">    <img 
                                                         src="https://img.youtube.com/vi/<%= videoId %>/0.jpg"
                                                         alt="<%= albumName %>"
                                                         class="thumbnail-image" />
                                                     <div class="play-button">▶</div>
-                                                </div>
+                                                </a> </div>
+                                               
                                             </div>
                                         
                                         <% }); %>
@@ -325,3 +318,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 
 <%- include('footer') %>
+
+    </div>  
+    </div>
+    <%- include('./partials/popup') %>

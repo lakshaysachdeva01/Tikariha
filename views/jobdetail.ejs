@@ -1,27 +1,12 @@
 <%- include('header'), {seoDetails} %>
 <div id="smooth-wrapper">
     <div id="smooth-content">
-        <main>
+        <main  style="padding: 180px 0 0px;">
             <!--======  Start Page Hero Section  ======-->
-            <section class="page-hero bg_cover p-r z-1" data-src="/assets/images/innerpage/bg/page-bg.jpg">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!--=== Page Content ===-->
-                            <div class="page-content text-center">
-                                <h1>Posts</h1>
-                                <ul>
-                                    <li><a href="/">Home</a></li>
-                                    <li>Posts</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+           
 <% if (job) { %>
 <!-- Job Details -->
-<section id="jobDetails" class="job-details pt-60 pb-90">
+<section id="jobDetails" class="job-details pt-60 ">
     <div class="container">
         <div class="row">
             <!-- Full Width Content -->
@@ -30,7 +15,7 @@
                     <!-- Job Header -->
                     <div class="job-header">
                         <!-- Job Tags -->
-                        <div class="job-tags">
+                        <div class="job-tags" style="color: var(--primary-color);">
                             <% if (job.category?.name) { %>
                             <span class="job-tag"><%= job.jobPosition %></span>
                             <% } %>
@@ -55,6 +40,14 @@
                             <div class="detail-item">
                                 <span class="detail-label">Experience</span>
                                 <span class="detail-value"><%= job.experienceRequired.replace(/_/g, ' ') || '' %></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Qualification</span>
+                                <span class="detail-value"> <%= job.qualreq %></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Salary Range</span>
+                                <span class="detail-value"><%=job.salaryRange %> </span>
                             </div>
                         </div>
                     </div>
@@ -119,64 +112,7 @@
                         </div>
                     <% } %>
 
-                    <div class="job-section">
-                        <h3 class="job-section-title">Highlights</h3>
-                        <div class="">
-                            <div class="row">
-                                <div class="col-12 col-md-4 mb-4">
-                                    <div class="property-detail-feature-list-item d-flex align-items-center">
-                                        <div>
-                                            <h6 class="fs-6 m-0">Work Mode</h6>
-                                            <h6 class="fs-6 mt-1" style="margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;">
-                                                <%= String(job.type || '')
-                                                    .trim()
-                                                    .replace(/_/g, ' ')
-                                                    .toLowerCase()
-                                                    .replace(/\b\w/g, char => char.toUpperCase())
-                                                %>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-4 mb-4">
-                                    <div class="property-detail-feature-list-item d-flex align-items-center">
-                                        <div>
-                                            <h6 class="fs-6 m-0">Salary Range</h6>
-                                            <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;" ><%=job.salaryRange %> </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <% if (job.qualreq && job.qualreq.length > 0) { %>
-                                <div class="col-12 col-md-4 mb-4">
-                                    <div class="property-detail-feature-list-item d-flex align-items-center">
-                                        <div>
-                                            <h6 class="fs-6 m-0">Qualification</h6>
-                                            <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;" >
-                                               <%= job.qualreq %>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                </div>
-                                <% } %>
-                        
-                                <div class="col-12 col-md-4 mb-4">
-                                    <div class="property-detail-feature-list-item d-flex align-items-center">
-                                        <div style="display: flex; justify-content: center; align-items: center;">
-                                            <div style="display: flex; flex-direction: column; text-align: center;">
-                                                <h6 class="fs-6 m-0" style="margin-bottom: 0;">Experience</h6>
-                                                <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;"><%= job.experienceRequired.replace(/_/g, ' ') %></h6>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                  
                     <!-- Job Application Form -->
                     <section class="renvia-contact_three pt-80 pb-120">
                         <div class="container">
@@ -287,14 +223,20 @@
         </main>
 
 <style>
+  .job-section h1, .job-section h2, .job-section h3, .job-section h4, .job-section h5, .job-section h6 .job-section strong , .job-section b{
+            font-size: 18px;
+            margin: 30px 0 12px;
+            font-weight:400 !important;
+        }
+
+strong, b{
+    font-weight:400 !important;
+}
+
 .job-detail-content {
     border-radius: 8px;
 }
 
-.fa-solid{
-    font-size: 30px ;
-    padding-right: 14px;
-}
 
 .job-header {
     margin-bottom: 40px;
@@ -345,7 +287,7 @@
 
 .detail-label {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     color: #374151;
 }
 

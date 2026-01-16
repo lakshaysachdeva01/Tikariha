@@ -1,25 +1,9 @@
 <div id="smooth-wrapper">
   <div id="smooth-content">
-      <main>
-          <!--======  Start Page Hero Section  ======-->
-          <section class="page-hero bg_cover p-r z-1" data-src="assets/images/innerpage/bg/page-bg.jpg">
-              <div class="container">
-                  <div class="row justify-content-center">
-                      <div class="col-lg-8">
-                          <!--=== Page Content ===-->
-                          <div class="page-content text-center">
-                              <h1>Post Details</h1>
-                              <ul>
-                                  <li><a href="/">Home</a></li>
-                                  <li>Post Details</li>
-                              </ul>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </section><!--======  End Page Hero Section  ======-->
+      <main style="padding: 180px 0 30px;">
+         
           <!--======  Start Blog Standard Section  ======-->
-          <section class="renvia-blog-details-sec pt-120 pb-70">
+          <section class="renvia-blog-details-sec pt-30 pb-30">
               <div class="container">
                   <div class="row">
                       <div class="col-xl-8">
@@ -141,7 +125,7 @@ function convertToEmbedUrl(url) {
                                 
                                                       <% item.multipleImages.forEach((image, index)=> { %>
                                                         <div class="image" style="position: relative; 
-                                                                              <%= imageCount > 1 ? 'height: 250px; overflow: hidden;' : '' %>">
+                                                                              <%= imageCount > 1 ? 'height: 300px; overflow: hidden;' : '' %>">
                                 
                                                           <img src="<%= process.env.S3_BASE_URL + image %>" alt="" class="image-size lightbox-trigger"
                                                             style="width: 100%; <%= imageCount > 1 ? 'height: 100%; object-fit: cover;' : 'height: auto;' %> border-radius: 8px; cursor: pointer; margin-bottom: 20px;"
