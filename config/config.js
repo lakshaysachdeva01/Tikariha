@@ -25,13 +25,12 @@ const BANNER_TYPES = {
    };
 
    const CAREER_ENQUIRY_DYNAMIC_FIELDS_KEYS={
-    name : "strings.stringOne",
-    phone : "strings.stringTwo",
-    email: "email",
-    qualification: "strings.stringThree",
-    experience: "strings.stringFour",
-    applied: "strings.stringFive",
-    resume: "files.fileOne",
+    name : "name",
+    phone : "contactNo",
+    email: "emailId",
+    experience: "experience",
+    applied: "appliedFor",
+    resume: "resume",
     remarks: "remarks",
    };
 

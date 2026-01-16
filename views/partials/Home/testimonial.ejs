@@ -29,14 +29,14 @@
                                             <div class="quote">
                                                 <img src="assets/images/home-one/testimonial/quote.png" alt="quote">
                                             </div>
-                                            <p><%= slide.review %></p>
+                                            <p><%= slide.testimonial %></p>
                                             <div class="author-thumb-item">
                                                 <div class="author-thumb">
-                                                    <img src="<%= process.env.S3_BASE_URL + slide.image %>" alt="<%= slide.name %>">
+                                                    <img src="<%= process.env.S3_BASE_URL + slide.picture %>" alt="<%= slide.name %>">
                                                 </div>
                                                 <div class="author-info">
                                                     <h5><%= slide.name %></h5>
-                                                    <span class="position"><%= slide.companyProfile %></span>
+                                                    <span class="position"><%= slide.profile %></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -47,7 +47,7 @@
                             </div>
                             <div class="renvia-counter-box" data-aos="fade-up" data-aos-duration="1400">
                                 <div class="content">
-                                    <h2><span class="number"><%= testimonial.length %></span><span class="symbol">+</span></h2>
+                                    <h2><span class="number">10</span><span class="symbol">+</span></h2>
                                     <p>Professional and Experienced staff <br> ready to help you</p>
                                 </div>
                             </div>
@@ -57,23 +57,8 @@
             </div>
         </section>
     
-        <% }) %>
-      
-        
                          
-                          
-                              
-                                    <img  src="<%= process.env.S3_BASE_URL + slide.image %>" alt="<%= slide.name %>">
                                
-                                <p class="mb-1-9 display-28 display-md-26 w-sm-85 mx-auto text-white opacity7 font-weight-400"> <%= slide.review.length > 140 ? slide.review.slice(0, 140) + '...' : slide.review %> 
-                                  <% if (slide.review.length > 140) { %>
-                                      <span class="read-more-btn" data-review="<%= slide.review.replace(/"/g, '&quot;') %>" onclick="openReviewPopup(this.getAttribute('data-review'))">
-                                          Read More
-                                      </span>
-                                  <% } %></p>
-<%= slide.name %>
-                               <%= slide.companyProfile %>
-                            
                          
               
         
@@ -240,4 +225,5 @@
       }
   });
 </script>
+
 <% } %>

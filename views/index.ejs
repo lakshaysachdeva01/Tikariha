@@ -1,4 +1,5 @@
 <%- include('header'), {seoDetails} %>
+<%- include('./partials/Home/popupbanner') %>
 <div id="smooth-wrapper">
     <div id="smooth-content">
         <main>
@@ -176,77 +177,9 @@
                 </div>
             </section><!--======  End About Section  ======-->
             <!--======  Start Services Section  ======-->
-            <section class="renvia-service_one gray-bg pt-115 pb-80" data-src="assets/images/home-one/bg/service-bg.jpg">
-                <div class="container-fluid">
-                    <div class="row justify-content-center">
-                        <div class="col-xxl-6 col-xl-8 col-lg-8">
-                            <!-- Section Title -->
-                            <div class="section-title text-center mb-55">
-                                <span class="sub-title" data-aos="fade-down" data-aos-duration="1000"><img src="assets/images/line1.png" alt="line">What we Offer<img src="assets/images/line2.png" alt="line"></span>
-                                <h2 class="text-anm">We Develop Excellent Real Estate And Infrastructural Projects.</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Service Slider -->
-                    <div class="service-slider" data-aos="fade-down" data-aos-duration="1000">
-                        <!-- Renvia Service Card -->
-                        <div class="renvia-service-card style-one mb-40">
-                            <div class="content">
-                                <div class="title-wrap">
-                                    <h4><a href="service-details.html">Real Estate Development</a></h4>
-                                    <a href="service-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
-                                </div>
-                                <p>we are more than just real estate advisors we are long-term partners in your property</p>
-                                <img src="assets/images/home-one/services/service-img1.jpg" alt="service image">
-                            </div>
-                        </div>
-                        <!-- Renvia Service Card -->
-                        <div class="renvia-service-card style-one mb-40">
-                            <div class="content">
-                                <div class="title-wrap">
-                                    <h4><a href="service-details.html">Construction Management</a></h4>
-                                    <a href="service-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
-                                </div>
-                                <p>we are more than just real estate advisors we are long-term partners in your property</p>
-                                <img src="assets/images/home-one/services/service-img2.jpg" alt="service image">
-                            </div>
-                        </div>
-                        <!-- Renvia Service Card -->
-                        <div class="renvia-service-card style-one mb-40">
-                            <div class="content">
-                                <div class="title-wrap">
-                                    <h4><a href="service-details.html">Architecture & Design</a></h4>
-                                    <a href="service-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
-                                </div>
-                                <p>we are more than just real estate advisors we are long-term partners in your property</p>
-                                <img src="assets/images/home-one/services/service-img3.jpg" alt="service image">
-                            </div>
-                        </div>
-                        <!-- Renvia Service Card -->
-                        <div class="renvia-service-card style-one mb-40">
-                            <div class="content">
-                                <div class="title-wrap">
-                                    <h4><a href="service-details.html">Project Management</a></h4>
-                                    <a href="service-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
-                                </div>
-                                <p>we are more than just real estate advisors we are long-term partners in your property</p>
-                                <img src="assets/images/home-one/services/service-img4.jpg" alt="service image">
-                            </div>
-                        </div>
-                        <!-- Renvia Service Card -->
-                        <div class="renvia-service-card style-one mb-40">
-                            <div class="content">
-                                <div class="title-wrap">
-                                    <h4><a href="service-details.html">Construction Management</a></h4>
-                                    <a href="service-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
-                                </div>
-                                <p>we are more than just real estate advisors we are long-term partners in your property</p>
-                                <img src="assets/images/home-one/services/service-img2.jpg" alt="service image">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section><!--======  End Services Section  ======-->
+            <%- include('./partials/Home/homeproducts') %>
+            
+            <!--======  End Services Section  ======-->
             <!--======  Start Project Section  ======-->
             <section class="renvia-project_one pt-120 pb-100">
                 <div class="container">
@@ -463,8 +396,8 @@
                 </div>
             </section><!--======  End Feature Section  ======-->
             <!--======  Start Testimonial Section  ======-->
-           
-           <%- include('partials/Home/testimonials') %>
+          
+           <%- include('./partials/Home/testimonial.ejs') %>
            
            
             <!--======  End Testimonial Section  ======-->
@@ -654,66 +587,10 @@
                 </div>
             </section><!--======  End Award Section  ======-->
             <!--======  Start Blog Section  ======-->
-            <section class="renvia-blog-sec pt-115 pb-80">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6">
-                            <!-- Section Title -->
-                            <div class="section-title text-center mb-5">
-                                <span class="sub-title" data-aos="fade-down" data-aos-duration="1000"><img src="assets/images/line1.png" alt="line">Our Latest Blog<img src="assets/images/line2.png" alt="line"></span>
-                                <h2 class="text-anm">Latest News Update <br> & Articles</h2>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xl-4 col-md-6 col-sm-12">
-                            <!-- Renvia Blog Item -->
-                            <div class="renvia-blog-post-item style-one mb-40" data-aos="fade-up" data-aos-duration="1000">
-                                <div class="post-thumbnail">
-                                    <img src="assets/images/home-one/blog/blog-img1.jpg" alt="blog grid">
-                                </div>
-                                <div class="post-content">
-                                    <div class="post-tags">
-                                        <span><a href="#">Company insights</a></span>
-                                    </div>
-                                    <h4 class="title"><a href="blog-details.html">Signet Breaks Ground on Foundry Lofts in Midtown Cleveland</a></h4>
-                                    <a href="blog-details.html" class="read-more style-one">Read Details<i class="far fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-6 col-sm-12">
-                            <!-- Renvia Blog Item -->
-                            <div class="renvia-blog-post-item style-one mb-40" data-aos="fade-up" data-aos-duration="1200">
-                                <div class="post-thumbnail">
-                                    <img src="assets/images/home-one/blog/blog-img2.jpg" alt="blog grid">
-                                </div>
-                                <div class="post-content">
-                                    <div class="post-tags">
-                                        <span><a href="#">Company insights</a></span>
-                                    </div>
-                                    <h4 class="title"><a href="blog-details.html">Transforming Communities The Impact of a Dedicated Real Estate</a></h4>
-                                    <a href="blog-details.html" class="read-more style-one">Read Details<i class="far fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-6 col-sm-12">
-                            <!-- Renvia Blog Item -->
-                            <div class="renvia-blog-post-item style-one mb-40" data-aos="fade-up" data-aos-duration="1400">
-                                <div class="post-thumbnail">
-                                    <img src="assets/images/home-one/blog/blog-img3.jpg" alt="blog grid">
-                                </div>
-                                <div class="post-content">
-                                    <div class="post-tags">
-                                        <span><a href="#">Company insights</a></span>
-                                    </div>
-                                    <h4 class="title"><a href="blog-details.html">Signet Breaks Ground on Foundry Lofts in Midtown Cleveland</a></h4>
-                                    <a href="blog-details.html" class="read-more style-one">Read Details<i class="far fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section><!--======  End Blog Section  ======-->
+            
+<%- include('./partials/Home/homeblogs') %>
+
+            <!--======  End Blog Section  ======-->
         </main>
 
 <%- include('footer') %>

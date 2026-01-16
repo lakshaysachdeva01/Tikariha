@@ -1,5 +1,432 @@
-<%- include('header', {seoDetails}) %>
+<%- include('header'), {seoDetails} %>
+    <div id="smooth-wrapper" style="padding-top: 40px;">
+        <div id="smooth-content">
+            <main>
+
+
+                <section class="renvia-project-details-sec pt-120">
+                    <div class="container">
+                        <!-- Project Details Wrapper -->
+                        <div class="project-details-wrapper">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="project-main">
+
+
+                                        <div class="content-box">
+                                            <div class="row">
+                                                <div class="col-xl-8">
+
+                                                    <div class="project-thumbnail mb-40" data-aos="fade-up"
+                                                        data-aos-duration="1000">
+                                                        <img src="<%= process.env.S3_BASE_URL + projectDetails.coverImage %>"
+                                                            alt="<%= projectDetails.projectName %>">
+                                                    </div>
+                                                    <div class="project-content" data-aos="fade-up"
+                                                        data-aos-duration="1200">
+                                                        <div class="project-meta-list top-button">
+                                                            <% const titleCase=(str)=>
+                                                                str
+                                                                .replace(/_/g, ' ')
+                                                                .toLowerCase()
+                                                                .replace(/\b\w/g, char => char.toUpperCase());
+                                                                %>
+
+                                                                <div style="display: flex; gap: 10px;">
+                                                                    <div class="renvia-info-item   style-three mb-30">
+
+                                                                        <div class="info">
+                                                                            <h6>
+                                                                                <%= titleCase(projectDetails.possesion)
+                                                                                    %>
+                                                                            </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="renvia-info-item style-three mb-30">
+
+                                                                        <div class="info">
+                                                                            <h6>
+                                                                                <%= titleCase(projectDetails.projectType)
+                                                                                    %>
+                                                                            </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="renvia-info-item style-three mb-30">
+                                                                        <div class="info">
+                                                                            <h6>
+                                                                                <%= titleCase(projectDetails.locality)
+                                                                                    %> , <%=
+                                                                                        titleCase(projectDetails.city)
+                                                                                        %>
+                                                                            </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="renvia-info-item style-three mb-30">
+
+                                                                    <div class="info download-brochure">
+                                                                        <h6
+                                                                            style="display: flex; align-items: center; justify-content: center;">
+                                                                            <a href="<%= process.env.S3_BASE_URL + projectDetails.brochure %>"
+                                                                                target="_blank"><span
+                                                                                    style="height: 20px; width: 20px; margin-right: 6px; "><svg
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        width="20" height="20"
+                                                                                        fill="#000000"
+                                                                                        viewBox="0 0 256 256">
+                                                                                        <path
+                                                                                            d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z">
+                                                                                        </path>
+                                                                                    </svg></span> Download Brochure</a>
+                                                                        </h6>
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+
+                                                        <h3 class="title">
+                                                            <%= projectDetails.projectName %>
+                                                        </h3>
+                                                        <div class="location" style="padding-bottom: 18px;"><i
+                                                                class="far fa-map-marker-alt"></i>
+                                                            <%= titleCase(projectDetails.locality) %> , <%=
+                                                                    titleCase(projectDetails.city) %>
+                                                        </div>
+                                                    
 
 
 
-<%- include('footer') %>
+                                                    <h3>Project Description</h3>
+                                                    <div class="project-description-block"><%- projectDetails.projectDescrpition[0].description %></div>
+
+
+
+                                                    <% if (projectDetails.amenities?.length) { %>
+                                                        <h3 class="ah-title" >Amenities</h3>
+                                                        <ul class="amenities-list">
+                                                            <% projectDetails.amenities.forEach(amenity=> { %>
+                                                                <li>
+                                                                    <i class="fa-solid fa-check"
+                                                                        style="margin-right: 10px;"></i>
+                                                                    <%= titleCase(amenity) %>
+                                                                </li>
+                                                                <% }) %>
+                                                        </ul>
+                                                        <% } %>
+
+                                                            <% if (projectDetails.projectHighlight) { %>
+                                                                <h3  class="ah-title">Highlights</h3>
+
+                                                                <ul class="highlights-list">
+                                                                    <% projectDetails.projectHighlight .split(',')
+                                                                        .map(h=> h.trim())
+                                                                        .filter(Boolean)
+                                                                        .forEach(highlight => { %>
+
+                                                                        <li>
+                                                                            <i class="fa-solid fa-check"
+                                                                                style="margin-right: 10px;"></i>
+                                                                            <%= highlight %>
+                                                                        </li>
+
+                                                                        <% }) %>
+                                                                </ul>
+                                                                <% } %>
+
+
+                                                </div>
+                                                </div>
+                                                <div class="col-xl-4 ">
+                                                    <section class="renvia-contact_two pb-120" data-aos="fade-up" data-aos-duration="1000">
+                                                        <div class="container">
+                                                            <div class="contact-wrapper" style="border-top: none; padding-top: 0;">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12">
+                                                                        <!-- Section Title -->
+                                                                        <div class="section-title  mb-30">
+                                                                            <h3>Enquire</h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <form>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form_control" placeholder="Full Name*" name="name"
+                                                                                    required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <input type="tel" class="form_control" placeholder="Contact Number*" name="contactNumber"
+                                                                                    required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <input type="email" class="form_control" placeholder="Email Address*" name="email"
+                                                                                    required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form_control" placeholder="Subject*" name="subject"
+                                                                                    required>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group">
+                                                                                <textarea name="message" placeholder="Your Massage" rows="4"
+                                                                                    class="form_control"></textarea>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-lg-12">
+                                                                            <div class="form-group text-end">
+                                                                                <button class="theme-btn style-one">Send A Request<i
+                                                                                        class="far fa-arrow-right"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </section>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div  class="project-content">
+                                            <div class="property-media-box mt-70" data-aos="fade-up" data-aos-duration="1000">
+                                                <div class="row align-items-center">
+                                                    <div class="col-lg-5">
+                                                        <h3 class="mb-30">Property Media</h3>
+                                                    </div>
+                                                    <div class="col-lg-7">
+                                                        <div class="property-tabs mb-40">
+                                                            <ul class="nav nav-tabs">
+                                                                <% if (projectDetails.projectPictures && projectDetails.projectPictures.length > 0) { %>
+                                                                <li>
+                                                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab1">Photos</button>
+                                                                </li>
+                                                                <% } %>
+                                                                
+                                                                <% if (projectDetails.youtubeLink) { %>
+                                                                <li>
+                                                                    <button class="nav-link <%= (!projectDetails.projectPictures || projectDetails.projectPictures.length === 0) ? 'active' : '' %>" 
+                                                                            data-bs-toggle="tab" 
+                                                                            data-bs-target="#tab2">Property Video</button>
+                                                                </li>
+                                                                <% } %>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="tab-content">
+                                                    <!-- Photos Tab -->
+                                                    <% if (projectDetails.projectPictures && projectDetails.projectPictures.length > 0) { %>
+                                                    <div class="tab-pane fade show active" id="tab1">
+                                                        <div class="row">
+                                                            <!-- Large Image (First image) -->
+                                                            <div class="col-lg-8">
+                                                                <div class="renvia-image mb-30">
+                                                                    <a href="#" class="property-media-trigger" 
+                                                                       data-type="image" 
+                                                                       data-src="<%= process.env.S3_BASE_URL + projectDetails.projectPictures[0] %>">
+                                                                        <img src="<%= process.env.S3_BASE_URL + projectDetails.projectPictures[0] %>" 
+                                                                             alt="project image" 
+                                                                             class="img-fluid">
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- Side column with remaining images -->
+                                                            <div class="col-lg-4">
+                                                                <!-- Second image -->
+                                                                <% if (projectDetails.projectPictures[1]) { %>
+                                                                <div class="renvia-image mb-20">
+                                                                    <a href="#" class="property-media-trigger" 
+                                                                       data-type="image" 
+                                                                       data-src="<%= process.env.S3_BASE_URL + projectDetails.projectPictures[1] %>">
+                                                                        <img src="<%= process.env.S3_BASE_URL + projectDetails.projectPictures[1] %>" 
+                                                                             alt="project image" 
+                                                                             class="img-fluid">
+                                                                    </a>
+                                                                </div>
+                                                                <% } %>
+                                                                
+                                                                <!-- Third image with "+ more" overlay -->
+                                                                <% if (projectDetails.projectPictures[2]) { %>
+                                                                <div class="renvia-image mb-30 position-relative">
+                                                                    <a href="#" class="property-media-trigger" 
+                                                                       data-type="image" 
+                                                                       data-src="<%= process.env.S3_BASE_URL + projectDetails.projectPictures[2] %>">
+                                                                        <img src="<%= process.env.S3_BASE_URL + projectDetails.projectPictures[2] %>" 
+                                                                             alt="project image" 
+                                                                             class="img-fluid">
+                                                                    </a>
+                                                                    
+                                                                    <!-- "+ more" overlay if more than 3 images -->
+                                                                    <% if (projectDetails.projectPictures.length > 3) { %>
+                                                                    <div class="property-more-overlay position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center" 
+                                                                         style="background: rgba(0, 0, 0, 0.6); cursor: pointer; z-index: 10;"
+                                                                         onclick="propertyMediaPopup.show(3)">
+                                                                        <span class="text-white fw-bold fs-4">+<%= projectDetails.projectPictures.length - 3 %> more</span>
+                                                                    </div>
+                                                                    <% } %>
+                                                                </div>
+                                                                <% } %>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                                    
+                                                    <!-- Video Tab -->
+                                                    <% if (projectDetails.youtubeLink) { %>
+                                                    <div class="tab-pane fade <%= (!projectDetails.projectPictures || projectDetails.projectPictures.length === 0) ? 'show active' : '' %>" 
+                                                         id="tab2">
+                                                        <div class="row">
+                                                            <div class="col-lg-12">
+                                                                <div class="renvia-image video-image mb-30">
+                                                                    <div class="overlay-image"></div>
+                                                                    <% 
+                                                                    // YouTube ID extraction function
+                                                                    function getYouTubeId(url) {
+                                                                        if (!url) return null;
+                                                                        const patterns = [
+                                                                            /(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([a-zA-Z0-9_-]+)/,
+                                                                            /youtube\.com\/v\/([a-zA-Z0-9_-]+)/,
+                                                                            /youtube\.com\/watch\?.*v=([a-zA-Z0-9_-]+)/,
+                                                                            /youtu\.be\/([a-zA-Z0-9_-]+)/
+                                                                        ];
+                                                                        
+                                                                        for (const pattern of patterns) {
+                                                                            const match = url.match(pattern);
+                                                                            if (match && match[1]) {
+                                                                                return match[1];
+                                                                            }
+                                                                        }
+                                                                        return null;
+                                                                    }
+                                                                    
+                                                                    const youtubeId = getYouTubeId(projectDetails.youtubeLink);
+                                                                    const videoThumbnail = youtubeId ? `https://img.youtube.com/vi/${youtubeId}/maxresdefault.jpg` : '/assets/images/innerpage/project/project-single5.html';
+                                                                    %>
+                                                                    <img src="<%= videoThumbnail %>" alt="project video thumbnail" class="img-fluid">
+                                                                    <div class="play-button text-center">
+                                                                        <a href="#" class="property-media-trigger" 
+                                                                           data-type="video" 
+                                                                           data-src="<%= projectDetails.youtubeLink %>">
+                                                                            <i class="fas fa-play"></i>
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                                    
+                                                    <!-- No media message -->
+                                                    <% if ((!projectDetails.projectPictures || projectDetails.projectPictures.length === 0) && !projectDetails.youtubeLink) { %>
+                                                    <div class="tab-pane fade show active">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="alert alert-info text-center">No media available for this project</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <% } %>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Add all hidden triggers for images and video -->
+                                            <div style="display: none;">
+                                                <% if (projectDetails.projectPictures && projectDetails.projectPictures.length > 0) { %>
+                                                    <% projectDetails.projectPictures.forEach(function(image, index) { %>
+                                                        <a href="#" class="property-media-trigger" 
+                                                           data-type="image" 
+                                                           data-src="<%= process.env.S3_BASE_URL + image %>">
+                                                           Image <%= index + 1 %>
+                                                        </a>
+                                                    <% }); %>
+                                                <% } %>
+                                                
+                                                <% if (projectDetails.youtubeLink) { %>
+                                                    <a href="#" class="property-media-trigger" 
+                                                       data-type="video" 
+                                                       data-src="<%= projectDetails.youtubeLink %>">
+                                                       Project Video
+                                                    </a>
+                                                <% } %>
+                                            </div>
+                                        </div>
+                                       
+                                      
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+      
+        </section><!--======  End Project Details Section  ======-->
+        <!--======  Start Contact Section  ======-->
+        
+        </main>
+        <%- include('footer') %>
+    </div>
+    </div>
+
+
+
+
+    <%- include('./partials/popup') %>
+
+    <style>
+        .top-button .info {
+            background-color: #efefef;
+            padding: 4px 16px;
+            border-radius: 12px;
+            font-weight: lighter;
+        }
+
+
+        .ah-title{
+            margin-top: 30px;
+            padding-bottom: 16px;
+        }
+
+        .project-description-block h1, .project-description-block h2, .project-description-block h3, .project-description-block h4, .project-description-block h5, .project-description-block h6{
+            font-size: 24px;
+            margin-bottom: 14px;
+        }
+
+        .renvia-contact_two{
+            position: sticky;
+            top: 100px;
+            align-self: flex-start;
+        }
+
+        .download-brochure {
+            border: 1px solid #000;
+        }
+
+        .top-button .info h6 {
+            font-weight: 400;
+        }
+
+
+        .highlights-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px 20px;
+        }
+
+
+        .renvia-project-details-sec {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-thumbnail img {
+            max-height: 85vh;
+            object-fit: cover;
+        }
+    </style>

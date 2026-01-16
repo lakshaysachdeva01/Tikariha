@@ -5,23 +5,18 @@ exports.getProducts = async(req, res) => {
    
     const websiteID = await getWebsiteID(); 
  
-    const data = await fetchData(`${API_BASE_URL}/website/product-management/get-all-products/${websiteID}`);
+    const data = await fetchData(`${API_BASE_URL}/website/${websiteID}/project-management/get-all`);
 
-    
-    // Reverse the array to show products in reverse order
-    if (data && Array.isArray(data)) {
-        return data.reverse();
-    }
     
     return data || [];
     
 };
 
-exports.getProductDetails = async(slug) => {
+exports.getProductDetails = async(id) => {
    
     const websiteID = await getWebsiteID(); 
  
-    const data = await fetchData(`${API_BASE_URL}/website/product-management/get-product-by-slug/${websiteID}?slug=${slug}`);
+    const data = await fetchData(`${API_BASE_URL}/website/${websiteID}/project-management/get-by-id/${id}`);
  
     return data || null
 }

@@ -28,7 +28,7 @@
                             <!-- Renvia Blog Item -->
                             <div class="renvia-blog-post-item style-one mb-30" onclick="window.location.href='/post/<%= item._id %>'" data-aos="fade-up" data-aos-duration="800">
                                 <div class="post-thumbnail">
-                                    <img src="<%= process.env.S3_BASE_URL + item.coverImage %>" class="blogimage" alt="<%= item.postTitle %>">
+                                    <img src="<%= process.env.S3_BASE_URL + item.listingBanner %>" class="blogimage" alt="<%= item.postTitle %>">
                                 </div>
                                 <div class="post-content">
                                     <div class="post-tags">

@@ -18,7 +18,7 @@ exports.getAdBanner = async(req, res) => {
 exports.getHomepopupBanner = async () => {
     try {
         const websiteID = await getWebsiteID();
-        const data = await fetchData(`${API_BASE_URL}/website/banner/get-all-banners/${websiteID}?type=POPUP_BANNER`);
+        const data = await fetchData(`${API_BASE_URL}/website/${websiteID}/banners/get-all?bannerType=POPUP_BANNER`);
 
         if (data && Array.isArray(data) && data.length > 0) {
             return data; // Return banners

@@ -37,14 +37,15 @@ app.use(async (req, res, next) => {
 
 app.get('/', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
-    const websiteID = await getWebsiteID(); 
+    const websiteID = await getWebsiteID();
 //     const banners = await getHomeDesktopBanner();
-//     const testimonial = await gettestimonial();
-//     const blogs = await getBlog();
+    const testimonial = await gettestimonial();
+    const projects = await getProducts();
+    const blogs = await getBlog();
 //     const gallery= await getgallery();
-//     const products = await getProducts();
+// //     const products = await getProducts();
 //     const clients = await getclientle();
-//     const popupbanners = await getHomepopupBanner();
+    const popupbanners = await getHomepopupBanner();
 //    const latestImages = await getLatestGalleryImages();
    const seoDetails = {
     title: " ",
@@ -54,8 +55,8 @@ app.get('/', async (req, res) => {
     canonical: `${baseUrl}`,
 };
 
-   
-    res.render('index', {body: "",websiteID,baseUrl,seoDetails});
+
+    res.render('index', {body: "",websiteID,baseUrl,testimonial,seoDetails,projects,blogs,popupbanners});
 });
 
 
@@ -76,34 +77,87 @@ app.get('/about', async (req, res) => {
 
 app.get('/projects', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
+    const websiteID = await getWebsiteID();
+    const projects = await getProducts();
     const seoDetails = {
         title: "",
         metaDescription: "",
         metaImage: `${baseUrl}/${metaLogoPath}`,
         keywords: "",
-        canonical: `${baseUrl}/about`,
+        canonical: `${baseUrl}/projects`,
     };
     
    
-    res.render('locations', {body: "",baseUrl, seoDetails});
+    res.render('locations', {body: "",baseUrl, seoDetails,projects,websiteID});
 });
+
+
+
+app.get('/project/:id', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const { id } = req.params;
+    const projectDetails = await getProductDetails(id);
+    const websiteID = await getWebsiteID();
+
+    if (!projectDetails) {
+        return res.redirect('/projects');
+    }
+
+    const seoDetails = {
+        title: projectDetails.title || "Project Details",
+        metaDescription: projectDetails.description ? projectDetails.description.replace(/<[^>]*>/g, '').substring(0, 160) : "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: projectDetails.keywords || "",
+        canonical: `${baseUrl}/project/${id}`,
+    };
+
+    res.render('details', {
+        body: "",
+        baseUrl,
+        project: projectDetails,
+        seoDetails,
+        S3_BASE_URL,
+        API_BASE_URL,
+        WEBSITE_ID_KEY,
+        websiteID,
+        projectDetails
+    });
+});
+
+
 
 
 
 app.get('/services', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const websiteID = await getWebsiteID(); 
+
     const seoDetails = {
         title: "",
         metaDescription: "",
         metaImage: `${baseUrl}/${metaLogoPath}`,
         keywords: "",
-        canonical: `${baseUrl}/about`,
+        canonical: `${baseUrl}/services`,
     };
     
-   
-    res.render('services', {body: "",baseUrl, seoDetails, SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,API_BASE_URL,WEBSITE_ID_KEY,websiteID});
+    // Normalize query parameters (handle both 'enq' and 'eng' typos)
+    const query = {
+        enq: req.query.enq || req.query.eng || null
+    };
+    
+    res.render('services', {
+        body: "",
+        baseUrl, 
+        seoDetails, 
+        SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,
+        API_BASE_URL,
+        WEBSITE_ID_KEY,
+        websiteID,
+        query // Pass the normalized query object
+    });
 });
+
+
 app.get('/gallery', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     
