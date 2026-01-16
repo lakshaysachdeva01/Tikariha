@@ -3,242 +3,127 @@
 
 <div id="smooth-wrapper">
     <div id="smooth-content">
-        <main>
-            <!--======  Start Page Hero Section  ======-->
-            <section class="page-hero bg_cover p-r z-1" data-src="assets/images/innerpage/bg/page-bg.html">
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8">
-                            <!--=== Page Content ===-->
-                            <div class="page-content text-center">
-                                <h1>Services</h1>
-                                <ul>
-                                    <li><a href="/">Home</a></li>
-                                    <li>Services</li>
-                                </ul>
+        <main id="top-180-90">
+            <section class="renvia-service_one gray-bg pt-120 pb-60" style="margin-top: -180px;">
+                <div class="container pt-60">
+                    <div class="row">
+                        <div class="col-xl-4 col-md-6 col-sm-12">
+                            <!-- Renvia Service Card -->
+                            <div class="renvia-service-card style-one mb-40" data-aos="fade-up" data-aos-duration="800">
+                                <div class="content">
+                                    <div class="title-wrap">
+                                        <h4><a href="service-details.html">Insurance <br /> Advisory</a></h4>
+                                        <a href="service-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+                                    </div>
+                                    <p>Protect what matters most with expert guidance across health, life, and general insurance.
+                                        We help you choose the right coverage, avoid mis-selling, and secure your family’s financial future with clarity and confidence.</p>
+                                <button class="theme-btn style-one themebtn">Enquire Now</button>
+                                </div>
                             </div>
                         </div>
+                        <div class="col-xl-4 col-md-6 col-sm-12">
+                            <!-- Renvia Service Card -->
+                            <div class="renvia-service-card style-one mb-40" data-aos="fade-up" data-aos-duration="1000">
+                                <div class="content">
+                                    <div class="title-wrap">
+                                        <h4><a href="service-details.html">Property Consultancy & Sales</a></h4>
+                                        <a href="service-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+                                    </div>
+                                    <p>From buying and selling to leasing and valuation, we provide end-to-end real estate advisory.
+                                        Our focus is on transparent transactions, market-aligned pricing, and decisions that create long-term value.</p>
+                                        <button class="theme-btn style-one themebtn">Enquire Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6 col-sm-12">
+                            <!-- Renvia Service Card -->
+                            <div class="renvia-service-card style-one mb-40" data-aos="fade-up" data-aos-duration="1200">
+                                <div class="content">
+                                    <div class="title-wrap">
+                                        <h4><a href="service-details.html">Investment Consultancy</a></h4>
+                                        <a href="service-details.html" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+                                    </div>
+                                    <p>Build wealth with strategy, not speculation.
+                                        We offer goal-based investment advisory aligned with risk profiles, market cycles, and long-term financial objectives—balancing growth with protection.</p>
+                                        <button class="theme-btn style-one themebtn">Enquire Now</button>
+                                </div>
+                            </div>
+                        </div>
+                      
                     </div>
                 </div>
-            </section><!--======  End Page Hero Section  ======-->
-            
-            <!--======  Start Service Section  ======-->
-            <section class="renvia-contact_three pt-80 pb-120">
-                <div class="container">
+            </section>
 
-                    
-                    <!--=== Insurance Form (First if insurance or no query, Second if investment) ===-->
-                    <% if (query.enq === 'investment') { %>
-                        <!-- Show Investment form first -->
-                        <div id="investment-section">
-                            <div class="contact-wrapper" data-aos="fade-up" data-aos-duration="1000">
-                                <h3>Enquiry for Investment Consultancy</h3>
-                                <form id="serviceform2" class="contact-form" method="POST">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-user"></i></label>
-                                                <input type="text" class="form_control" placeholder="Your Name" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.name %>" required>
+
+            <section class="renvia-contact_two pt-120 pb-120 p-r z-1">
+    
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-xl-10 col-lg-10">
+                            <!-- Renvia Content Box -->
+                            <div class="renvia-content-box mb-5 mb-xl-0">
+                                <!-- Section Title -->
+                                <div class="section-title " style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+                                    <span class="sub-title" data-aos="fade-down" data-aos-duration="800"><span class="line"></span>Free Consultation<img src="assets/images/line2.png" alt="line"></span>
+                                    <h2 class="text-anm">Connect With Our Advisors</h2>
+                                </div>
+                                <p  style="margin-bottom: 60px; text-align: center;" data-aos="fade-up" data-aos-duration="800">We’re here to help you make informed, confident decisions.</p>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <!-- Renvia Info Box -->
+                                        <div class="renvia-info-item style-one mb-40" data-aos="fade-up" data-aos-duration="1200">
+                                            <div class="icon">
+                                                <i class="far fa-phone-alt"></i>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-envelope"></i></label>
-                                                <input type="email" class="form_control" placeholder="Email Address" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.email %>" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-phone"></i></label>
-                                                <input type="tel" class="form_control" placeholder="Phone Number" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone %>" 
-                                                       pattern="[0-9]{10}" 
-                                                       maxlength="10" 
-                                                       minlength="10" 
-                                                       title="Please enter exactly 10 digits" 
-                                                       required
-                                                       oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-map-marker-alt"></i></label>
-                                                <input type="text" class="form_control" placeholder="Address" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.address %>" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label><i class="far fa-pen"></i></label>
-                                                <textarea class="form_control" placeholder="Message" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.remarks %>" rows="5" cols="8"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group text-center">
-                                                <button class="theme-btn style-one">Send Message Us <i class="far fa-arrow-right"></i></button>
+                                            <div class="content">
+                                                <h5>Phone</h5>
+                                                <p><a href="tel:+919039931234">+91 9039931234</a></p>
+                                                <p><a href="tel:+919893651234">+91 9893651234</a></p>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                        
-                        <!-- Show Insurance form second -->
-                        <div id="insurance-section" class="mt-80">
-                            <div class="contact-wrapper" data-aos="fade-up" data-aos-duration="1000">
-                                <h3>Enquiry for Insurance</h3>
-                                <form id="serviceform1" class="contact-form" method="POST">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-user"></i></label>
-                                                <input type="text" class="form_control" placeholder="Your Name" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.name %>" required>
+                                    <div class="col-md-4">
+                                        <!-- Renvia Info Box -->
+                                        <div class="renvia-info-item style-one mb-40" data-aos="fade-up" data-aos-duration="1400">
+                                            <div class="icon">
+                                                <i class="far fa-map-marker-alt"></i>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-envelope"></i></label>
-                                                <input type="email" class="form_control" placeholder="Email Address" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.email %>" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-phone"></i></label>
-                                                <input type="tel" class="form_control" placeholder="Phone Number" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone %>" 
-                                                       pattern="[0-9]{10}" 
-                                                       maxlength="10" 
-                                                       minlength="10" 
-                                                       title="Please enter exactly 10 digits" 
-                                                       required
-                                                       oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-map-marker-alt"></i></label>
-                                                <input type="text" class="form_control" placeholder="Address" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.address %>" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label><i class="far fa-pen"></i></label>
-                                                <textarea class="form_control" placeholder="Message" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.remarks %>" rows="5" cols="8"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group text-center">
-                                                <button class="theme-btn style-one">Send Message Us <i class="far fa-arrow-right"></i></button>
+                                            <div class="content">       
+                                                <h5>Email</h5>
+                                                <p><a href="mailto:manish@tikarihaadvisors.com">manish@tikarihaadvisors.com</a></p>
+                                                <p><a href="mailto:info@tikarihaadvisors.com">info@tikarihaadvisors.com</a></p>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
-                        </div>
-                    <% } else { %>
-                        <!-- Show Insurance form first (default) -->
-                        <div id="insurance-section">
-                            <div class="contact-wrapper" data-aos="fade-up" data-aos-duration="1000">
-                                <h3>Enquiry for Insurance</h3>
-                                <form id="serviceform1" class="contact-form" method="POST">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-user"></i></label>
-                                                <input type="text" class="form_control" placeholder="Your Name" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.name %>" required>
+                                    <div class="col-md-4">
+                                        <!-- Renvia Info Box -->
+                                        <div class="renvia-info-item style-one mb-40" data-aos="fade-up" data-aos-duration="1000">
+                                            <div class="icon">
+                                                <i class="far fa-map-marker-alt"></i>
                                             </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-envelope"></i></label>
-                                                <input type="email" class="form_control" placeholder="Email Address" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.email %>" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-phone"></i></label>
-                                                <input type="tel" class="form_control" placeholder="Phone Number" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone %>" 
-                                                       pattern="[0-9]{10}" 
-                                                       maxlength="10" 
-                                                       minlength="10" 
-                                                       title="Please enter exactly 10 digits" 
-                                                       required
-                                                       oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-map-marker-alt"></i></label>
-                                                <input type="text" class="form_control" placeholder="Address" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.address %>" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label><i class="far fa-pen"></i></label>
-                                                <textarea class="form_control" placeholder="Message" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.remarks %>" rows="5" cols="8"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group text-center">
-                                                <button class="theme-btn style-one">Send Message Us <i class="far fa-arrow-right"></i></button>
+                                            <div class="content">
+                                                <h5>Location</h5>
+                                                <p>Raipur, Chhattisgarh, India 492001</p>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
+                                   
+                                 
+                                </div>
+                              
                             </div>
                         </div>
-                        
-                        <!-- Show Investment form second -->
-                        <div id="investment-section" class="mt-80">
-                            <div class="contact-wrapper" data-aos="fade-up" data-aos-duration="1000">
-                                <h3>Enquiry for Investment Consultancy</h3>
-                                <form id="serviceform2" class="contact-form" method="POST">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-user"></i></label>
-                                                <input type="text" class="form_control" placeholder="Your Name" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.name %>" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-envelope"></i></label>
-                                                <input type="email" class="form_control" placeholder="Email Address" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.email %>" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-phone"></i></label>
-                                                <input type="tel" class="form_control" placeholder="Phone Number" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone %>" 
-                                                       pattern="[0-9]{10}" 
-                                                       maxlength="10" 
-                                                       minlength="10" 
-                                                       title="Please enter exactly 10 digits" 
-                                                       required
-                                                       oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label><i class="far fa-map-marker-alt"></i></label>
-                                                <input type="text" class="form_control" placeholder="Address" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.address %>" required>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label><i class="far fa-pen"></i></label>
-                                                <textarea class="form_control" placeholder="Message" name="<%= SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS.remarks %>" rows="5" cols="8"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="form-group text-center">
-                                                <button class="theme-btn style-one">Send Message Us <i class="far fa-arrow-right"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    <% } %>
+                       
+                    </div>
                 </div>
-            </section><!--======  End Contact Section  ======-->
+            </section>
+
+            <style>
+                .themebtn{
+                    padding: 12px 18px;
+                }
+            </style>
+          
         </main>
 
 <%- include('footer') %>

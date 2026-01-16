@@ -3371,7 +3371,7 @@ label {
   margin-bottom: 30px;
 }
 .renvia-service-card.style-one .title-wrap h4 {
-  max-width: 180px;
+  max-width: 245px;
 }
 .renvia-service-card.style-one .title-wrap .icon-btn {
   width: 50px;
@@ -5943,8 +5943,7 @@ label {
           filter: brightness(1);
 }
 .renvia-client-item .client-img img {
-  -webkit-filter: brightness(0);
-          filter: brightness(0);
+ 
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   margin: 0 auto;
@@ -6077,16 +6076,17 @@ label {
   color: var(--white-color);
 }
 .renvia-info-item.style-two.item_one .icon {
-  color: var(--primary-color);
-  border-color: var(--primary-color);
+ 
+  border-color: #fff;
+  color: #fff;
 }
 .renvia-info-item.style-two.item_two .icon {
-  border-color: #E4ED64;
-  color: #E4ED64;
+  border-color: #fff;
+  color: #fff;
 }
 .renvia-info-item.style-two.item_three .icon {
-  border-color: #E2791D;
-  color: #E2791D;
+  border-color: #fff;
+  color: #fff;
 }
 .renvia-info-item.style-three {
   display: -webkit-box;

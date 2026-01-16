@@ -68,12 +68,12 @@
                                                                     <div class="info download-brochure">
                                                                         <h6
                                                                             style="display: flex; align-items: center; justify-content: center;">
-                                                                            <a href="<%= process.env.S3_BASE_URL + projectDetails.brochure %>"
+                                                                            <a style=" color: #40329b !important;" href="<%= process.env.S3_BASE_URL + projectDetails.brochure %>"
                                                                                 target="_blank"><span
                                                                                     style="height: 20px; width: 20px; margin-right: 6px; "><svg
                                                                                         xmlns="http://www.w3.org/2000/svg"
                                                                                         width="20" height="20"
-                                                                                        fill="#000000"
+                                                                                        fill="  #40329b "
                                                                                         viewBox="0 0 256 256">
                                                                                         <path
                                                                                             d="M224,144v64a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V144a8,8,0,0,1,16,0v56H208V144a8,8,0,0,1,16,0Zm-101.66,5.66a8,8,0,0,0,11.32,0l40-40a8,8,0,0,0-11.32-11.32L136,124.69V32a8,8,0,0,0-16,0v92.69L93.66,98.34a8,8,0,0,0-11.32,11.32Z">
@@ -87,7 +87,7 @@
                                                         <h3 class="title">
                                                             <%= projectDetails.projectName %>
                                                         </h3>
-                                                        <div class="location" style="padding-bottom: 18px;"><i
+                                                        <div class="location" style="padding-bottom: 22px;     border-bottom: 1px solid #c3c3c3;"><i
                                                                 class="far fa-map-marker-alt"></i>
                                                             <%= titleCase(projectDetails.locality) %> , <%=
                                                                     titleCase(projectDetails.city) %>
@@ -96,7 +96,6 @@
 
 
 
-                                                    <h3>Project Description</h3>
                                                     <div class="project-description-block"><%- projectDetails.projectDescrpition[0].description %></div>
 
 
@@ -106,8 +105,7 @@
                                                         <ul class="amenities-list">
                                                             <% projectDetails.amenities.forEach(amenity=> { %>
                                                                 <li>
-                                                                    <i class="fa-solid fa-check"
-                                                                        style="margin-right: 10px;"></i>
+                                                                   
                                                                     <%= titleCase(amenity) %>
                                                                 </li>
                                                                 <% }) %>
@@ -124,8 +122,7 @@
                                                                         .forEach(highlight => { %>
 
                                                                         <li>
-                                                                            <i class="fa-solid fa-check"
-                                                                                style="margin-right: 10px;"></i>
+                                                                        
                                                                             <%= highlight %>
                                                                         </li>
 
@@ -394,7 +391,8 @@
         }
 
         .project-description-block h1, .project-description-block h2, .project-description-block h3, .project-description-block h4, .project-description-block h5, .project-description-block h6{
-            font-size: 24px;
+            font-size: 18px;
+            margin-top: 30px;
             margin-bottom: 14px;
         }
 
@@ -405,7 +403,8 @@
         }
 
         .download-brochure {
-            border: 1px solid #000;
+            background-color: #5e40e01a !important;
+           
         }
 
         .top-button .info h6 {

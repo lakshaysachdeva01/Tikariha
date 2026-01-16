@@ -42,7 +42,7 @@ exports.gettestimonial = async(req, res) => {
 
 exports.getclientle = async(req, res) => {  
     const websiteID = await getWebsiteID(); 
-     const data = await fetchData(`${API_BASE_URL}/website/association/get-all-associations/${websiteID}?type=CLIENT`);
+     const data = await fetchData(`${API_BASE_URL}/website/${websiteID}/associations-management/get-all`);
      return data || null
 };
 

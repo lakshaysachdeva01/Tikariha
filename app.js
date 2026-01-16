@@ -62,6 +62,7 @@ app.get('/', async (req, res) => {
 
 app.get('/about', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
+    const clients = await getclientle();
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -71,7 +72,7 @@ app.get('/about', async (req, res) => {
     };
     
    
-    res.render('about', {body: "",baseUrl, seoDetails});
+    res.render('about', {body: "",baseUrl, seoDetails,clients});
 });
 
 
@@ -156,6 +157,67 @@ app.get('/services', async (req, res) => {
         query // Pass the normalized query object
     });
 });
+
+
+app.get('/service/insurance-advisory', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const websiteID = await getWebsiteID();
+    const seoDetails = {
+        title: "",
+        metaDescription: "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: "",
+        canonical: `${baseUrl}/projects`,
+    };
+    
+   
+    res.render('service-detail1', {body: "",baseUrl,  SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,
+        API_BASE_URL,
+        WEBSITE_ID_KEY,
+        websiteID,seoDetails,websiteID});
+});
+
+
+
+app.get('/service/projects-consultancy-sales', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const websiteID = await getWebsiteID();
+    const seoDetails = {
+        title: "",
+        metaDescription: "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: "",
+        canonical: `${baseUrl}/projects`,
+    };
+    
+   
+    res.render('service-detail2', {body: "",baseUrl,  SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,
+        API_BASE_URL,
+        WEBSITE_ID_KEY,
+        websiteID,seoDetails,websiteID});
+});
+
+
+
+app.get('/service/investment-consultancy', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const websiteID = await getWebsiteID();
+    const seoDetails = {
+        title: "",
+        metaDescription: "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: "",
+        canonical: `${baseUrl}/projects`,
+    };
+    
+   
+    res.render('service-detail3', {body: "",baseUrl,  SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,
+        API_BASE_URL,
+        WEBSITE_ID_KEY,
+        websiteID,seoDetails,websiteID});
+});
+
+
 
 
 app.get('/gallery', async (req, res) => {
