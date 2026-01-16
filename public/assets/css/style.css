@@ -888,7 +888,7 @@ label {
   color: var(--white-color);
 }
 .theme-btn.style-one:hover {
-  background-color: var(--heading-color);
+  background-color: var(--primary-color);
   color: var(--white-color);
 }
 @media screen and (max-width: 1199.98px) {
@@ -6867,3 +6867,15 @@ label {
   margin-right: 10px;
 }
 /*# sourceMappingURL=style.css.map */
+
+.top-180-90{
+  padding-top: 180px;
+  padding-bottom: 30px;
+}
+
+
+  @media screen and (max-width: 768px) {
+    .top-180-90{
+      padding-top: 90px;
+    }
+  }

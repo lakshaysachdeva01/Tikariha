@@ -398,11 +398,11 @@ app.get('/post/:id', async (req, res) => {
    
   
     const seoDetails = {
-        title: "",
-        metaDescription: "",
+        title: blogDetails?.seoConfig?.title || "Blog Details",
+        metaDescription: blogDetails?.seoConfig?.metaDescription || blogDetails?.description ? blogDetails?.description.replace(/<[^>]*>/g, '').substring(0, 160) : "",
         metaImage: `${baseUrl}/${metaLogoPath}`,
-        keywords: "",
-        canonical:``,
+        keywords: blogDetails?.seoConfig?.keywords || "",
+        canonical: `${baseUrl}/post/${id}`,
     };
 
     res.render('blogpost', {

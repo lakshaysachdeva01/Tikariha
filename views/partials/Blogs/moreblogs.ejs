@@ -7,15 +7,19 @@
         <div class="sidebar-widget sidebar-post-widget mb-40" data-aos="fade-up" data-aos-duration="1000">
           <h4 class="widget-title">Recent Posts</h4>
           <div class="widget-content">
-              <ul class="recent-post-list">
+              <ul class="recent-post-list" style="padding-left: 0;">
 
 
                 <% latestblog.forEach(item=> { %>
                   <li class="post-thumbnail-content mb-4">
-                      <img src="<%= process.env.S3_BASE_URL + item.coverImage %>" alt=" <%= item.title %>">
+                      <img style="height: 80px; object-fit: cover; width: 80px;" src="<%= process.env.S3_BASE_URL + item.listingBanner %>" alt=" <%= item.postTitle %>">
                       <div class="post-title-date">
-                          <span class="posted-on"><a href="/post/<%= item.seoDetails.slug %>"><%= item.postDate %></a></span>
-                          <h5><a href="/post/<%= item.seoDetails.slug %>"><%= item.title %>/a></h5>
+                          <span class="posted-on"><a href="/post/<%= item.seoConfig.slug %>"><%= item.postDate %></a></span>
+                          <h5><a href="/post/<%= item.seoConfig.slug %>" style="   display: -webkit-box;
+                            -webkit-line-clamp: 2;
+                            -webkit-box-orient: vertical;
+                            overflow: hidden;
+                            text-overflow: ellipsis;"> <%= item.postTitle %></h5>
                           </div>
                       </li>
                       <% }) %>

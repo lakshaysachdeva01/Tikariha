@@ -1,9 +1,9 @@
 <div id="smooth-wrapper">
     <div id="smooth-content">
-        <main style="padding: 180px 0 30px;">
+        <main id="top-180-90" >
       
             <!--======  Start Blog Section  ======-->
-            <section class="renvia-blog-grid-sec pt-30 pb-30">
+            <section class="renvia-blog-grid-sec pt-30">
                 <div class="container">
                     <div class="row ">
 
@@ -12,12 +12,13 @@
                             <!-- Renvia Blog Item -->
                             <div class="renvia-blog-post-item style-one mb-30" onclick="window.location.href='/post/<%= item._id %>'" data-aos="fade-up" data-aos-duration="800">
                                 <div class="post-thumbnail">
+                                    <div class="post-tags-as" style="position: absolute; top: 20px; left: 20px; font-size: 14px; background-color: var(--primary-color); color:var(--white-color); padding: 4px 12px;border-radius: 12px;">
+                                        <span><a href="javascript:void(0)"><%= item.postCategory %></a></span>
+                                    </div>
                                     <img src="<%= process.env.S3_BASE_URL + item.listingBanner %>" class="blogimage" alt="<%= item.postTitle %>">
                                 </div>
                                 <div class="post-content">
-                                    <div class="post-tags">
-                                        <span><a href="javascript:void(0)"><%= item.postCategory %></a></span>
-                                    </div>
+                                    
                                     <h4 class="title"><a href="/post/<%= item._id %>"><%= item.postTitle %></a></h4>
                                     <a href="/post/<%= item._id %>" class="read-more style-one">Read Details<i class="far fa-arrow-right"></i></a>
                                 </div>
