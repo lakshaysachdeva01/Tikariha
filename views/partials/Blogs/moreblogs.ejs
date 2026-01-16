@@ -12,14 +12,14 @@
 
                 <% latestblog.forEach(item=> { %>
                   <li class="post-thumbnail-content mb-4">
-                      <img style="height: 80px; object-fit: cover; width: 80px;" src="<%= process.env.S3_BASE_URL + item.listingBanner %>" alt=" <%= item.postTitle %>">
+                      <img style="height: 80px; min-height: 80px; object-fit: cover; width: 80px; min-width: 80px;" src="<%= process.env.S3_BASE_URL + item.listingBanner %>" alt=" <%= item.postTitle %>">
                       <div class="post-title-date">
-                          <span class="posted-on"><a href="/post/<%= item.seoConfig.slug %>"><%= item.postDate %></a></span>
+
                           <h5><a href="/post/<%= item.seoConfig.slug %>" style="   display: -webkit-box;
-                            -webkit-line-clamp: 2;
+                            -webkit-line-clamp: 3;
                             -webkit-box-orient: vertical;
                             overflow: hidden;
-                            text-overflow: ellipsis;"> <%= item.postTitle %></h5>
+                            text-overflow: ellipsis;"> <%= item.postTitle %><span class="posted-on"><a href="/post/<%= item.seoConfig.slug %>"><%= item.postDate %></a></span></h5>
                           </div>
                       </li>
                       <% }) %>
