@@ -15,7 +15,7 @@
                                     <div class="post-tags-as" style="position: absolute; top: 20px; left: 20px; font-size: 14px; background-color: var(--primary-color); color:var(--white-color); padding: 4px 12px;border-radius: 12px;">
                                         <span><a href="javascript:void(0)"><%= item.postCategory %></a></span>
                                     </div>
-                                    <img src="<%= process.env.S3_BASE_URL + item.listingBanner %>" class="blogimage" alt="<%= item.postTitle %>">
+                                    <img onclick="window.location.href='/post/<%= item._id %>'" src="<%= process.env.S3_BASE_URL + item.listingBanner %>" class="blogimage" alt="<%= item.postTitle %>">
                                 </div>
                                 <div class="post-content">
                                     
