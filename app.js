@@ -5,12 +5,12 @@ const { getHomeDesktopBanner ,gettestimonial ,getAdBanner,getHomepopupBanner ,ge
 const { getBlog ,getBlogfull, getlatestblogs} = require('./controller/blogcontroller');
 const { getgallery,getLatestGalleryImages} = require('./controller/gallerycontroller');
 const { getProducts, getProductDetails, getProductsByCategory, getCategories ,getjobs,getjobdetails,getotherjobs} = require('./controller/productcontroller');
-const { CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS ,JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS , BOOKING_ENQUIRY_DYNAMIC_FIELDS_KEYS} = require('./config/config');
+const { CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS  , BOOKING_ENQUIRY_DYNAMIC_FIELDS_KEYS, SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS} = require('./config/config');
 
 const express = require('express');
 const path = require('path');
 const app = express();
-const port = 8000;
+const port = 3000;
 const metaLogoPath = "/assets/images/Logo/Tikariha_Meta.jpg";
 // Set the view engine to EJS
 app.set('view engine', 'ejs');
@@ -38,14 +38,14 @@ app.use(async (req, res, next) => {
 app.get('/', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const websiteID = await getWebsiteID(); 
-    const banners = await getHomeDesktopBanner();
-    const testimonial = await gettestimonial();
-    const blogs = await getBlog();
-    const gallery= await getgallery();
-    const products = await getProducts();
-    const clients = await getclientle();
-    const popupbanners = await getHomepopupBanner();
-   const latestImages = await getLatestGalleryImages();
+//     const banners = await getHomeDesktopBanner();
+//     const testimonial = await gettestimonial();
+//     const blogs = await getBlog();
+//     const gallery= await getgallery();
+//     const products = await getProducts();
+//     const clients = await getclientle();
+//     const popupbanners = await getHomepopupBanner();
+//    const latestImages = await getLatestGalleryImages();
    const seoDetails = {
     title: " ",
     metaDescription: "",
@@ -55,7 +55,7 @@ app.get('/', async (req, res) => {
 };
 
    
-    res.render('index', {body: "",baseUrl,latestImages, products, websiteID,popupbanners,testimonial,blogs,gallery,clients, API_BASE_URL,WEBSITE_ID_KEY, seoDetails,banners});
+    res.render('index', {body: "",websiteID,baseUrl,seoDetails});
 });
 
 
@@ -92,6 +92,7 @@ app.get('/projects', async (req, res) => {
 
 app.get('/services', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
+    const websiteID = await getWebsiteID(); 
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -101,42 +102,64 @@ app.get('/services', async (req, res) => {
     };
     
    
-    res.render('services', {body: "",baseUrl, seoDetails});
+    res.render('services', {body: "",baseUrl, seoDetails, SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,API_BASE_URL,WEBSITE_ID_KEY,websiteID});
 });
-
-
-
 app.get('/gallery', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
-    const gallery = await getgallery();
     
-    const seoDetails = {
-        title: "",
-        metaDescription: "",
-        metaImage: `${baseUrl}/${metaLogoPath}`,
-        keywords: "",
-        canonical: `${baseUrl}/gallery`,
-    };
+    try {
+        const rawGallery = await getgallery();
+        
+        console.log("=== DEBUG INFO ===");
+        console.log("Raw gallery:", rawGallery);
+        console.log("Raw gallery type:", typeof rawGallery);
+        console.log("Is array?", Array.isArray(rawGallery));
+        console.log("Length:", rawGallery ? rawGallery.length : 0);
+        
+        // Check if we have data
+        if (!rawGallery || !Array.isArray(rawGallery) || rawGallery.length === 0) {
+            console.log("WARNING: No gallery data found!");
+        }
+        
+        // Try to normalize only if we have data and function exists
+        let normalizedGallery = [];
+        if (typeof normalizeGallery === 'function' && rawGallery && rawGallery.length > 0) {
+            normalizedGallery = normalizeGallery(rawGallery);
+        } else {
+            console.log("normalizeGallery function not available or no data to normalize");
+        }
 
-    res.render('gallery', { body: "", gallery, seoDetails });
+        const seoDetails = {
+            title: "Tikariha Gallery",
+            metaDescription: "",
+            metaImage: `${baseUrl}/${metaLogoPath}`,
+            keywords: "",
+            canonical: `${baseUrl}/gallery`,
+        };
+
+        res.render('gallery', { 
+            body: "", 
+            gallery: rawGallery || [], 
+            normalizedGallery: normalizedGallery || [],
+            seoDetails 
+        });
+    } catch (error) {
+        console.error("Error in /gallery route:", error);
+        // Even if there's an error, render the page with empty data
+        res.render('gallery', { 
+            body: "", 
+            gallery: [], 
+            normalizedGallery: [],
+            seoDetails: {
+                title: "Gallery",
+                metaDescription: "",
+                metaImage: `${req.protocol}://${req.get('Host')}/${metaLogoPath}`,
+                keywords: "",
+                canonical: `${req.protocol}://${req.get('Host')}/gallery`,
+            }
+        });
+    }
 });
-app.get('/gallery/:filter', async (req, res) => {
-    const baseUrl = req.protocol + '://' + req.get('Host');
-    const { filter } = req.params;
-    const gallery = await getgallery();
-
-    const seoDetails = {
-        title: "",
-        metaDescription: "",
-        metaImage: `${baseUrl}/${metaLogoPath}`,
-        keywords: "",
-        canonical: `${baseUrl}/gallery/${filter}`,
-    };
-
-    res.render('gallery', { body: "", gallery, seoDetails });
-});
-
-
 
 
 app.get('/contact', async (req, res) => {
@@ -187,48 +210,49 @@ app.get('/posts', async (req, res) => {
     res.render('blogs', { body: "", blogs, baseUrl, seoDetails });
 });
 
-
-// app.get('/jobs', async (req, res) => {
-//     const baseUrl = req.protocol + '://' + req.get('Host');
-//     const jobs = await getjobs();
-//     const seoDetails = {
-//         title: "",
-//         metaDescription: "",
-//         metaImage: `${baseUrl}/${metaLogoPath}`,
-//         keywords: "",
-//         canonical: `${baseUrl}/jobs`,
-//     };
+app.get('/jobs', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const jobs = await getjobs();
+    const seoDetails = {
+        title: "",
+        metaDescription: "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: "",
+        canonical: `${baseUrl}/jobs`,
+    };
     
-//     res.render('jobs', { body: "", baseUrl, seoDetails, jobs });
-// });
+    res.render('jobs', { body: "", baseUrl, seoDetails, jobs });
+});
 
 
-// app.get('/job/:slug', async (req, res) => {
-//     const baseUrl = req.protocol + '://' + req.get('Host');
-//     const { slug } = req.params;
-//     const websiteID = await getWebsiteID();
-//     const job = await getjobdetails(slug);
-//     const otherJobs = await getotherjobs(slug);
-//     const seoDetails = {
-//         title: job?.seoDetails?.title || "Job Details - Maniram Steel",
-//         metaDescription: job?.seoDetails?.metaDescription || job?.description?.replace(/<[^>]*>/g, '').substring(0, 160) || "View job details and apply for this position at Maniram Steel.",
-//         metaImage: `${baseUrl}/${metaLogoPath}`,
-//         keywords: job?.seoDetails?.tags?.join(', ') || "job, career, employment",
-//         canonical: `${baseUrl}/job/${slug}`,
-//     };
+app.get('/job/:slug', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const { slug } = req.params;
+    const websiteID = await getWebsiteID();
+    const job = await getjobdetails(slug);
+    // const otherJobs = await getotherjobs(slug);
+    const jobDescription = job?.description?.replace(/<[^>]*>/g, '').substring(0, 160) || '';
+    const seoDetails = {
+        title: job?.seoDetails?.title || `${job?.jobTitle || job?.title || 'Job'} - Tikariha | Career Opportunities`,
+        metaDescription: job?.seoDetails?.metaDescription || jobDescription || `Apply for ${job?.jobTitle || job?.title || 'this position'} at Tikariha. Join our team and build your career in hospitality.`,
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: job?.seoDetails?.tags?.join(', ') || `${job?.jobTitle || job?.title} Tikariha, hotel jobs, hospitality careers, Tikariha careers, ${job?.category || 'hotel'} jobs Tikariha, employment opportunities`,
+        canonical: `${baseUrl}/job/${slug}`,
+    };
     
-//     res.render('jobdetail', {
-//         body: "", 
-//         baseUrl, 
-//         seoDetails, 
-//         job, 
-//         otherJobs,
-//         websiteID,
-//         API_BASE_URL,
-//         WEBSITE_ID_KEY,
-//         JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS
-//     });
-// });
+    res.render('jobdetail', {
+        body: "", 
+        baseUrl, 
+        seoDetails, 
+        job,
+        websiteID,
+        API_BASE_URL,
+        WEBSITE_ID_KEY,
+        S3_BASE_URL,
+       
+    });
+});
+
 
 
 
@@ -301,16 +325,14 @@ app.get('/thankyou', async (req, res) => {
 
 
 
-app.get('/post/:slug', async (req, res) => {
+app.get('/post/:id', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
-    const { slug } = req.params; // Extract slug from params
-    const blogDetails = await getBlogfull(slug);
-    const testimonial = await gettestimonial();
+    const { id } = req.params; // Extract slug from params
+    const blogDetails = await getBlogfull(id);
+    console.log("BLOG DETAILS 👉", blogDetails);
     const websiteID = await getWebsiteID(); 
    
-    const adbanner = await getAdBanner();
-    const blogs = await getBlog();
-    const latestblog = await getlatestblogs(slug);
+    const latestblog = await getlatestblogs(id);
     // Extract the first 50 words from the description
     const truncateToWords = (text, wordCount) => {
         if (!text) return '';
@@ -334,10 +356,8 @@ app.get('/post/:slug', async (req, res) => {
        baseUrl,
        blogDetails,
         seoDetails,
-        adbanner,
         latestblog,
-        blogs,
-       testimonial,websiteID,API_BASE_URL,WEBSITE_ID_KEY, BOOKING_ENQUIRY_DYNAMIC_FIELDS_KEYS
+       websiteID,API_BASE_URL,WEBSITE_ID_KEY
     });
 });
 

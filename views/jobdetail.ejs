@@ -1,15 +1,24 @@
 <%- include('header'), {seoDetails} %>
-   <!-- PAGE TITLE
-        ================================================== -->
-        <section class="page-title-section top-position1 bg-img cover-background left-overlay-secondary" data-overlay-dark="85" data-background="/assets/img/banner/page-title-01.jpg">
-            <div class="container">                
-                <h1>Work With Us!</h1>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li>Career</li>
-                </ul>                
-            </div>
-        </section>
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+            <!--======  Start Page Hero Section  ======-->
+            <section class="page-hero bg_cover p-r z-1" data-src="/assets/images/innerpage/bg/page-bg.jpg">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <!--=== Page Content ===-->
+                            <div class="page-content text-center">
+                                <h1>Posts</h1>
+                                <ul>
+                                    <li><a href="/">Home</a></li>
+                                    <li>Posts</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 <% if (job) { %>
 <!-- Job Details -->
 <section id="jobDetails" class="job-details pt-60 pb-90">
@@ -25,12 +34,12 @@
                             <% if (job.category?.name) { %>
                             <span class="job-tag"><%= job.jobPosition %></span>
                             <% } %>
-                            <% if (job.workMode) { %>
-                            <span class="job-tag"><%= job.workMode.replace('_', ' ') %></span>
+                            <% if (job.type) { %>
+                            <span class=""><%= job.type.replace('_', ' ') %></span>
                             <% } %>
                         </div>
                         
-                        <h1 class="job-title"><%= job.title %></h1>
+                        <h1 class="job-title"><%= job.jobTitle %></h1>
                         <% if (job.subTitle) { %>
                         <p class="job-subtitle"><%= job.subTitle %></p>
                         <% } %>
@@ -38,14 +47,14 @@
                         <!-- Key Details -->
                         <div class="job-key-details">
                             <div class="detail-item">
-                                <span class="detail-label">Designation</span>
+                                <span class="detail-label">Location</span>
                                 <span class="detail-value">
-                                    <%= job.jobPosition %>
+                                    <%= job.jobLocation %>
                                 </span>
                             </div>
                             <div class="detail-item">
                                 <span class="detail-label">Experience</span>
-                                <span class="detail-value"><%= job.experienceLevel || '' %></span>
+                                <span class="detail-value"><%= job.experienceRequired.replace(/_/g, ' ') || '' %></span>
                             </div>
                         </div>
                     </div>
@@ -60,183 +69,153 @@
                     </div>
                     <% } %>
 
-
-               
-               
-
- <div class="job-section">
+                    <div class="job-section">
                         <h3 class="job-section-title">Highlights</h3>
-                    <div class="">
-                        <div class="row">
-                            <div class="col-12 col-md-4 mb-4">
-                                <div class="property-detail-feature-list-item d-flex align-items-center">
-                                    <i  class="fa-solid fa-user-tie"></i>
-                                    <div>
-                                        <h6 class="fs-6 m-0">Job Position</h6>
-                                        <h6 class="fs-6 mt-1" style="margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;">
-                                            <%= job.jobPosition %>
-                                        </h6>
-                                        
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-4 mb-4">
-                                <div class="property-detail-feature-list-item d-flex align-items-center">
-                                    <i class="fa-solid fa-clock"></i>
-                                    <div>
-                                        <h6 class="fs-6 m-0">Work Mode</h6>
-                                        <h6 class="fs-6 mt-1" style="margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;">
-                                            <%= String(job.workMode || '')
-                                                .trim() // Remove extra spaces
-                                                .replace(/_/g, ' ') // Replace underscores with spaces
-                                                .toLowerCase() // Convert to lowercase
-                                                .replace(/\b\w/g, char => char.toUpperCase()) // Capitalize first letter of each word
-                                            %>
-                                        </h6>
-                                        
-                                        
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="col-12 col-md-4 mb-4">
-                                <div class="property-detail-feature-list-item d-flex align-items-center">
-                                    <i class="fa-solid fa-sack-xmark"></i>
-                                    <div>
-                                        <h6 class="fs-6 m-0">Salary Range</h6>
-                                        <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;" ><%=job.salary.minimumValue%>₹-<%=job.salary.maximumValue%>₹ </h6>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
-                            <% if (job.qualification && job.qualification.length > 0) { %>
-                            <div class="col-12 col-md-4 mb-4">
-                                <div class="property-detail-feature-list-item d-flex align-items-center">
-                                    <i class="fa-solid fa-award"></i>
-                                    <div>
-                                        <h6 class="fs-6 m-0">Qualification</h6>
-
-                                        <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;" >
-                                            <% if (job.qualification && Array.isArray(job.qualification.qualificationStandard) && job.qualification.qualificationStandard.length > 0) { %>
-                                                <%= job.qualification.qualificationStandard.map(q => q.title).join(' | ') %>
-                                            <% } else { %>
-                                                <!-- Do not display anything if no data -->
-                                            <% } %>
+                        <div class="">
+                            <div class="row">
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="property-detail-feature-list-item d-flex align-items-center">
+                                        <i class="fa-solid fa-clock"></i>
+                                        <div>
+                                            <h6 class="fs-6 m-0">Work Mode</h6>
+                                            <h6 class="fs-6 mt-1" style="margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;">
+                                                <%= String(job.type || '')
+                                                    .trim()
+                                                    .replace(/_/g, ' ')
+                                                    .toLowerCase()
+                                                    .replace(/\b\w/g, char => char.toUpperCase())
+                                                %>
                                             </h6>
-                                            <h6 class="fs-7 mb-0" style="color: grey; font-size: 16px;">
-                                            <% if (job.qualification && Array.isArray(job.qualification.qualificationRequired) && job.qualification.qualificationRequired.length > 0) { %>
-                                                <%= job.qualification.qualificationRequired.join(' | ') %>
-                                            <% } else { %>
-                                                <!-- Do not display anything if no data -->
-                                            <% } %>
-                                            </h6>
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <% } %>
-                    
-                            <div class="col-12 col-md-4 mb-4">
-                                <div class="property-detail-feature-list-item d-flex align-items-center">
-                                    <i class="fa-solid fa-clock-rotate-left"></i>
-                                    <div style="display: flex; justify-content: center; align-items: center;">
-                                        <div style="display: flex; flex-direction: column; text-align: center;">
-                                            <h6 class="fs-6 m-0" style="margin-bottom: 0;">Experience</h6>
-                                            <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;"><%= job.experienceLevel %></h6>
                                         </div>
                                     </div>
-                                    
-                                    
-                                    
+                                </div>
+
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="property-detail-feature-list-item d-flex align-items-center">
+                                        <i class="fa-solid fa-sack-xmark"></i>
+                                        <div>
+                                            <h6 class="fs-6 m-0">Salary Range</h6>
+                                            <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;" ><%=job.salaryRange %> </h6>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-12 col-md-4 mb-4">
-                                <div class="property-detail-feature-list-item d-flex align-items-center">
-                                    <i class="fa-solid fa-mars-and-venus"></i>
-                                    <div>
-                                        <h6 class="fs-6 m-0">Preferred Gender</h6>
-                                        <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;"><%=job.gender%></h6>
+                            
+                            <div class="row">
+                                <% if (job.qualreq && job.qualreq.length > 0) { %>
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="property-detail-feature-list-item d-flex align-items-center">
+                                        <i class="fa-solid fa-award"></i>
+                                        <div>
+                                            <h6 class="fs-6 m-0">Qualification</h6>
+                                            <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;" >
+                                               <%= job.qualreq %>
+                                            </h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+                        
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="property-detail-feature-list-item d-flex align-items-center">
+                                        <i class="fa-solid fa-clock-rotate-left"></i>
+                                        <div style="display: flex; justify-content: center; align-items: center;">
+                                            <div style="display: flex; flex-direction: column; text-align: center;">
+                                                <h6 class="fs-6 m-0" style="margin-bottom: 0;">Experience</h6>
+                                                <h6 class="fs-6 mt-1" style=" margin-top: 6px; color: grey; font-weight: 500; font-size: 16px;"><%= job.experienceRequired.replace(/_/g, ' ') %></h6>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
                     </div>
-                    </div>
-
 
                     <!-- Job Application Form -->
-                    <div class="job-section">
-                        <h3 class="job-section-title">Apply for this Position</h3>
-                        <div class="job-application-form">
-                            <p class="form-description">Fill out the form below to apply for this position. We'll review your application and get back to you soon.</p>
-                            <form id="jobApplicationForm">
-                                <div class="row">
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.NAME %>" placeholder="Full Name*" required>
+                    <section class="renvia-contact_three pt-80 pb-120">
+                        <div class="container">
+                            <div class="contact-wrapper" data-aos="fade-up" data-aos-duration="1000">
+                                <h3>Apply for this Position</h3>
+                                <form id="jobApplicationForm" class="contact-form" method="POST">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                              
+                                                <input type="text" class="form_control" placeholder="Full Name*" name="name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                              
+                                                <input type="tel" class="form_control" placeholder="Contact Number*" name="contactNo" 
+                                                       pattern="[0-9]{10}" 
+                                                       maxlength="10" 
+                                                       minlength="10" 
+                                                       title="Please enter exactly 10 digits" 
+                                                       required
+                                                       oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                           
+                                                <input type="email" class="form_control" placeholder="Email Address*" name="emailId" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                              
+                                                <div class="file-upload-wrapper">
+                                                    <input type="file" class="form_control" id="resumeUpload" name="resume" accept=".pdf,.doc,.docx" required style="display: none;">
+                                                    <input type="text" class="form_control" id="resumePlaceholder" placeholder="Upload Resume*" readonly style="cursor: pointer; background-color: #fff;">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-lg-6">
+                                               
+                                                <select  name="experience" required>
+                                                    <option value="">Select Experience*</option>
+                                                    <option value="FRESHER">Fresher</option>
+                                                    <option value="LESS_THAN_1_YEAR">Less than 1 year</option>
+                                                    <option value="1_TO_3_YEARS">1 to 3 years</option>
+                                                    <option value="3_TO_5_YEARS">3 to 5 years</option>
+                                                    <option value="5_TO_8_YEARS">5 to 8 years</option>
+                                                    <option value="8_TO_10_YEARS">8 to 10 years</option>
+                                                    <option value="10_TO_12_YEARS">10 to 12 years</option>
+                                                    <option value="12_PLUS_YEARS">12+ years</option>
+                                                </select>
+                                          
+                                        </div> -->
+                                        <div class="col-lg-6" style="display: none;">
+                                            <div class="form-group">
+                                            
+                                                <input type="text" class="form_control" placeholder="Applying for: <%= job.jobTitle %>" value="<%= job.jobTitle %>" readonly style="background-color: #f8f9fa;">
+                                                <input type="hidden" name="appliedFor" value="<%= job._id %>">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+                                              
+                                                <textarea class="form_control" placeholder="Tell us about yourself and why you're interested in this position (Optional)" name="message" rows="5" cols="8"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group text-center">
+                                                <button class="theme-btn style-one" type="submit" id="jobApplicationSubmitBtn">
+                                                    <span id="jobApplicationBtnText">Submit Application</span>
+                                                    <span class="submit-loader" id="jobApplicationSubmitLoader" style="display: none;">
+                                                        <i class="far fa-spinner fa-spin"></i>
+                                                    </span>
+                                                    <i class="far fa-arrow-right"></i>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <div class="form-group">
-                                            <input type="tel" class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER %>" placeholder="Contact Number*" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" maxlength="10" required>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <div class="form-group">
-                                            <input type="email" class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.EMAIL %>" placeholder="Email Address*" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" required>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-sm-6 col-md-6 col-lg-6">
-                                        <div class="form-group">
-                                            <input type="file" class="form-control" id="resumeUpload" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.RESUME %>" accept=".pdf,.doc,.docx" required style="display: none;">
-                                            <input type="text" class="form-control" id="resumePlaceholder" placeholder="Upload Resume*" readonly style="cursor: pointer; background-color: #fff;">
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <input type="hidden" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.JOB_ID %>" value="<%= job._id %>">
-                                        <div class="form-group">
-                                            <textarea class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.MESSAGE %>" placeholder="Tell us about yourself and why you're interested in this position" rows="5"></textarea>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-sm-12 col-md-12 col-lg-12">
-                                        <button class="btn btn__primary" type="submit" id="jobApplicationSubmitBtn">
-                                            <span id="jobApplicationBtnText">Submit</span>
-                                            <span class="submit-loader" id="jobApplicationSubmitLoader" style="display: none;">
-                                                <svg width="20" height="20" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
-                                                    <g fill="none" fill-rule="evenodd">
-                                                        <g transform="translate(1 1)" stroke-width="2">
-                                                            <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
-                                                            <path d="M36 18c0-9.94-8.06-18-18-18">
-                                                                <animateTransform
-                                                                    attributeName="transform"
-                                                                    type="rotate"
-                                                                    from="0 18 18"
-                                                                    to="360 18 18"
-                                                                    dur="1s"
-                                                                    repeatCount="indefinite"/>
-                                                            </path>
-                                                        </g>
-                                                    </g>
-                                                </svg>
-                                            </span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                            <p class="form-messege mt-3"></p>
+                                </form>
+                                <p class="form-messege mt-3 text-center"></p>
+                            </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -259,15 +238,12 @@
     </div>
 </section>
 <% } %>
+        </main>
 
 <style>
 .job-detail-content {
-
     border-radius: 8px;
-   
-   
 }
-
 
 .fa-solid{
     font-size: 30px ;
@@ -287,8 +263,8 @@
 .job-tag {
     font-size: 13px;
     text-transform: capitalize;
-    border: 1px solid #a1a76b;
-    color: #a1a76b;
+    border: 1px solid #c0a257;
+    color: #c0a257;
     padding: 3px 10px;
     margin-right: 10px;
     background: transparent;
@@ -296,7 +272,7 @@
 
 .job-title {
     font-size: 40px;
-    font-weight: 700;
+    font-weight: 500;
     margin-bottom: 15px;
     line-height: 1.2;
 }
@@ -338,7 +314,7 @@
 
 .job-section-title {
     font-size: 28px;
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 25px;
     padding-left: 15px;
     position: relative;
@@ -351,7 +327,7 @@
     top: 0;
     bottom: 0;
     width: 4px;
-    background: #a1a76b;
+    background: #c0a257;
     border-radius: 2px;
 }
 
@@ -360,120 +336,77 @@
     font-size: 16px;
 }
 
-.salary-info {
-    background: #f7fafc;
-    padding: 20px;
-    border-radius: 8px;
-
+/* Form styles from renvia-contact_three */
+.renvia-contact_three .contact-wrapper {
+    background: #fff;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.05);
 }
 
-.salary-range {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
+.renvia-contact_three .contact-wrapper h3 {
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-.salary-amount {
-    font-size: 24px;
-    font-weight: 700;
-}
-
-.salary-period {
-    font-size: 16px;
-}
-
-.qualification-info {
-    background: #f7fafc;
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.qualification-item {
-    margin-bottom: 20px;
-}
-
-.qualification-item h4 {
-    font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.qualification-item ul {
-   
-    padding: 0;
-}
-
-.qualification-item li {
-    padding: 5px 0;
-    padding-left: 20px;
+.renvia-contact_three .form-group {
     position: relative;
-}
-
-.qualification-item li:before {
-    content: '✓';
-    position: absolute;
-    left: 0;
-    color: #59612a;
-    font-weight: bold;
-}
-
-.location-info ul {
-    list-style: none;
-    padding: 0;
-}
-
-.location-info li {
-    padding: 8px 0;
-    padding-left: 25px;
-    position: relative;
-}
-
-.location-info li:before {
-    content: '📍';
-    position: absolute;
-    left: 0;
-}
-
-.job-application-form {
-    background: #f7fafc;
-    padding: 30px;
-    border-radius: 8px;
-}
-
-.job-application-form {
-    background: #f7fafc;
-    padding: 30px;
-    border-radius: 8px;
-}
-
-.form-description {
     margin-bottom: 25px;
-    font-size: 14px;
 }
 
-.btn__primary {
-    background-color: #a1a76b;
-    border-color: #a1a76b;
-    font-weight: 600;
+.renvia-contact_three .form-group label {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #c0a257;
+    font-size: 16px;
+    z-index: 1;
+}
+
+.renvia-contact_three .form_control {
+    width: 100%;
+    padding: 15px 20px 15px 50px;
+    border: 1px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 15px;
+    color: #333;
+    background: #fff;
+    transition: all 0.3s ease;
+}
+
+.renvia-contact_three .form_control:focus {
+    outline: none;
+    border-color: #c0a257;
+    box-shadow: 0 0 0 2px rgba(192, 162, 87, 0.1);
+}
+
+.renvia-contact_three textarea.form_control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+
+.renvia-contact_three .theme-btn.style-one:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* File upload styles */
+.file-upload-wrapper {
     position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    width: 100%;
 }
 
-.btn__primary:hover {
-    background-color: #8e9460;
-    border-color: #8e9460;
-}
-
-/* Responsive adjustments for full-width layout */
-
-.not-found-content {
-    padding: 60px 20px;
-}
-
-.not-found-content h2 {
-    margin-bottom: 15px;
+/* Select dropdown styles */
+.renvia-contact_three select.form_control {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c0a257' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 16px;
+    padding-right: 40px;
 }
 
 /* Responsive */
@@ -495,55 +428,61 @@
         gap: 15px;
     }
     
-    .job-application-form {
-        padding: 20px;
+    .renvia-contact_three .contact-wrapper {
+        padding: 30px 20px;
+    }
+    
+    .renvia-contact_three .contact-wrapper h3 {
+        font-size: 28px;
     }
 }
 
-/* Form Validation Styles */
-.form-control:invalid:not(:placeholder-shown) {
-    border-color: #ddd;
+/* Form message */
+.form-messege {
+    font-size: 14px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
 }
 
-.form-control:valid:not(:placeholder-shown) {
-    border-color: #28a745;
+.form-messege.success {
+    color: #28a745;
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
 }
 
-/* Loader Styles */
+.form-messege.error {
+    color: #dc3545;
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+/* Loader */
 .submit-loader {
     display: inline-block;
-    vertical-align: middle;
+    margin-right: 8px;
 }
 
-.submit-loader svg {
-    display: inline-block;
-    vertical-align: middle;
+.submit-loader .fa-spinner {
+    animation: fa-spin 1s infinite linear;
 }
 
+@keyframes fa-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 </style>
 
 <script>
-// Phone number validation and custom file upload
+// Custom file upload
 document.addEventListener('DOMContentLoaded', function() {
-    const phoneInput = document.querySelector('input[name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER %>"]');
-    if (phoneInput) {
-        phoneInput.addEventListener('input', function(e) {
-            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
-        });
-    }
-
-    // Custom file upload functionality
-    const fileInput = document.getElementById('resumeUpload');
     const resumePlaceholder = document.getElementById('resumePlaceholder');
-
-    if (resumePlaceholder && fileInput) {
-        // Click placeholder to open file browser
+    if (resumePlaceholder) {
         resumePlaceholder.addEventListener('click', function() {
-            fileInput.click();
+            document.querySelector('input[name="resume"]').click();
         });
-
-        // Update placeholder text when file is selected
-        fileInput.addEventListener('change', function() {
+        
+        document.querySelector('input[name="resume"]').addEventListener('change', function() {
             if (this.files && this.files[0]) {
                 resumePlaceholder.value = this.files[0].name;
             } else {
@@ -555,7 +494,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Job Application Form Submission
 document.getElementById('jobApplicationForm').addEventListener('submit', async function (e) {
-    e.preventDefault(); // Prevent default form submission
+    e.preventDefault();
 
     const submitBtn = document.getElementById('jobApplicationSubmitBtn');
     const btnText = document.getElementById('jobApplicationBtnText');
@@ -564,32 +503,24 @@ document.getElementById('jobApplicationForm').addEventListener('submit', async f
     try {
         const API_BASE_URL = "<%= API_BASE_URL %>";
         const websiteID = "<%= websiteID %>";
-        const WEBSITEIDKEY = "<%= WEBSITE_ID_KEY %>";
-        const JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS = <%- JSON.stringify(JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS) %>;
         
-        const UPLOAD_FILES_END_POINT = `${API_BASE_URL}/third-party/file-upload/upload-files`;
-        const CREATE_JOB_APPLICATION_END_POINT = `${API_BASE_URL}/website/job-application/create-job-application`;
-
-        const jobApplicationForm = e.target; // Reference to the form element
-        const WEBSITE_ID_KEY = WEBSITEIDKEY;
+        const UPLOAD_FILES_END_POINT = `${API_BASE_URL}/third-party/file-upload/upload-files/${websiteID}`;
+        const CREATE_JOB_APPLICATION_END_POINT = `${API_BASE_URL}/website/${websiteID}/service-enquiry/create`;
 
         // Show loader
         btnText.style.display = 'none';
         loader.style.display = 'inline-block';
         submitBtn.disabled = true;
 
-        // -------------------------------------------
         // 1. Upload File
         const uploadFileData = new FormData();
-        const fileInput = jobApplicationForm.querySelector(
-            `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.RESUME}"]`
-        ).files[0];
+        const fileInput = this.querySelector('input[name="resume"]').files[0];
 
         if (!fileInput) {
             throw new Error("Please upload a resume file.");
         }
 
-        uploadFileData.append("file", fileInput);
+        uploadFileData.append("attachresume", fileInput);
 
         const fileUploadResponse = await fetch(UPLOAD_FILES_END_POINT, {
             method: "POST",
@@ -601,74 +532,63 @@ document.getElementById('jobApplicationForm').addEventListener('submit', async f
         }
 
         const fileUploadData = await fileUploadResponse.json();
-        const uploadedResume =
-            fileUploadData?.data?.length > 0
-                ? fileUploadData?.data[0]?.imageNames[0]
-                : "";
+        
+        let uploadedResume = "";
+        if (fileUploadData?.data?.fileNames && fileUploadData.data.fileNames.length > 0) {
+            uploadedResume = fileUploadData.data.fileNames[0];
+        }
 
         if (!uploadedResume) {
             throw new Error("File upload did not return a valid file name.");
         }
 
-        // -------------------------------------------
-        // 2. Prepare Form Payload
+        // 2. Prepare Payload - Get experience from dropdown
         const payload = {
-            [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.NAME]: jobApplicationForm.querySelector(
-                `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.NAME}"]`
-            ).value,
-            [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER]: jobApplicationForm.querySelector(
-                `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER}"]`
-            ).value,
-            [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.EMAIL]: jobApplicationForm.querySelector(
-                `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.EMAIL}"]`
-            ).value,
-            [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.MESSAGE]: jobApplicationForm.querySelector(
-                `textarea[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.MESSAGE}"]`
-            ).value,
-            [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.RESUME]: uploadedResume,
-            [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.JOB_ID]: jobApplicationForm.querySelector(
-                `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.JOB_ID}"]`
-            ).value,
-            [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.FORM_TYPE]: "career-enquiry",
-            [WEBSITE_ID_KEY]: websiteID,
+            name: this.querySelector('input[name="name"]').value,
+            contactNo: this.querySelector('input[name="contactNo"]').value,
+            emailId: this.querySelector('input[name="emailId"]').value,
+            experience: "3_TO_5_YEARS",
+            resume: uploadedResume,
+            appliedFor: this.querySelector('input[name="appliedFor"]').value
         };
 
-        // -------------------------------------------
-        // 3. Submit the Form Data
-        const headers = new Headers({
-            "Content-Type": "application/json",
-        });
+        console.log("Payload being sent:", payload);
 
+        // 3. Submit Form
         const response = await fetch(CREATE_JOB_APPLICATION_END_POINT, {
             method: "POST",
-            headers,
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
         });
 
         if (!response.ok) {
-            throw new Error(`Form submission failed! Status: ${response.status}`);
+            const errorData = await response.json().catch(() => ({}));
+            throw new Error(`Form submission failed! Status: ${response.status}. ${errorData.message || ''}`);
         }
 
         const data = await response.json();
+        console.log("Success response:", data);
 
-        // Redirect to the thank-you page on success
-        sessionStorage.setItem("thankYouMessage", "We've Received Your Request and will Reach out to you soon");
+        // Redirect to thank you page
+        sessionStorage.setItem("thankYouMessage", "We've Received Your Application and will Reach out to you soon");
         window.location.href = "/thankyou";
+        
     } catch (error) {
         console.error("Form submission error:", error);
-        // Reset button state
         btnText.style.display = 'inline';
         loader.style.display = 'none';
         submitBtn.disabled = false;
         
-        // Show error message
         const formMessage = document.querySelector('.form-messege');
         if (formMessage) {
             formMessage.textContent = error.message || "An error occurred. Please try again.";
             formMessage.style.color = "#dc3545";
+            formMessage.classList.add('error');
         }
     }
 });
 </script>
 
 <%- include('footer') %>
+    </div>
+</div>

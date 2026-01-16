@@ -1,142 +1,119 @@
 <%- include('header'), {seoDetails} %>
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+    <!--======  Start Page Hero Section  ======-->
+    <section class="page-hero bg_cover p-r z-1" data-src="/assets/images/innerpage/bg/page-bg.jpg ">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <!--=== Page Content ===-->
+                    <div class="page-content text-center">
+                        <h1>Jobs</h1>
+                        <ul>
+                            <li><a href="/">Home</a></li>
+                            <li>jobs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+<section id="news" class="container col-12 news-section-two" style="padding: 100px 0;">
+    <div class="auto-container">
+        <div class="row">
+            <% if (jobs && jobs.length > 0) { %>
+                <% jobs.forEach((job, index) => { %>
+                <!-- News Block -->
+                <div class="news-block-two col-lg-4 col-sm-6 wow fadeInUp">
+                    <div class="inner-box wow fadeInLeft">
+                        <div class="content-box">
+                            <!-- Fix 1: Job category display - use job type -->
+                            <p class="job-category" style="font-size: 12px; color: #A1a1a1; margin: 0 0 10px 0; font-weight: 400; text-transform: uppercase; font-family: 'Barlow Condensed', sans-serif;">
+                                <%= job.type ? job.type.replace(/_/g, ' ') : 'General' %>
+                            </p>
+                            
+                            <h4 class="title" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; min-height: 2.6em; margin-bottom: 15px;">
+                                <a href="/job/<%= job._id %>"><%= job.jobTitle || 'Job Title' %></a>
+                            </h4>
+                            
+                            <!-- Fix 2: Safe description display with fallback -->
+                            <div class="desc" style="
+    font-family: 'Barlow', sans-serif; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    margin-bottom: 25px; 
+    font-size: 14px; 
+    color: #666666;
+    line-height: 1.6;
+">
+    <% if (job.jobDescription && job.jobDescription[0] && job.jobDescription[0].description) { 
+        // Extract text from HTML for preview
+        let desc = job.jobDescription[0].description;
+        // Remove all HTML tags for preview
+        desc = desc.replace(/<[^>]*>/g, ' ');
+        // Trim and get first 150 characters
+        desc = desc.replace(/\s+/g, ' ').trim();
+        desc = desc.substring(0, 150);
+    %>
+        <%= desc %>...
+    <% } else { %>
+        No description available.
+    <% } %>
+</div>
+                            
+                            <div class="btn-box">
+                                <a style="padding: 12px 0;" href="/job/<%= job._id %>">
+                                    Read More
+                                    <i class="fa-solid fa-arrow-right" style="margin-left: 10px; font-size:16px; color: #363636;"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+            <% } else { %>
+            <!-- Optional: Add no jobs message if you want -->
+            <div class="col-12 text-center">
+                <p>No job openings available at the moment.</p>
+            </div>
+            <% } %>
+        </div>
+    </div>
+</section>
 
-        <!-- PAGE TITLE
-        ================================================== -->
-        <section class="page-title-section top-position1 bg-img cover-background left-overlay-secondary" data-overlay-dark="85" data-background="/assets/img/banner/page-title-01.jpg">
-          <div class="container">                
-              <h1>Work With Us!</h1>
-              <ul>
-                  <li><a href="/">Home</a></li>
-                  <li>Career</li>
-              </ul>                
-          </div>
-      </section>
-
-      <!-- BLOG LIST
-      ================================================== -->
-      <% if (jobs && jobs.length > 0) { %>
-      <section>
-          <div class="container">
-              <div class="row mt-n2-9">
-                  <div class="col-lg-8 mt-2-9">
-
-                    <% jobs.forEach(job => { %>
-                      <div class="row mt-n1-9">
-                          <div class="col-12 mt-1-9 wow fadeIn" data-wow-delay="200ms">
-                              <article class="card card-style04 h-100">
-                                  
-                                  <div class="card-body position-relative pt-2-6 pb-1-9 pb-xl-2-6 px-1-9 px-xl-2-4">
-                                     
-                                      <div class="mb-3">
-                                          <a href="javascript:void(0)" class="text-uppercase fw-bold display-31"><%= job.jobPosition %></a>
-                                          <a href="javascript:void(0)" class="text-uppercase fw-bold display-31 blog-tag ps-4 position-relative">Experience : <%= job.experienceLevel %></a>
-                                          <a href="javascript:void(0)" class="text-uppercase fw-bold display-31 blog-tag ps-4 position-relative">Location : <%= job.location.cities[0].name %></a>
-                                      </div>
-                                      <h3 class="h2 mb-3"><a href="/job/<%= job.seoDetails?.slug %>"><%= job.title %></a></h3>
-                                      <p><%= job.subTitle %></p>
-                                      <a class="apply" href="/job/<%= job.seoDetails?.slug %>">Apply Now <i class="fa-solid fa-angles-right"></i></a>
-                                  </div>
-                                 
-                              </article>
-                          </div>
-                      </div>
-                      <% }) %>
 <style>
-  .apply{
-    margin-top: 30px;
-    color: #a1a76b;
-  }
+    .news-section-two .news-block-two {
+        margin-bottom: 30px;
+    }
+    
+    .news-section-two .inner-box {
+        background: #fff;
+        border-radius: 8px;
+        padding: 30px;
+        height: 100%;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f0f0f0;
+    }
+    
+    @media (max-width: 768px) {
+        .news-section-two {
+            padding: 60px 0 !important;
+        }
+        
+        .news-section-two .inner-box {
+            padding: 20px;
+        }
+    }
 </style>
-                  </div>
-                  <div class="col-lg-4 mt-2-9">
-                      <div class="blog-sidebar mt-n1-9 ps-xl-5">
-                          <div class="widget bg-secondary mt-1-9 wow fadeInUp" data-wow-delay="200ms">
-                              <div class="section-title-01 mb-1-9">
-                                  <span class="text-primary font-weight-600 text-uppercase letter-spacing-1 position-relative ps-2">Search</span>
-                              </div>
-                              <div class="input-group">
-                                  <input type="text" class="form-control rounded-start border-0" placeholder="Search here...">
-                                  <div class="input-group-append">
-                                      <button class="btn-style1 border-primary rounded-end" type="button"><span><i class="fa fa-search"></i></span></button>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="widget bg-secondary mt-1-9 wow fadeInUp" data-wow-delay="200ms">
-                              <div class="section-title-01 mb-1-9">
-                                  <span class="text-primary font-weight-600 text-uppercase letter-spacing-1 position-relative ps-2">Recent Posts</span>
-                              </div>
-                              <div class="d-flex mb-4">
-                                  <div class="flex-shrink-0 me-3">
-                                      <img src="img/blog/blog-thumb-01.jpg" alt="...">
-                                  </div>
-                                  <div class="flex-grow-1">
-                                      <h4 class="mb-2 h6"><a href="#" class="text-white text-white-hover-light">Innovations in energy production.</a></h4>
-                                      <span class="text-white opacity8 small">June 01, 2025</span>
-                                  </div>
-                              </div>
-                              <div class="d-flex mb-4">
-                                  <div class="flex-shrink-0 me-3">
-                                      <img src="img/blog/blog-thumb-02.jpg" alt="...">
-                                  </div>
-                                  <div class="flex-grow-1">
-                                      <h4 class="mb-2 h6"><a href="#" class="text-white text-white-hover-light">Changing engine gear & grinding machine.</a></h4>
-                                      <span class="text-white opacity8 small">June 05, 2025</span>
-                                  </div>
-                              </div>
-                              <div class="d-flex">
-                                  <div class="flex-shrink-0 me-3">
-                                      <img src="img/blog/blog-thumb-03.jpg" alt="...">
-                                  </div>
-                                  <div class="flex-grow-1">
-                                      <h4 class="mb-2 h6"><a href="#" class="text-white text-white-hover-light">Trends in oil & gas exploration.</a></h4>
-                                      <span class="text-white opacity8 small">June 06, 2025</span>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="widget bg-secondary mt-1-9 wow fadeInUp" data-wow-delay="200ms">
-                              <div class="section-title-01 mb-1-9">
-                                  <span class="text-primary font-weight-600 text-uppercase letter-spacing-1 position-relative ps-2">Categories</span>
-                              </div>
-                              <ul class="category-list list-unstyled mb-0">
-                                  <li><a href="#"><span>Business</span></a></li>
-                                  <li><a href="#"><span>Digital Agency</span></a></li>
-                                  <li><a href="#"><span>Introductions</span></a></li>
-                                  <li><a href="#"><span>New Technologies</span></a></li>
-                                  <li><a href="#"><span>Web Development</span></a></li>
-                              </ul>
-                          </div>
-                          <div class="widget bg-secondary mt-1-9 wow fadeInUp" data-wow-delay="200ms">
-                              <div class="section-title-01 mb-1-9">
-                                  <span class="text-primary font-weight-600 text-uppercase letter-spacing-1 position-relative ps-2">Categories</span>
-                              </div>
-                              <div class="blog-tags mt-n2">
-                                  <a href="#">Consulting</a>
-                                  <a href="#">Agency</a>
-                                  <a href="#">Business</a>
-                                  <a href="#">Digital</a>
-                                  <a href="#">Experience</a>
-                                  <a href="#">Technology</a>
-                              </div>
-                          </div>
-                          <div class="widget bg-secondary mt-1-9 wow fadeInUp" data-wow-delay="200ms">
-                              <div class="section-title-01 mb-1-9">
-                                  <span class="text-primary font-weight-600 text-uppercase letter-spacing-1 position-relative ps-2">Follow Us</span>
-                              </div>
-                              <ul class="social-icon-style2 ps-0">
-                                  <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                  <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                  <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                  <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                              </ul>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-      <% } %>
 
 
-
+</main>
 <%- include('footer') %>
+    </div>
+    </div>
+    

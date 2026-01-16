@@ -56,12 +56,12 @@ function convertToEmbedUrl(url) {
     <% } else if (blogDetails?.banner?.bannerType==="IMAGE" && blogDetails?.banner?.image) { %>
       <!-- Render image if the banner type is IMAGE and image URL exists -->
       <img style="padding-top: 0; width:100%; max-height: 75vh;"
-        src="<%= process.env.S3_BASE_URL + blogDetails.banner.image %>" alt="blog_banner">
+        src="<%= process.env.S3_BASE_URL + blogDetails.coverBanner %>" alt="blog_banner">
       <% } %>
                                       </div>
                                       <div class="post-content">
                                          
-                                          <h4 class="title"><%= blogDetails.title %></h4>
+                                          <h4 class="title"><%= blogDetails.postTitle %></h4>
                                          <div class="blog-description"> <%- blogDetails.description.replace(/<span[^>]*>/g, '').replace(/<\/span>/g, '').replace(/\n/g, '<br>') %></div>
                                         
                                           <% if (blogDetails?.multipleDescriptions?.length> 0) { %>
@@ -137,7 +137,7 @@ function convertToEmbedUrl(url) {
                                                                         imageCount === 5 ? 'five-images' :
                                                                         'grid-layout' 
                                                                     %>"
-                                                      style="display: grid; gap: 15px; grid-template-columns: <%= gridColumns %>; align-items: stretch;">
+                                                      style="display: grid; margin-bottom: 25px; gap: 15px; grid-template-columns: <%= gridColumns %>; align-items: stretch;">
                                 
                                                       <% item.multipleImages.forEach((image, index)=> { %>
                                                         <div class="image" style="position: relative; 

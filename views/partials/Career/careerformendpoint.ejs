@@ -1,3 +1,4 @@
+
 <script>
     // Phone number validation and custom file upload
     document.addEventListener('DOMContentLoaded', function() {
@@ -27,6 +28,9 @@
                 }
             });
         }
+
+        // Custom Dropdown is now handled by global custom-dropdown.js
+        // It will auto-initialize on page load
     });
     
     // Job Application Form Submission
@@ -36,15 +40,30 @@
         const submitBtn = document.getElementById('jobApplicationSubmitBtn');
         const btnText = document.getElementById('jobApplicationBtnText');
         const loader = document.getElementById('jobApplicationSubmitLoader');
+        const formMessage = document.querySelector('.form-messege');
+    
+        // Validate experience dropdown
+        const selectedExperience = document.getElementById('selectedExperienceValue')?.value;
+        if (!selectedExperience) {
+            if (formMessage) {
+                formMessage.textContent = "Please select years of experience.";
+                formMessage.style.color = "#dc3545";
+            }
+            return;
+        }
     
         try {
+            // Clear any previous error messages
+            if (formMessage) {
+                formMessage.textContent = '';
+            }
             const API_BASE_URL = "<%= API_BASE_URL %>";
             const websiteID = "<%= websiteID %>";
             const WEBSITEIDKEY = "<%= WEBSITE_ID_KEY %>";
             const JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS = <%- JSON.stringify(JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS) %>;
             
-            const UPLOAD_FILES_END_POINT = `${API_BASE_URL}/third-party/file-upload/upload-files`;
-            const CREATE_JOB_APPLICATION_END_POINT = `${API_BASE_URL}/website/job-application/create-job-application`;
+            const UPLOAD_FILES_END_POINT = `${API_BASE_URL}/third-party/file-upload/upload-files/${websiteID}`;
+            const CREATE_JOB_APPLICATION_END_POINT = `${API_BASE_URL}/website/${websiteID}/job-enquiries/create`;
     
             const jobApplicationForm = e.target; // Reference to the form element
             const WEBSITE_ID_KEY = WEBSITEIDKEY;
@@ -88,25 +107,46 @@
     
             // -------------------------------------------
             // 2. Prepare Form Payload
+            const contactNumberValue = jobApplicationForm.querySelector(
+                `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER}"]`
+            ).value;
+            
+            // Get job title from the hidden input field
+            const jobTitleInput = jobApplicationForm.querySelector(
+                `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.JOB_ID}"]`
+            );
+            const jobTitle = jobTitleInput ? jobTitleInput.value : '';
+            
+            // Get years of experience value
+            const yrOfExperience = document.getElementById('selectedExperienceValue')?.value || '';
+            
+            // Validate required fields before submission
+            if (!jobTitle) {
+                throw new Error("Job title is required.");
+            }
+            if (!yrOfExperience) {
+                throw new Error("Years of experience is required.");
+            }
+            if (!uploadedResume) {
+                throw new Error("Resume attachment is required.");
+            }
+            
+            // Build payload with backend-expected camelCase field names
             const payload = {
                 [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.NAME]: jobApplicationForm.querySelector(
                     `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.NAME}"]`
                 ).value,
-                [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER]: jobApplicationForm.querySelector(
-                    `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER}"]`
-                ).value,
+                [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER]: parseInt(contactNumberValue, 10) || 0,
                 [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.EMAIL]: jobApplicationForm.querySelector(
                     `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.EMAIL}"]`
                 ).value,
                 [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.MESSAGE]: jobApplicationForm.querySelector(
                     `textarea[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.MESSAGE}"]`
-                ).value,
-                [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.RESUME]: uploadedResume,
-                [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.JOB_ID]: jobApplicationForm.querySelector(
-                    `input[name="${JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.JOB_ID}"]`
-                ).value,
-                [JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.FORM_TYPE]: "career-enquiry",
-                [WEBSITE_ID_KEY]: websiteID,
+                ).value || '',
+                // Backend expects these specific camelCase field names
+                jobTitle: jobTitle,
+                yrOfExperience: yrOfExperience,
+                attachResume: uploadedResume,
             };
     
             // -------------------------------------------
@@ -120,13 +160,22 @@
                 headers,
                 body: JSON.stringify(payload),
             });
-    
+            
+            const responseData = await response.json();
+            
             if (!response.ok) {
-                throw new Error(`Form submission failed! Status: ${response.status}`);
+                // Handle backend validation errors
+                let errorMessage = "Form submission failed. Please check your input.";
+                if (responseData.errors && Array.isArray(responseData.errors) && responseData.errors.length > 0) {
+                    // Extract error messages from the errors array
+                    const errorMessages = responseData.errors.map(err => err.message || `${err.field}: ${err.message || 'is invalid'}`).join(', ');
+                    errorMessage = errorMessages;
+                } else if (responseData.message) {
+                    errorMessage = responseData.message;
+                }
+                throw new Error(errorMessage);
             }
-    
-            const data = await response.json();
-    
+            
             // Redirect to the thank-you page on success
             sessionStorage.setItem("thankYouMessage", "We've Received Your Request and will Reach out to you soon");
             window.location.href = "/thankyou";
@@ -138,10 +187,10 @@
             submitBtn.disabled = false;
             
             // Show error message
-            const formMessage = document.querySelector('.form-messege');
-            if (formMessage) {
-                formMessage.textContent = error.message || "An error occurred. Please try again.";
-                formMessage.style.color = "#dc3545";
+            const errorFormMessage = document.querySelector('.form-messege');
+            if (errorFormMessage) {
+                errorFormMessage.textContent = error.message || "An error occurred. Please try again.";
+                errorFormMessage.style.color = "#dc3545";
             }
         }
     });

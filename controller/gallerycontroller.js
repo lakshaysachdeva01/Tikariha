@@ -1,60 +1,100 @@
 const { API_BASE_URL } = require('../config/config');
 const { getWebsiteID, fetchData } = require('../utils/helper');
 
-
-exports.getgallery = async (req, res) => {  
-    const websiteID = await getWebsiteID(); 
-    let data = await fetchData(`${API_BASE_URL}/website/gallery/get-all-galleries/${websiteID}`);
-
-    return Array.isArray(data) ? data.reverse() : data || null;
-};
-
-exports.getgalleryalbum = async (title) => {  
-    const websiteID = await getWebsiteID(); 
-    const data = await fetchData(`${API_BASE_URL}/website/gallery/get-all-galleries/${websiteID}`);
-    
-    // Filter the galleries by the title
-    const filteredAlbums = data.filter(album => album.title.toLowerCase() === title.toLowerCase());
-
-    // Return the filtered albums as an array (or empty array if no match)
-    return filteredAlbums.length > 0 ? filteredAlbums : [];
-};
-
-exports.getLatestGalleryImages = async () => {
+const normalizeGallery = (albums = []) => {
+    return albums.map(album => {
+      const images = Array.isArray(album.multiImages) ? album.multiImages : [];
+      const videos = Array.isArray(album.videoLink)
+        ? album.videoLink.map(v => v.link).filter(Boolean)
+        : [];
+  
+      return {
+        id: album._id,
+        title: album.albumName,
+        mediaDetails: {
+          mediaType:
+            images.length > 0 ? "IMAGE" :
+            videos.length > 0 ? "VIDEO" : null,
+          images,
+          videoLinks: videos
+        },
+        createdAt: album.createdAt
+      };
+    });
+  };
+  exports.getgallery = async () => {
     try {
-        const websiteID = await getWebsiteID();
-        const response = await fetch(`${API_BASE_URL}/website/gallery/get-all-galleries/${websiteID}`);
+        const websiteID = await getWebsiteID(); 
+        const response = await fetchData(
+            `${API_BASE_URL}/website/${websiteID}/gallery/get-all`
+        );
 
-        if (!response.ok) {
-            console.error(`API request failed with status ${response.status}`);
-            return [];
+        console.log("API RESPONSE FULL:", JSON.stringify(response, null, 2)); // Full response
+        
+        // Check if response exists and has data
+        if (response && Array.isArray(response)) {
+            // If response is directly an array
+            console.log("Returning direct array with", response.length, "items");
+            return response;
+        } else if (response && response.data && Array.isArray(response.data)) {
+            // If response has data property
+            console.log("Returning response.data array with", response.data.length, "items");
+            return response.data;
+        } else if (response && Array.isArray(response.data)) {
+            // Another check
+            console.log("Returning response.data array (alternative) with", response.data.length, "items");
+            return response.data;
         }
-
-        const data = await response.json();
-
-        if (!data || !Array.isArray(data.data)) {
-            console.error("Invalid API response structure", data);
-            return [];
-        }
-
-        const latestImages = data.data.flatMap(album => {
-            if (
-                album.mediaDetails &&
-                album.mediaDetails.images &&
-                Array.isArray(album.mediaDetails.images) &&
-                album.mediaDetails.images.length > 0
-            ) {
-                return album.mediaDetails.images.map(image => ({
-                    url: `https://technolitics-s3-bucket.s3.ap-south-1.amazonaws.com/websitebuilder-s3-bucket/${image}`,
-                    title: album.title
-                }));
-            }
-            return [];
-        });
-
-        return latestImages.slice(-4).reverse(); // Get the latest 5 images
+        
+        console.log("No valid data found in response, returning empty array");
+        return [];
     } catch (error) {
-        console.error("Error fetching latest gallery images:", error);
+        console.error("Error in getgallery:", error);
         return [];
     }
 };
+  
+  exports.getgalleryalbum = async (title) => {
+    try {
+      const websiteID = await getWebsiteID();
+      const response = await fetchData(
+        `${API_BASE_URL}/website/${websiteID}/gallery/get-all`
+      );
+  
+      const rawData = Array.isArray(response?.data) ? response.data : [];
+      const gallery = normalizeGallery(rawData);
+  
+      return gallery.filter(
+        album => album.title.toLowerCase() === title.toLowerCase()
+      );
+    } catch (err) {
+      console.error("❌ getgalleryalbum failed:", err);
+      return [];
+    }
+  };
+
+  
+  exports.getLatestGalleryImages = async () => {
+    try {
+      const websiteID = await getWebsiteID();
+      const response = await fetchData(
+        `${API_BASE_URL}/website/${websiteID}/gallery/get-all`
+      );
+  
+      const rawData = Array.isArray(response?.data) ? response.data : [];
+      const gallery = normalizeGallery(rawData);
+  
+      const images = gallery.flatMap(album =>
+        album.mediaDetails.images.map(image => ({
+          url: `${process.env.S3_BASE_URL + image}`,
+          title: album.title
+        }))
+      );
+  
+      return images.slice(-4).reverse();
+    } catch (err) {
+      console.error("❌ getLatestGalleryImages failed:", err);
+      return [];
+    }
+  };
+  

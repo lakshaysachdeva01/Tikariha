@@ -1,67 +1,202 @@
- <!-- Job Application Form -->
- <div class="job-section">
-    <h3 class="job-section-title">Apply for this Position</h3>
-    <div class="job-application-form">
-        <p class="form-description">Fill out the form below to apply for this position. We'll review your application and get back to you soon.</p>
-        <form id="jobApplicationForm">
-            <div class="row">
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.NAME %>" placeholder="Full Name*" required>
-                    </div>
-                </div>
-                
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <input type="tel" class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER %>" placeholder="Contact Number*" pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" maxlength="10" required>
-                    </div>
-                </div>
-                
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <input type="email" class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.EMAIL %>" placeholder="Email Address*" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="Please enter a valid email address" required>
-                    </div>
-                </div>
-                
-                <div class="col-sm-6 col-md-6 col-lg-6">
-                    <div class="form-group">
-                        <input type="file" class="form-control" id="resumeUpload" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.RESUME %>" accept=".pdf,.doc,.docx" required style="display: none;">
-                        <input type="text" class="form-control" id="resumePlaceholder" placeholder="Upload Resume*" readonly style="cursor: pointer; background-color: #fff;">
-                    </div>
-                </div>
-                
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <input type="hidden" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.JOB_ID %>" value="<%= job._id %>">
-                    <div class="form-group">
-                        <textarea class="form-control" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.MESSAGE %>" placeholder="Tell us about yourself and why you're interested in this position" rows="5"></textarea>
-                    </div>
-                </div>
-                
-                <div class="col-sm-12 col-md-12 col-lg-12">
-                    <button class="btn btn__primary" type="submit" id="jobApplicationSubmitBtn">
-                        <span id="jobApplicationBtnText">Submit</span>
-                        <span class="submit-loader" id="jobApplicationSubmitLoader" style="display: none;">
-                            <svg width="20" height="20" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
-                                <g fill="none" fill-rule="evenodd">
-                                    <g transform="translate(1 1)" stroke-width="2">
-                                        <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
-                                        <path d="M36 18c0-9.94-8.06-18-18-18">
-                                            <animateTransform
-                                                attributeName="transform"
-                                                type="rotate"
-                                                from="0 18 18"
-                                                to="360 18 18"
-                                                dur="1s"
-                                                repeatCount="indefinite"/>
-                                        </path>
-                                    </g>
-                                </g>
-                            </svg>
-                        </span>
-                    </button>
-                </div>
+<style>
+    #jobApplicationForm .form-control {
+        width: 100%;
+        height: 54px;
+        color: #686a74;
+        font-size: 16px;
+        padding: 0 30px;
+        border: 1px solid #adadad;
+        background: #fff;
+        border-radius: 0;
+    }
+    
+    #jobApplicationForm .form-control:focus {
+        border-color: #adadad;
+        outline: none;
+        box-shadow: none;
+    }
+    
+    #jobApplicationForm textarea.form-control {
+        min-height: 100px;
+        resize: vertical;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        height: auto;
+    }
+    
+    #jobApplicationForm .custom-dropdown-selected {
+        width: 100%;
+        height: 54px;
+        color: #686a74;
+        font-size: 16px;
+        padding: 0 30px;
+        border: 1px solid #adadad;
+        background: #fff;
+        border-radius: 0;
+        min-height: 54px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    #jobApplicationForm .custom-dropdown-selected::after {
+        content: '\f107';
+        font-family: 'Font Awesome 5 Free';
+        font-weight: 900;
+        color: var(--theme-color1);
+        position: absolute;
+        right: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 0;
+        font-size: 16px;
+        pointer-events: none;
+        user-select: none;
+    }
+    
+    #jobApplicationForm .custom-dropdown-selected:focus,
+    #jobApplicationForm .custom-dropdown-selected:hover {
+        border-color: #adadad;
+        outline: none;
+        box-shadow: none;
+    }
+    
+    #jobApplicationForm #resumePlaceholder {
+        width: 100%;
+        height: 54px;
+        color: #222222;
+        font-size: 16px;
+        padding: 0 30px;
+        border: 1px solid #adadad;
+        background: #fff !important;
+        border-radius: 0;
+        cursor: pointer;
+    }
+    
+    #jobApplicationForm button[type="submit"],
+    #jobApplicationForm .theme-btn {
+        background-color: #222222;
+        color: #fff;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-family: var(--text-font2);
+        letter-spacing: 2px;
+        width: 100%;
+        height: 54px;
+        line-height: 54px;
+        border: 0;
+        position: relative;
+        z-index: 9;
+        padding: 0;
+    }
+    
+    #jobApplicationForm button[type="submit"]:before,
+    #jobApplicationForm .theme-btn:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        content: "";
+        background-color: var(--bg-theme-color1);
+        border-radius: inherit;
+        transform: scale(0, 1);
+        z-index: -1;
+        transform-origin: top right;
+        transition: transform 500ms cubic-bezier(0.86, 0, 0.07, 1);
+    }
+    
+    #jobApplicationForm button[type="submit"]:hover:before,
+    #jobApplicationForm .theme-btn:hover:before {
+        transform: scale(1, 1);
+        transform-origin: bottom left;
+    }
+</style>
+
+<!-- Job Application Form -->
+<form id="jobApplicationForm" method="post" style=" border-top: 2px dashed #e0e0e0; padding-top: 25px; margin-top: 25px;">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="mb-3">
+                <input name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.NAME %>" class="form-control" type="text" placeholder="Full Name*" required>
             </div>
-        </form>
-        <p class="form-messege mt-3"></p>
+        </div>
+        <div class="col-sm-6">
+            <div class="mb-3">
+                <input name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.CONTACT_NUMBER %>" class="form-control" type="tel" placeholder="Contact Number*" required pattern="[0-9]{10}" title="Please enter a valid 10-digit phone number" maxlength="10" minlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
+            </div>
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="mb-3">
+                <input name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.EMAIL %>" class="form-control required email" type="email" placeholder="Email Address*" required>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="mb-3">
+                <div class="custom-dropdown" id="experienceDropdown">
+                    <div class="custom-dropdown-selected" id="experienceDropdownSelected">
+                        <span class="selected-text">Years of Experience*</span>
+                    </div>
+                    <div class="custom-dropdown-options" id="experienceDropdownOptions">
+                        <div class="dropdown-option" data-value="FRESHER" data-title="Fresher">Fresher</div>
+                        <div class="dropdown-option" data-value="1_TO_3_YRS" data-title="1 to 3 Years">1 to 3 Years</div>
+                        <div class="dropdown-option" data-value="4_TO_5_YRS" data-title="4 to 5 Years">4 to 5 Years</div>
+                        <div class="dropdown-option" data-value="6_TO_7_YRS" data-title="6 to 7 Years">6 to 7 Years</div>
+                        <div class="dropdown-option" data-value="8_TO_12_YRS" data-title="8 to 12 Years">8 to 12 Years</div>
+                        <div class="dropdown-option" data-value="12__YRS" data-title="12+ Years">12+ Years</div>
+                    </div>
+                </div>
+                <input type="hidden" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.YRS_OF_EXP %>" id="selectedExperienceValue" required>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="mb-3" style="position: relative;">
+                <input type="file" class="form-control" id="resumeUpload" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.RESUME %>" accept=".pdf,.doc,.docx" required style="display: none;">
+                <input type="text" class="form-control" id="resumePlaceholder" placeholder="Upload Resume*" readonly style="cursor: pointer; background:#f4f5f8; ">
+                <span style="position: absolute;     right: 18px;
+    opacity: 50%; top: 50%; transform: translateY(-50%); pointer-events: none; z-index: 1;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#4a5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M14 2V8H20" stroke="#4a5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 13H8" stroke="#4a5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 17H8" stroke="#4a5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M10 9H8" stroke="#4a5568" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <input type="hidden" name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.JOB_ID %>" value="<%= job.jobTitle %>">
+        <textarea name="<%= JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS.MESSAGE %>" class="form-control required" rows="7" placeholder="Tell us about yourself and why you're interested in this position"></textarea>
+    </div>
+    <div class="mb-5">
+        <input name="form_botcheck" class="form-control" type="hidden" value="" />
+        <button type="submit" class="theme-btn btn-style-one" id="jobApplicationSubmitBtn" data-loading-text="Please wait...">
+            <span class="btn-title" id="jobApplicationBtnText">Submit</span>
+            <span class="submit-loader" id="jobApplicationSubmitLoader" style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#fff">
+                    <g fill="none" fill-rule="evenodd">
+                        <g transform="translate(1 1)" stroke-width="2">
+                            <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+                            <path d="M36 18c0-9.94-8.06-18-18-18">
+                                <animateTransform
+                                    attributeName="transform"
+                                    type="rotate"
+                                    from="0 18 18"
+                                    to="360 18 18"
+                                    dur="1s"
+                                    repeatCount="indefinite"/>
+                            </path>
+                        </g>
+                    </g>
+                </svg>
+            </span>
+        </button>
+    </div>
+</form>
+<p class="form-messege mt-3"></p>

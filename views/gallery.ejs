@@ -1,8 +1,327 @@
+<%- include('header', { seoDetails }) %>
 
+<style>
+    .gallery-breadcrumb {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding: 30px 0;
+        list-style: none;
+        margin: 0;
+    }
+    
+    .gallery-breadcrumb .breadcrumb-item {
+        flex: 0 0 auto;
+        margin: 0;
+        padding: 0;
+        border: none;
+        background: transparent;
+        list-style: none;
+    }
+    
+    .gallery-breadcrumb .breadcrumb-item+.breadcrumb-item::before {
+        content: none !important;
+        display: none !important;
+    }
+    
+    .gallery-breadcrumb .breadcrumb-item.theme-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 14px 32px;
+        font-size: 15px;
+        font-weight: 600;
+        font-family: var(--body-font);
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        border: 2px solid var(--border-color);
+        cursor: pointer;
+        white-space: nowrap;
+        background-color: var(--white-color);
+        color: var(--heading-color);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+    
+    .gallery-breadcrumb .breadcrumb-item.theme-btn.active {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        border-color: var(--primary-color);
+        box-shadow: 0 4px 12px rgba(255, 65, 54, 0.3);
+    }
+    
+    .gallery-breadcrumb .breadcrumb-item.theme-btn:not(.active):hover {
+        background-color: var(--primary-color);
+        color: var(--white-color);
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 65, 54, 0.3);
+    }
 
-<%- include('header'), {seoDetails} %>
+    @media (max-width: 768px) {
+        .gallery-breadcrumb {
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            justify-content: flex-start;
+            padding: 20px 0;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .gallery-breadcrumb::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .gallery-breadcrumb .breadcrumb-item.theme-btn {
+            padding: 12px 24px;
+            font-size: 14px;
+        }
+    }
+    
+    .gallery-container {
+        column-count: 3;
+        gap: 20px;
+    }
+    
+    .gallery-thumb {
+        margin-bottom: 20px;
+        break-inside: avoid;
+    }
+    
+    @media (max-width:992px) {
+        .gallery-container {
+            column-count: 2;
+            gap: 30px;
+        }
+    }
+    
+    @media (max-width:700px) {
+        .gallery-container {
+            column-count: 1;
+            gap: 30px;
+        }
+    }
+    
+    @media (max-width:500px) {
+        .gallery-thumb {
+            margin-bottom: 14px !important;
+        }
+    }
+  
+    .thumbnail-container {
+        position: relative;
+        width: 100%;
+    }
+    
+    .thumbnail-image {
+        width: 100%;
+        object-fit: cover;
+        display: block;
+        border-radius: 8px;
+    }
+    
+    .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 40px;
+        color: white;
+        border: 2px solid white;
+        height: 72px;
+        width: 72px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0,0,0,0.5);
+        padding: 6px 2px 10px 10px;
+    }
+    
+    .breadcrumb-item.btn-style1:hover {
+        background-color: white !important;
+        color: black;
+        border: 1px solid rgb(0, 0, 0) !important;
+    }
+</style>
 
-<%- include('partials/gallery/listing.ejs') %>
+<div id="smooth-wrapper">
+    <div id="smooth-content">
+        <main>
+            <section class="page-hero bg_cover p-r z-1" data-src="/assets/images/innerpage/bg/page-bg.jpg">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="page-content text-center">
+                                <h1>Gallery</h1>
+                                <ul>
+                                    <li><a href="/">Home</a></li>
+                                    <li>Gallery</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
+            <div class="page-title-area bg_cover mb-30 mt-30" style="margin-top: 20px;">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="page-title-content">
+                                <nav aria-label="breadcrumb">
+                                    <ol class="breadcrumb gallery-breadcrumb" id="galleryTabs">
+                                        <li class="breadcrumb-item theme-btn style-one active" data-filter="all">All</li>
+                                        <% 
+                                        const displayData = gallery || [];
+                                        displayData.forEach((album) => { 
+                                            const albumName = album.albumName || 'Untitled';
+                                            // Show tab if album has either images or videos
+                                            if ((album.multiImages && album.multiImages.length > 0) || 
+                                                (album.videoLink && album.videoLink.length > 0)) { %>
+                                                <li class="breadcrumb-item theme-btn style-one" data-filter="<%= albumName.toLowerCase() %>"><%= albumName %></li>
+                                            <% } %>
+                                        <% }); %>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gallery-area gallery-page masonry" style="padding-bottom: 120px;">
+                <div class="container">
+                    <div class="gallery-itmes">
+                        <div class="rows">
+                            <div class="gallery-container state-gallery">
+                                <% 
+                                const galleryData = gallery || [];
+                                
+                                if (galleryData.length === 0) { %>
+                                    <div class="col-12 text-center">
+                                        <p>No gallery items found.</p>
+                                    </div>
+                                <% }
+                                
+                                galleryData.slice().reverse().forEach((album) => { 
+                                    const albumName = album.albumName || 'Untitled';
+                                    const images = album.multiImages || [];
+                                    const videos = album.videoLink || [];
+                                %>
+                                    
+                                    <% /* IMAGES */ %>
+                                    <% if (images.length > 0) { %>
+                                        <% images.slice().reverse().forEach((image) => { 
+                                            const imageSrc = typeof image === 'string' ? image : (image.link || image.src || '');
+                                            if (!imageSrc) return;
+                                        %>
+                                            <div class="gallery-thumb image-item"
+                                                data-title="<%= albumName.toLowerCase() %>">
+                                                
+                                                <img 
+                                                    src="<%= process.env.S3_BASE_URL + imageSrc %>"
+                                                    alt="<%= albumName %>"
+                                                    class="thumbnail-image" />
+                                            </div>
+                                        <% }); %>
+                                    <% } %>
+                                    
+                                    <% /* VIDEOS */ %>
+                                    <% if (videos.length > 0) { %>
+                                        <% videos.forEach(video => { 
+                                            const videoUrl = typeof video === 'string' ? video : (video.link || '');
+                                            if (!videoUrl) return;
+                                            
+                                            function convertToEmbedUrl(url) {
+                                                let videoId = "";
+                                                if (url.includes("youtu.be")) {
+                                                    videoId = url.split("youtu.be/")[1]?.split("?")[0];
+                                                } else if (url.includes("youtube.com/watch")) {
+                                                    videoId = url.split("v=")[1]?.split("&")[0];
+                                                }
+                                                return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
+                                            }
+
+                                            const embedUrl = convertToEmbedUrl(videoUrl);
+                                            if (!embedUrl) return;
+                                            
+                                            const videoId = embedUrl.split('/').pop();
+                                        %>
+                                        
+                                            <div class="gallery-thumb video-item"
+                                                data-title="<%= albumName.toLowerCase() %>">
+
+                                                <div class="thumbnail-container">
+                                                    <img 
+                                                        src="https://img.youtube.com/vi/<%= videoId %>/0.jpg"
+                                                        alt="<%= albumName %>"
+                                                        class="thumbnail-image" />
+                                                    <div class="play-button">▶</div>
+                                                </div>
+                                            </div>
+                                        
+                                        <% }); %>
+                                    <% } %>
+                                <% }); %>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+ 
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const galleryItems = document.querySelectorAll('.gallery-thumb');
+    const galleryBreadcrumbs = document.querySelectorAll('#galleryTabs .breadcrumb-item');
+
+    // Make videos clickable to open YouTube
+    document.querySelectorAll('.video-item .thumbnail-container').forEach(video => {
+        video.addEventListener('click', function() {
+            const videoItem = this.closest('.video-item');
+            const playButton = this.querySelector('.play-button');
+            const img = this.querySelector('img');
+            
+            // Get YouTube ID from thumbnail URL
+            const youtubeId = img.src.split('/vi/')[1]?.split('/')[0];
+            if (youtubeId) {
+                window.open(`https://www.youtube.com/watch?v=${youtubeId}`, '_blank');
+            }
+        });
+    });
+
+    // Simple filter functionality
+    function filterGallery(filter) {
+        galleryItems.forEach(item => {
+            const itemTitle = item.getAttribute('data-title');
+            if (filter === 'all') {
+                item.style.display = 'block';
+            } else if (itemTitle === filter) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    galleryBreadcrumbs.forEach((item) => {
+        item.addEventListener('click', function (event) {
+            event.preventDefault();
+            galleryBreadcrumbs.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            const filter = this.getAttribute('data-filter');
+            filterGallery(filter);
+        });
+    });
+
+    // Set default filter to 'All'
+    filterGallery('all');
+});
+</script>
 
 <%- include('footer') %>

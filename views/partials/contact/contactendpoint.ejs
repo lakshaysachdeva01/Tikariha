@@ -9,7 +9,7 @@
             const WEBSITEIDKEY = "<%= WEBSITE_ID_KEY %>";
             const CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS = <%- JSON.stringify(CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS) %>;
     
-            const CREATE_CONTACT_ENQUIRY_END_POINT = `${API_BASE_URL}/website/contact-enquiry/create-contact-enquiry`;
+            const CREATE_CONTACT_ENQUIRY_END_POINT = `${API_BASE_URL}/website/${websiteID}/service-enquiry/create`;
     
             const contactForm = e.target; // Reference to the form element
             const WEBSITE_ID_KEY = WEBSITEIDKEY;
@@ -19,9 +19,9 @@
                 [CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.name]: contactForm.querySelector(
                     `input[name="${CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.name}"]`
                 ).value,
-                [CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone]: contactForm.querySelector(
+                [CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone]: Number(contactForm.querySelector(
                     `input[name="${CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.phone}"]`
-                ).value,
+                ).value),
                 [CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.email]: contactForm.querySelector(
                     `input[name="${CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.email}"]`
                 ).value,
@@ -31,7 +31,7 @@
                 [CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.remarks]: contactForm.querySelector(
                     `textarea[name="${CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.remarks}"]`
                 ).value,
-                [WEBSITE_ID_KEY]: websiteID,
+                [CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS.serviceType]: "GENERAL",
             };
     
             // Set headers for the request

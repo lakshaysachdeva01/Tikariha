@@ -35,7 +35,7 @@ exports.getHomepopupBanner = async () => {
 
 exports.gettestimonial = async(req, res) => {  
     const websiteID = await getWebsiteID(); 
-     const data = await fetchData(`${API_BASE_URL}/website/testimonial/get-all-testimonials/${websiteID}`);
+     const data = await fetchData(`${API_BASE_URL}/website/${websiteID}/testimonials/get-all`);
      return data || null
 };
 

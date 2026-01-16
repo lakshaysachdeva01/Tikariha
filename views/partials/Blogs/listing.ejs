@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-            </section><!--======  End Page Hero Section  ======-->
+            </section>
             <!--======  Start Blog Section  ======-->
             <section class="renvia-blog-grid-sec pt-120 pb-120">
                 <div class="container">
@@ -26,16 +26,16 @@
                         <% blogs.forEach(item => { %>
                         <div class="col-xl-4 col-md-6 col-sm-12">
                             <!-- Renvia Blog Item -->
-                            <div class="renvia-blog-post-item style-one mb-30" onclick="window.location.href='/post/<%= item.seoDetails.slug %>'" data-aos="fade-up" data-aos-duration="800">
+                            <div class="renvia-blog-post-item style-one mb-30" onclick="window.location.href='/post/<%= item._id %>'" data-aos="fade-up" data-aos-duration="800">
                                 <div class="post-thumbnail">
-                                    <img src="<%= process.env.S3_BASE_URL + item.banner.image %>" alt="<%= item.title %>">
+                                    <img src="<%= process.env.S3_BASE_URL + item.coverImage %>" class="blogimage" alt="<%= item.postTitle %>">
                                 </div>
                                 <div class="post-content">
                                     <div class="post-tags">
-                                        <span><a href="javascript:void(0)"><%= item.category %></a></span>
+                                        <span><a href="javascript:void(0)"><%= item.postCategory %></a></span>
                                     </div>
-                                    <h4 class="title"><a href="/post/<%= item.seoDetails.slug %>"><%= item.title %></a></h4>
-                                    <a href="/post/<%= item.seoDetails.slug %>" class="read-more style-one">Read Details<i class="far fa-arrow-right"></i></a>
+                                    <h4 class="title"><a href="/post/<%= item._id %>"><%= item.postTitle %></a></h4>
+                                    <a href="/post/<%= item._id %>" class="read-more style-one">Read Details<i class="far fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -54,3 +54,18 @@
            
 
      
+        <style>
+            .blogimage{
+                width: 412px;
+                height: 270px;
+                object-fit: cover;
+            }
+            .title a{
+               min-height: 62px;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        </style>

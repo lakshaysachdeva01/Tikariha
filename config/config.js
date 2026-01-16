@@ -16,11 +16,12 @@ const BANNER_TYPES = {
     DELETE: "DELETE",
   };
   const CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS={
-    name : "strings.stringOne",
-    phone : "strings.stringTwo",
-    email: "email",
-    address:"strings.stringThree",
-    remarks: "remarks",
+    name : "name",
+    email: "emailId",
+    phone : "contactNo",
+    address: "city",
+    remarks: "remakrs",
+    serviceType: "enqfor",
    };
 
    const CAREER_ENQUIRY_DYNAMIC_FIELDS_KEYS={
@@ -44,16 +45,15 @@ const BANNER_TYPES = {
     remarks: "remarks",
    };
 
-
-   const JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS = {
-    NAME: "strings.stringOne",
-    CONTACT_NUMBER: "strings.stringTwo",
-    EMAIL: "email",
-    RESUME: "files.fileOne",
-    JOB_ID: "job",
-    MESSAGE: "remarks",
-    FORM_TYPE: "formType",
+   const SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS={
+    name : "name",
+    email: "emailId",
+    phone : "contactNo",
+    address: "city",
+    remarks: "remakrs",
+    serviceType: "enqfor",
    };
+
 
 module.exports={
   API_BASE_URL,
@@ -65,5 +65,6 @@ module.exports={
     CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS,
     CAREER_ENQUIRY_DYNAMIC_FIELDS_KEYS,
     BOOKING_ENQUIRY_DYNAMIC_FIELDS_KEYS,
-    JOB_ENQUIRY_DYNAMIC_FIELDS_KEYS
+    SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,
+ 
 };

@@ -1,4 +1,5 @@
 
+<p style="color:red">Gallery count: <%= gallery.length %></p>
 <style>
     .form-switch .switch {
         cursor: pointer;
@@ -187,7 +188,6 @@
     
     .thumbnail-image {
         width: 100%;
-        height: 230px !important;
         object-fit: cover;
         display: block;
     }
@@ -244,6 +244,10 @@ border: 1px solid rgb(0, 0, 0) !important;
         </div>
     </div>
 </section><!--======  End Page Hero Section  ======-->
+<% 
+// Use passed variables
+const displayGallery = rawGallery || gallery || []; 
+%>
 
 <div class="page-title-area bg_cover mb-30 mt-30" style="margin-top: 20px;">
     <div class="container">
@@ -256,18 +260,28 @@ border: 1px solid rgb(0, 0, 0) !important;
                             <% 
                             // Check if any video exists in the gallery
                             let hasVideos = false;
-                            gallery.forEach((album) => {
-                                if (album.mediaDetails && album.mediaDetails.mediaType === "VIDEO" && album.mediaDetails.videoLink) {
+                            
+                            displayGallery.forEach((album) => {
+                                const hasVideoLink = album.videoLink && Array.isArray(album.videoLink) && album.videoLink.length > 0;
+                                const hasMediaVideos = album.mediaDetails && album.mediaDetails.videoLinks && Array.isArray(album.mediaDetails.videoLinks) && album.mediaDetails.videoLinks.length > 0;
+                                
+                                if (hasVideoLink || hasMediaVideos) {
                                     hasVideos = true;
                                 }
                             });
                             %>
+                            
                             <% if (hasVideos) { %>
                                 <li class="breadcrumb-item theme-btn style-one" data-filter="videos">Videos</li>
                             <% } %>
-                            <% gallery.forEach((album) => { %>
-                                <% if (album.mediaDetails && album.mediaDetails.mediaType === "IMAGE") { %>
-                                    <li class="breadcrumb-item theme-btn style-one" data-filter="<%= album.title.toLowerCase() %>"><%= album.title %></li>
+                            
+                            <% displayGallery.forEach((album) => { 
+                                const albumTitle = album.albumName || album.title || 'Untitled';
+                                const hasImages = (album.multiImages && Array.isArray(album.multiImages) && album.multiImages.length > 0) ||
+                                                 (album.mediaDetails && album.mediaDetails.images && Array.isArray(album.mediaDetails.images) && album.mediaDetails.images.length > 0);
+                                
+                                if (hasImages) { %>
+                                    <li class="breadcrumb-item theme-btn style-one" data-filter="<%= albumTitle.toLowerCase() %>"><%= albumTitle %></li>
                                 <% } %>
                             <% }); %>
                         </ol>
@@ -284,46 +298,86 @@ border: 1px solid rgb(0, 0, 0) !important;
             <div class="rows">
                 <!-- Gallery Container -->
                 <div class="gallery-container state-gallery">
-                    <% gallery.slice().reverse().forEach((album) => { %>
-                        <% if (album.mediaDetails.mediaType === "IMAGE" && album.mediaDetails.images.length > 0) { %>
-                            <% album.mediaDetails.images.slice().reverse().forEach((image) => { %>
-                                <div class="gallery-thumb image-item popup-trigger" data-type="image" data-src="https://technolitics-s3-bucket.s3.ap-south-1.amazonaws.com/websitebuilder-s3-bucket/<%= image %>" data-title="<%= album.title.toLowerCase() %>">
-                                    <img src="https://technolitics-s3-bucket.s3.ap-south-1.amazonaws.com/websitebuilder-s3-bucket/<%= image %>" 
-                                         alt="<%= album.title %>" style="width: 100%;" />
+                    <% 
+                    displayGallery.slice().reverse().forEach((album) => { 
+                        // Check structure
+                        const hasMultiImages = album.multiImages && Array.isArray(album.multiImages);
+                        const hasMediaImages = album.mediaDetails && album.mediaDetails.images && Array.isArray(album.mediaDetails.images);
+                        const hasVideoLink = album.videoLink && Array.isArray(album.videoLink);
+                        const hasMediaVideos = album.mediaDetails && album.mediaDetails.videoLinks && Array.isArray(album.mediaDetails.videoLinks);
+                        
+                        const images = hasMultiImages ? album.multiImages : (hasMediaImages ? album.mediaDetails.images : []);
+                        const videos = hasVideoLink ? album.videoLink : (hasMediaVideos ? album.mediaDetails.videoLinks : []);
+                        const albumTitle = album.albumName || album.title || 'Untitled';
+                    %>
+                        
+                        <% /* IMAGE ALBUM */ %>
+                        <% if (images.length > 0) { %>
+                            <% images.slice().reverse().forEach((image) => { 
+                                // Handle both string images and object images
+                                const imageSrc = typeof image === 'string' ? image : image.link || image.src || image;
+                                if (!imageSrc) return;
+                            %>
+                                <div class="gallery-thumb image-item popup-trigger"
+                                    data-type="image"
+                                    data-src="<%= process.env.S3_BASE_URL + imageSrc %>"
+                                    data-title="<%= albumTitle.toLowerCase() %>">
+                                    
+                                    <img 
+                                        src="<%= process.env.S3_BASE_URL + imageSrc %>"
+                                        alt="<%= albumTitle %>"
+                                        style="width:100%;" />
                                 </div>
                             <% }); %>
                         <% } %>
-                        <% if (album.mediaDetails.mediaType === "VIDEO" && album.mediaDetails.videoLink) { 
-                            function convertToEmbedUrl(url) {
-                                let videoId = "";
-                                if (url.includes("youtu.be")) {
-                                    videoId = url.split("youtu.be/")[1]?.split("?")[0];
-                                } else if (url.includes("youtube.com/watch")) {
-                                    videoId = url.split("v=")[1]?.split("&")[0];
+                        
+                        <% /* VIDEO ALBUM */ %>
+                        <% if (videos.length > 0) { %>
+                            <% videos.forEach(video => { 
+                                // Get video URL from object or string
+                                const videoUrl = typeof video === 'string' ? video : video.link;
+                                if (!videoUrl) return;
+                                
+                                function convertToEmbedUrl(url) {
+                                    let videoId = "";
+                                    if (url.includes("youtu.be")) {
+                                        videoId = url.split("youtu.be/")[1]?.split("?")[0];
+                                    } else if (url.includes("youtube.com/watch")) {
+                                        videoId = url.split("v=")[1]?.split("&")[0];
+                                    }
+                                    return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
                                 }
-                                return videoId ? `https://www.youtube.com/embed/${videoId}` : "";
-                            }
-                            const embedUrl = convertToEmbedUrl(album.mediaDetails.videoLink);
-                        %>
-                            <% if (embedUrl) { %>
-                                <div class="gallery-thumb video-item popup-trigger" data-type="video" data-src="<%= embedUrl %>" data-title="videos" style="margin-bottom: 20px; display:flex; flex-direction:column">
+
+                                const embedUrl = convertToEmbedUrl(videoUrl);
+                                if (!embedUrl) return;
+                            %>
+                            
+                                <div class="gallery-thumb video-item popup-trigger"
+                                    data-type="video"
+                                    data-src="<%= embedUrl %>"
+                                    data-title="videos"
+                                    style="margin-bottom:20px; display:flex; flex-direction:column">
+
                                     <div class="thumbnail-container">
-                                        <img src="https://img.youtube.com/vi/<%= embedUrl.split('/').pop() %>/0.jpg" 
-                                             alt="<%= album.title %>" class="thumbnail-image" />
+                                        <img 
+                                            src="https://img.youtube.com/vi/<%= embedUrl.split('/').pop() %>/0.jpg"
+                                            alt="<%= albumTitle %>"
+                                            class="thumbnail-image" />
                                         <div class="play-button">▶</div>
                                     </div>
                                 </div>
-                            <% } else { %>
-                                <p>Invalid YouTube URL provided.</p>
-                            <% } %>
+                            
+                            <% }); %>
                         <% } %>
                     <% }); %>
+                    
                 </div>
             </div>
         </div>
     </div>
 </div>
 
+<!-- Rest of your script... -->
 
 <script>document.addEventListener('DOMContentLoaded', function () {
     const galleryItems = document.querySelectorAll('.gallery-thumb');
@@ -351,8 +405,7 @@ border: 1px solid rgb(0, 0, 0) !important;
             }
         });
 
-        // Reinitialize Media Items for Popup
-        initMediaItems();
+    
     }
 
     galleryBreadcrumbs.forEach((item) => {
