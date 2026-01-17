@@ -3,7 +3,7 @@ const { getWebsiteID, fetchData } = require('../utils/helper');
 
 exports.getHomeDesktopBanner = async(req, res) => {  
     const websiteID = await getWebsiteID(); 
-     const data = await fetchData(`${API_BASE_URL}/website/banner/get-all-banners/${websiteID}?type=HOME_BANNER`);
+     const data = await fetchData(`${API_BASE_URL}/website/${websiteID}/banners/get-all?bannerType=HERO_BANNER`);
      return data || null
      
 };

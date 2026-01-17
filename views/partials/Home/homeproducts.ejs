@@ -17,36 +17,106 @@
         <!-- Service Slider -->
         <div class="service-slider" data-aos="fade-down" data-aos-duration="1000">
             <!-- Renvia Service Card -->
-            <% projects.forEach((project, index) => { %>
-                <div class="renvia-service-card col-lg-4 col-md-6 col-sm-12 style-one mb-40" onclick="window.location.href='/project/<%= project._id %>'">
-                    <div class="content">
-                        <div class="title-wrap" style="margin-bottom: 20px; padding-bottom: 20px;">
-                            <h4><a href="/project/<%= project._id %>"><%= project.projectName %></a></h4>
-                            <a href="/project/<%= project._id %>" class="icon-btn"><i class="far fa-arrow-right"></i></a>
-                        </div>
-                
-                        <%
-                        const titleCase = (str) =>
-                          str
-                            .replace(/_/g, ' ')
-                            .toLowerCase()
-                            .replace(/\b\w/g, char => char.toUpperCase());
-                      %>
-                      
-                      <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-                          <p style="margin-bottom: 0px;font-size: 14px; background-color:#ffc5c5; padding: 2px 20px; border-radius: 12px; color: #000;"><%= titleCase(project.possesion) %></p>
-                          <p style="margin-bottom: 0px;font-size: 14px; background-color:#F8F8F8; padding: 2px 20px; border-radius: 12px; color: #000;"><%= titleCase(project.projectType) %></p>
-                      </div>
-                      
-                      <p style="margin-bottom: 24px;"><%= titleCase(project.locality) %>, <%= titleCase(project.city) %></p>
-                       <!-- <p><%= project.reraNo %></p> -->
-                        <img src="<%= process.env.S3_BASE_URL + project.listingBanner %>" alt="<%= project.projectName %>">
+          
+
+
+        <% projects.forEach((project, index) => { %>
+            
+            <%
+            const titleCase = (str) =>
+              str
+                .replace(/_/g, ' ')
+                .toLowerCase()
+                .replace(/\b\w/g, char => char.toUpperCase());
+          %>
+          
+    <div class="renvia-service-card service-projects col-lg-4 col-md-6 col-sm-12 style-one mb-40" onclick="window.location.href='/project/<%= project._id %>'">
+        <div class="content">
+            <div class="title-wrap" style="margin-bottom: 20px; padding-bottom: 20px;">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
+                    <img src="<%= process.env.S3_BASE_URL + project.projectLogo %>" style="height: 45px; width: 45px; object-fit: cover; border-radius: 100%;" alt="<%= project.projectName %>">
+                    <div style="display: flex; flex-direction: column;">
+                        <h4><a href="/project/<%= project._id %>"><%= project.projectName %></a></h4>
+                        <p style="margin-bottom: 0px;"><%= titleCase(project.locality) %>, <%= titleCase(project.city) %></p>
                     </div>
+                   
                 </div>
-                <% }) %>
+              
+                <a href="/project/<%= project._id %>" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+            </div>
+
+          <div class="project-description-block" style="margin-bottom: 22px; ">
+<%- project.projectDescrpition[0].description %>
+          </div>
+          
+         
+           <!-- <p><%= project.reraNo %></p> -->
+            <img src="<%= process.env.S3_BASE_URL + project.listingBanner %>" alt="<%= project.projectName %>">
+        </div>
+    </div>
+    
+<% }) %>
         </div>
     </div>
 </section>
 
     
 <% } %>
+
+
+<style>
+    
+
+.service-slider{
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+    .service-slider-projects .slick-slide {
+      margin-left: 15px;
+      margin-right: 15px;
+    
+    }
+    .service-projects{
+        max-width: 430px;
+    }
+
+    
+    .project-description-block h1, .project-description-block h2, .project-description-block h3, .project-description-block h4, .project-description-block h5, .project-description-block h6 ,.project-description-block {
+                font-size: 16px;
+                font-weight: 400 !important;
+                font-family: var(--body-font);
+                line-height: 26px;
+                color: #797e88;
+    
+            }
+    
+    
+            .project-description-block{
+                display: -webkit-box;
+                 -webkit-line-clamp: 3;
+                  -webkit-box-orient: vertical;
+                  
+                  overflow: hidden;
+                   text-overflow: ellipsis; 
+                   }
+    
+    
+    
+     strong{
+        font-weight: 400 !important;
+    }
+    
+    @media screen and (max-width: 991.98px) {
+      .service-slider-projects .slick-slide {
+        margin-left: 12px;
+        margin-right: 12px;
+      }
+    
+    .page-top{
+        margin-top: 60px;
+    }
+    
+    }
+    
+    </style>

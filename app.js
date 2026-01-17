@@ -38,7 +38,7 @@ app.use(async (req, res, next) => {
 app.get('/', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const websiteID = await getWebsiteID();
-//     const banners = await getHomeDesktopBanner();
+    const banners = await getHomeDesktopBanner();
     const testimonial = await gettestimonial();
     const projects = await getProducts();
     const blogs = await getBlog();
@@ -56,7 +56,7 @@ app.get('/', async (req, res) => {
 };
 
 
-    res.render('index', {body: "",websiteID,baseUrl,testimonial,seoDetails,projects,blogs,popupbanners});
+    res.render('index', {body: "",websiteID,baseUrl,testimonial,seoDetails,projects,blogs,popupbanners,banners });
 });
 
 

@@ -24,24 +24,53 @@
                                 <div class="testimonial-slider">
 
                                     <% testimonial.forEach((slide) => { %>
-                                    <div class="renvia-testimonial-item style-one">
-                                        <div class="testimonial-content">
-                                            <div class="quote">
-                                                <img src="assets/images/home-one/testimonial/quote.png" alt="quote">
-                                            </div>
-                                            <p><%= slide.testimonial %></p>
-                                            <div class="author-thumb-item">
-                                                <div class="author-thumb">
-                                                    <img src="<%= process.env.S3_BASE_URL + slide.picture %>" alt="<%= slide.name %>">
+                                        <div class="renvia-testimonial-item style-one">
+                                            <div class="testimonial-content">
+                                                <div class="quote">
+                                                    <img src="assets/images/home-one/testimonial/quote.png" alt="quote">
                                                 </div>
-                                                <div class="author-info">
-                                                    <h5><%= slide.name %></h5>
-                                                    <span class="position"><%= slide.profile %></span>
+                                                <p><%= slide.testimonial %></p>
+                                                <div class="author-thumb-item">
+                                                    <div class="author-thumb">
+                                                        <% if (slide.picture && slide.picture.trim() !== '') { %>
+                                                            <img src="<%= process.env.S3_BASE_URL + slide.picture %>" alt="<%= slide.name %>">
+                                                        <% } else { %>
+                                                            <% 
+                                                            // Get initials from name
+                                                            const nameParts = slide.name.split(' ');
+                                                            let initials = '';
+                                                            if (nameParts.length >= 2) {
+                                                                initials = nameParts[0].charAt(0) + nameParts[1].charAt(0);
+                                                            } else if (nameParts.length === 1) {
+                                                                initials = nameParts[0].charAt(0);
+                                                            }
+                                                            initials = initials.toUpperCase();
+                                                            %>
+                                                            <div class="avatar-initials" style="
+                                                                width: 60px;
+                                                                height: 60px;
+                                                                border-radius: 50%;
+                                                                background-color: var(--primary-color);
+                                                                color: white;
+                                                                display: flex;
+                                                                align-items: center;
+                                                                justify-content: center;
+                                                                font-size: 20px;
+                                                                font-weight: bold;
+                                                                text-transform: uppercase;
+                                                            ">
+                                                                <%= initials %>
+                                                            </div>
+                                                        <% } %>
+                                                    </div>
+                                                    <div class="author-info">
+                                                        <h5><%= slide.name %></h5>
+                                                        <span class="position"><%= slide.profile %></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <% }) %>
+                                        <% }) %>
                                 </div>
                                 <div class="testimonial-arrows"></div>
                             </div>

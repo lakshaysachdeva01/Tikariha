@@ -1,83 +1,29 @@
 <section class="renvia-hero_one">
   <div class="hero-dots"></div>
-  <div class="renvia-avatar-box">
-      <img class="mb-15" src="assets/images/home-one/hero/client-logo1.png" alt="logo">
-      <div class="avatar-list">
-          <ul>
-              <li><img src="assets/images/home-one/gallery/avatar-img1.png" alt="avatar img"></li>
-              <li><img src="assets/images/home-one/gallery/avatar-img2.png" alt="avatar img"></li>
-              <li><img src="assets/images/home-one/gallery/avatar-img3.png" alt="avatar img"></li>
-              <li><img src="assets/images/home-one/gallery/avatar-img4.png" alt="avatar img"></li>
-          </ul>
-          <div class="text">
-              <div class="ratings">
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-                  <i class="fas fa-star"></i>
-              </div>
-              <p>450+ reviews</p>
-          </div>
-      </div>
-  </div>
+ 
   <div class="hero-slider">
       <!-- Single Slider -->
+
+      <% banners.forEach((banner, index) => { %>
       <div class="single-slider">
-          <div class="image-layer bg_cover" data-src="assets/images/home-one/hero/hero-bg1.jpg"></div>
+          <div class="image-layer bg_cover" data-src="<%= process.env.S3_BASE_URL + banner.desktopbanner %>"></div>
           <div class="container">
               <div class="row">
                   <div class="col-xl-8 col-lg-10">
                       <!-- Hero Content -->
                       <div class="hero-content">
                           <span class="tag-line" data-aos="fade-down" data-aos-duration="2000">rehomes housing development</span>
-                          <h1 class="text-anm">Using greatness to shape the future</h1>
+                          <h1 class="text-anm"><%= banner.bannerTitle %></h1>
                           <p data-aos="fade-up" data-aos-duration="2200">We are a top 25 builder and developer fully invested in our customers’ success and improving the communities we serve.</p>
                           <div class="renvia-button" data-aos="fade-up" data-aos-duration="2400">
-                              <a href="service-details.html" class="theme-btn style-one">View All Services<i class="far fa-arrow-right"></i></a>
+                              <a href="/" class="theme-btn style-one">View All Services<i class="far fa-arrow-right"></i></a>
                           </div>
                       </div>
                   </div>
               </div>
           </div>
       </div>
-      <!-- Single Slider -->
-      <div class="single-slider">
-          <div class="image-layer bg_cover" data-src="assets/images/home-one/hero/hero-bg2.jpg"></div>
-          <div class="container">
-              <div class="row">
-                  <div class="col-xl-8 col-lg-10">
-                      <!-- Hero Content -->
-                      <div class="hero-content">
-                          <span class="tag-line" data-aos="fade-down" data-aos-duration="2000">rehomes housing development</span>
-                          <h1 class="text-anm">Using greatness to shape the future</h1>
-                          <p data-aos="fade-up" data-aos-duration="2200">We are a top 25 builder and developer fully invested in our customers’ success and improving the communities we serve.</p>
-                          <div class="renvia-button" data-aos="fade-up" data-aos-duration="2400">
-                              <a href="service-details.html" class="theme-btn style-one">View All Services<i class="far fa-arrow-right"></i></a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- Single Slider -->
-      <div class="single-slider">
-          <div class="image-layer bg_cover" data-src="assets/images/home-one/hero/hero-bg3.jpg"></div>
-          <div class="container">
-              <div class="row">
-                  <div class="col-xl-8 col-lg-10">
-                      <!-- Hero Content -->
-                      <div class="hero-content">
-                          <span class="tag-line" data-aos="fade-down" data-aos-duration="2000">rehomes housing development</span>
-                          <h1 class="text-anm">Using greatness to shape the future</h1>
-                          <p data-aos="fade-up" data-aos-duration="2200">We are a top 25 builder and developer fully invested in our customers’ success and improving the communities we serve.</p>
-                          <div class="renvia-button" data-aos="fade-up" data-aos-duration="2400">
-                              <a href="service-details.html" class="theme-btn style-one">View All Services<i class="far fa-arrow-right"></i></a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
+      <% }) %>
+     
   </div>
 </section>
