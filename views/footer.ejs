@@ -1,36 +1,7 @@
-<footer class="main-footer footer-v1 pt-80 pb-60">
+<footer class="main-footer footer-v1 pt-30 pb-60">
     <div class="container">
         <!--=== Footer Top ===-->
-        <div class="footer-top">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <div class="section-title text-white mb-55 text-center text-lg-start" data-aos="fade-up" data-aos-duration="800">
-                        <% if (typeof contact !== 'undefined' && contact && contact.title) { %>
-                            <h2><%= contact.title %></h2>
-                        <% } else { %>
-                            <h2>Let’s Get Started on Your Project?</h2>
-                        <% } %>
-                        
-                        <% if (typeof contact !== 'undefined' && contact && contact.subtitle) { %>
-                            <p><%= contact.subtitle %></p>
-                        <% } else { %>
-                            <p>Let's talk to us, share your dream project and we will transform it into reality</p>
-                        <% } %>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="renvia-button text-lg-end mb-60 text-center" data-aos="fade-up" data-aos-duration="800">
-                        <% if (typeof contact !== 'undefined' && contact && contact.buttonName && contact.buttonLink) { %>
-                            <a href="<%= contact.buttonLink %>" class="theme-btn style-one">
-                                <%= contact.buttonName %><i class="far fa-arrow-right"></i>
-                            </a>
-                        <% } else { %>
-                            <a href="/contact" class="theme-btn style-one">Get In Touch<i class="far fa-arrow-right"></i></a>
-                        <% } %>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
         <!--=== Footer Widget Area ===-->
         <div class="footer-widget-area pt-80 pb-30">
             <div class="row">
@@ -51,7 +22,7 @@
                     <div class="footer-widget footer-nav-widget mb-40 ms-0 ms-lg-5" data-aos="fade-up" data-aos-duration="1000">
                         <div class="widget-content">
                         
-                            <ul class="widget-nav">
+                            <ul class="widget-nav"  style="padding-left: 4px; list-style: none;">
                                 <li><a href="/">Home</a></li>
                                 <li><a href="/about">About</a></li>
                                 <li><a href="/posts">Posts</a></li>
@@ -65,7 +36,7 @@
                     <div class="footer-widget footer-nav-widget mb-40" data-aos="fade-up" data-aos-duration="1200">
                         <div class="widget-content">
                             
-                            <ul class="widget-nav">
+                            <ul class="widget-nav" style="padding-left: 4px; list-style: none;">
                                 <li><a href="/projects">Projects</a></li>
                                 <li><a href="/services">Services</a></li>
                                 <li><a href="/jobs">Career</a></li>
