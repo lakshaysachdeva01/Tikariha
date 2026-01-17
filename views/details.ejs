@@ -62,7 +62,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-
+                                                            <% if (projectDetails.brochure && projectDetails.brochure !== "null") { %>
                                                                 <div class="renvia-info-item style-three ">
 
                                                                     <div class="info download-brochure">
@@ -82,6 +82,7 @@
                                                                         </h6>
                                                                     </div>
                                                                 </div>
+                                                                <% } %>
                                                         </div>
                                                         <div style="display: flex; gap: 20px;     border-bottom: 1px solid #c3c3c3;">
 <img src="<%= process.env.S3_BASE_URL + projectDetails.projectLogo %>" style="width: 80px; height: 80px; object-fit: cover; border-radius: 100%;" alt="<%= projectDetails.projectName %>">
@@ -99,8 +100,421 @@
 
 
 
-                                                    <div class="project-description-block"><%- projectDetails.projectDescrpition[0].description %></div>
-
+                                                    <div class="project-description-block">
+                                                        <div id="project-description-truncate">
+                                                            <!-- Truncated content will appear here -->
+                                                        </div>
+                                                        <div id="project-description-full" style="display: none;">
+                                                            <!-- Full content will appear here -->
+                                                        </div>
+                                                        <button id="read-more-btn" class="theme-btn style-one" style="margin-top: 15px; display: none;">
+                                                            Read More <i class="far fa-arrow-down"></i>
+                                                        </button>
+                                                        <button id="read-less-btn" class="theme-btn style-one" style="margin-top: 15px; display: none;">
+                                                            Read Less <i class="far fa-arrow-up"></i>
+                                                        </button>
+                                                    </div>
+                                                    
+                                                    <script>
+                                                    document.addEventListener('DOMContentLoaded', function() {
+                                                        // Function to decode HTML entities
+                                                        function decodeHTMLEntities(text) {
+                                                            const textarea = document.createElement('textarea');
+                                                            textarea.innerHTML = text;
+                                                            return textarea.value;
+                                                        }
+                                                        
+                                                        // Function to clean HTML - remove empty tags and &nbsp;
+                                                        function cleanHtml(html) {
+                                                            const tempDiv = document.createElement('div');
+                                                            tempDiv.innerHTML = html;
+                                                            
+                                                            // Remove empty paragraphs and paragraphs with only &nbsp;
+                                                            const paragraphs = tempDiv.querySelectorAll('p');
+                                                            paragraphs.forEach(p => {
+                                                                const text = p.textContent.trim();
+                                                                const htmlContent = p.innerHTML.trim();
+                                                                
+                                                                // Check if paragraph is empty or contains only whitespace/&nbsp;
+                                                                if (!text || 
+                                                                    text === '' || 
+                                                                    htmlContent === '&nbsp;' || 
+                                                                    htmlContent === '' ||
+                                                                    htmlContent.replace(/&nbsp;/g, '').replace(/\s/g, '') === '') {
+                                                                    p.remove();
+                                                                } else {
+                                                                    // Clean &nbsp; from non-empty paragraphs
+                                                                    p.innerHTML = p.innerHTML.replace(/&nbsp;/g, ' ').trim();
+                                                                }
+                                                            });
+                                                            
+                                                            // Remove any other empty tags (span, div, etc.)
+                                                            const allElements = tempDiv.querySelectorAll('*');
+                                                            allElements.forEach(el => {
+                                                                const text = el.textContent.trim();
+                                                                const htmlContent = el.innerHTML.trim();
+                                                                
+                                                                if (!text && 
+                                                                    (htmlContent === '' || 
+                                                                     htmlContent === '&nbsp;' || 
+                                                                     htmlContent.replace(/&nbsp;/g, '').replace(/\s/g, '') === '')) {
+                                                                    el.remove();
+                                                                }
+                                                            });
+                                                            
+                                                            // Remove multiple spaces
+                                                            let cleanedHtml = tempDiv.innerHTML;
+                                                            cleanedHtml = cleanedHtml.replace(/\s+/g, ' ');
+                                                            cleanedHtml = cleanedHtml.replace(/\n\s*\n/g, '\n');
+                                                            
+                                                            return cleanedHtml;
+                                                        }
+                                                        
+                                                        // Get ALL descriptions from the array
+                                                        const descriptions = [
+                                                            `<%- projectDetails.projectDescrpition[0].description %>`,
+                                                            `<%- projectDetails.projectDescrpition[1] ? projectDetails.projectDescrpition[1].description : '' %>`
+                                                        ].filter(desc => desc && desc.trim() !== '');
+                                                        
+                                                        // Combine all descriptions into one HTML string and clean it
+                                                        let fullDescription = '';
+                                                        descriptions.forEach(desc => {
+                                                            if (desc && desc.trim() !== '') {
+                                                                const decoded = decodeHTMLEntities(desc);
+                                                                const cleaned = cleanHtml(decoded);
+                                                                fullDescription += cleaned;
+                                                            }
+                                                        });
+                                                        
+                                                        // Function to strip HTML tags and get plain text
+                                                        function stripHtmlTags(html) {
+                                                            const tempDiv = document.createElement('div');
+                                                            tempDiv.innerHTML = html;
+                                                            
+                                                            // Remove script and style elements
+                                                            const scripts = tempDiv.querySelectorAll('script, style');
+                                                            scripts.forEach(el => el.remove());
+                                                            
+                                                            // Get text content
+                                                            return tempDiv.textContent || tempDiv.innerText || '';
+                                                        }
+                                                        
+                                                        // Function to truncate HTML while preserving structure
+                                                        function truncateHtml(html, maxChars = 400) {
+                                                            const plainText = stripHtmlTags(html);
+                                                            
+                                                            if (plainText.length <= maxChars) {
+                                                                return { truncated: html, isTruncated: false };
+                                                            }
+                                                            
+                                                            // Create a temporary container
+                                                            const tempDiv = document.createElement('div');
+                                                            tempDiv.innerHTML = html;
+                                                            
+                                                            let charCount = 0;
+                                                            let resultHtml = '';
+                                                            
+                                                            function traverseNodes(node) {
+                                                                if (charCount >= maxChars) return;
+                                                                
+                                                                if (node.nodeType === Node.TEXT_NODE) {
+                                                                    let text = node.textContent;
+                                                                    
+                                                                    if (charCount + text.length > maxChars) {
+                                                                        // Need to truncate this text
+                                                                        const remaining = maxChars - charCount;
+                                                                        if (remaining > 0) {
+                                                                            // Try to find a good breaking point (space or punctuation)
+                                                                            let slicePoint = remaining;
+                                                                            const textSlice = text.substring(0, remaining + 20); // Look ahead a bit
+                                                                            
+                                                                            // Look for sentence endings first
+                                                                            const lastPeriod = textSlice.lastIndexOf('.');
+                                                                            const lastExclamation = textSlice.lastIndexOf('!');
+                                                                            const lastQuestion = textSlice.lastIndexOf('?');
+                                                                            const lastSpace = textSlice.lastIndexOf(' ');
+                                                                            
+                                                                            if (lastPeriod > remaining * 0.7) slicePoint = lastPeriod + 1;
+                                                                            else if (lastExclamation > remaining * 0.7) slicePoint = lastExclamation + 1;
+                                                                            else if (lastQuestion > remaining * 0.7) slicePoint = lastQuestion + 1;
+                                                                            else if (lastSpace > remaining * 0.6) slicePoint = lastSpace;
+                                                                            
+                                                                            if (slicePoint < remaining) {
+                                                                                resultHtml += text.substring(0, slicePoint);
+                                                                            } else {
+                                                                                resultHtml += text.substring(0, remaining);
+                                                                            }
+                                                                        }
+                                                                        charCount = maxChars;
+                                                                    } else {
+                                                                        resultHtml += text;
+                                                                        charCount += text.length;
+                                                                    }
+                                                                } else if (node.nodeType === Node.ELEMENT_NODE) {
+                                                                    // Skip certain tags for truncation
+                                                                    const tagName = node.tagName.toLowerCase();
+                                                                    const isInline = ['span', 'strong', 'em', 'b', 'i', 'a', 'code'].includes(tagName);
+                                                                    
+                                                                    if (!isInline) {
+                                                                        // For block elements, check if we should add them
+                                                                        if (charCount >= maxChars) return;
+                                                                    }
+                                                                    
+                                                                    // Open tag
+                                                                    resultHtml += `<${tagName}`;
+                                                                    
+                                                                    // Add attributes
+                                                                    for (let attr of node.attributes) {
+                                                                        resultHtml += ` ${attr.name}="${attr.value}"`;
+                                                                    }
+                                                                    resultHtml += '>';
+                                                                    
+                                                                    // Process children
+                                                                    for (let child of node.childNodes) {
+                                                                        traverseNodes(child);
+                                                                        if (charCount >= maxChars) break;
+                                                                    }
+                                                                    
+                                                                    // Close tag if needed
+                                                                    if (!['br', 'hr', 'img', 'input', 'meta', 'link'].includes(tagName)) {
+                                                                        resultHtml += `</${tagName}>`;
+                                                                    }
+                                                                    
+                                                                    // Add space after block elements
+                                                                    if (!isInline && charCount < maxChars) {
+                                                                        resultHtml += ' ';
+                                                                    }
+                                                                }
+                                                            }
+                                                            
+                                                            // Process all child nodes
+                                                            for (let child of tempDiv.childNodes) {
+                                                                traverseNodes(child);
+                                                                if (charCount >= maxChars) break;
+                                                            }
+                                                            
+                                                            // Add ellipsis if we truncated
+                                                            if (charCount >= maxChars) {
+                                                                resultHtml += '...';
+                                                                
+                                                                // Close any unclosed tags (simple approach)
+                                                                const tagStack = [];
+                                                                const regex = /<(\/?)([a-zA-Z]+)[^>]*>/g;
+                                                                let match;
+                                                                while ((match = regex.exec(resultHtml)) !== null) {
+                                                                    if (match[1] === '') {
+                                                                        // Opening tag
+                                                                        tagStack.push(match[2]);
+                                                                    } else {
+                                                                        // Closing tag
+                                                                        tagStack.pop();
+                                                                    }
+                                                                }
+                                                                
+                                                                // Close any remaining open tags
+                                                                while (tagStack.length > 0) {
+                                                                    const tag = tagStack.pop();
+                                                                    resultHtml += `</${tag}>`;
+                                                                }
+                                                            }
+                                                            
+                                                            return { 
+                                                                truncated: resultHtml, 
+                                                                isTruncated: charCount >= maxChars 
+                                                            };
+                                                        }
+                                                        
+                                                        // Check if we have any content
+                                                        if (!fullDescription || fullDescription.trim() === '') {
+                                                            document.querySelector('.project-description-block').innerHTML = 
+                                                                '<p>No description available.</p>';
+                                                            return;
+                                                        }
+                                                        
+                                                        // Check if content needs truncation
+                                                        const plainText = stripHtmlTags(fullDescription);
+                                                        const needsTruncation = plainText.length > 400;
+                                                        
+                                                        if (needsTruncation) {
+                                                            // Truncate the HTML
+                                                            const result = truncateHtml(fullDescription, 400);
+                                                            
+                                                            // Show truncated version
+                                                            document.getElementById('project-description-truncate').innerHTML = 
+                                                                result.truncated;
+                                                            document.getElementById('project-description-full').innerHTML = 
+                                                                fullDescription;
+                                                            
+                                                            // Show Read More button
+                                                            document.getElementById('read-more-btn').style.display = 'inline-block';
+                                                        } else {
+                                                            // Show full content if it's short
+                                                            document.getElementById('project-description-truncate').innerHTML = 
+                                                                fullDescription;
+                                                            
+                                                            // Remove the full div and buttons since we don't need them
+                                                            document.getElementById('project-description-full').remove();
+                                                            document.getElementById('read-more-btn').remove();
+                                                            document.getElementById('read-less-btn').remove();
+                                                            return;
+                                                        }
+                                                        
+                                                        // Get references to elements
+                                                        const truncateDiv = document.getElementById('project-description-truncate');
+                                                        const fullDiv = document.getElementById('project-description-full');
+                                                        const readMoreBtn = document.getElementById('read-more-btn');
+                                                        const readLessBtn = document.getElementById('read-less-btn');
+                                                        
+                                                        // Button click handlers
+                                                        readMoreBtn.addEventListener('click', function() {
+                                                            truncateDiv.style.display = 'none';
+                                                            fullDiv.style.display = 'block';
+                                                            readMoreBtn.style.display = 'none';
+                                                            readLessBtn.style.display = 'inline-block';
+                                                            
+                                                            // Smooth scroll to show more content
+                                                            setTimeout(() => {
+                                                                fullDiv.scrollIntoView({ 
+                                                                    behavior: 'smooth', 
+                                                                    block: 'start' 
+                                                                });
+                                                            }, 100);
+                                                        });
+                                                        
+                                                        readLessBtn.addEventListener('click', function() {
+                                                            truncateDiv.style.display = 'block';
+                                                            fullDiv.style.display = 'none';
+                                                            readMoreBtn.style.display = 'inline-block';
+                                                            readLessBtn.style.display = 'none';
+                                                            
+                                                            // Scroll back to the truncated content
+                                                            truncateDiv.scrollIntoView({ 
+                                                                behavior: 'smooth', 
+                                                                block: 'nearest' 
+                                                            });
+                                                        });
+                                                    });
+                                                    </script>
+                                                    
+                                                    <style>
+                                                    .project-description-block {
+                                                        position: relative;
+                                                        line-height: 1.6;
+                                                        font-size: 16px;
+                                                    }
+                                                    
+                                                    #project-description-truncate,
+                                                    #project-description-full {
+                                                        transition: opacity 0.3s ease;
+                                                    }
+                                                    
+                                                    /* Remove default margins and clean up paragraphs */
+                                                    #project-description-truncate p,
+                                                    #project-description-full p {
+                                                        margin: 0.5em 0 !important;
+                                                        color: #555;
+                                                    }
+                                                    
+                                                    /* Ensure empty paragraphs don't create space */
+                                                    #project-description-truncate p:empty,
+                                                    #project-description-full p:empty {
+                                                        display: none !important;
+                                                    }
+                                                    
+                                                    /* Clean up headings */
+                                                    #project-description-truncate h2,
+                                                    #project-description-full h2 {
+                                                        font-size: 1.5em;
+                                                        margin: 1em 0 0.5em 0;
+                                                        color: #333;
+                                                        clear: both;
+                                                    }
+                                                    
+                                                    /* Clean up lists */
+                                                    #project-description-truncate ul,
+                                                    #project-description-full ul {
+                                                        margin: 0.5em 0;
+                                                        padding-left: 1.5em;
+                                                    }
+                                                    
+                                                    #project-description-truncate li,
+                                                    #project-description-full li {
+                                                        margin: 0.3em 0;
+                                                    }
+                                                    
+                                                    /* Clean up tables */
+                                                    #project-description-truncate table,
+                                                    #project-description-full table {
+                                                        width: 100%;
+                                                        border-collapse: collapse;
+                                                        margin: 1em 0;
+                                                        border: 1px solid #ddd;
+                                                    }
+                                                    
+                                                    #project-description-truncate th,
+                                                    #project-description-full th {
+                                                        background-color: #f5f5f5;
+                                                        padding: 10px;
+                                                        text-align: left;
+                                                        border: 1px solid #ddd;
+                                                    }
+                                                    
+                                                    #project-description-truncate td,
+                                                    #project-description-full td {
+                                                        padding: 10px;
+                                                        border: 1px solid #ddd;
+                                                    }
+                                                    
+                                                    /* Remove any leftover &nbsp; spacing */
+                                                    #project-description-truncate *,
+                                                    #project-description-full * {
+                                                        white-space: normal !important;
+                                                    }
+                                                    
+                                                    /* Style for the buttons */
+                                                    #read-more-btn,
+                                                    #read-less-btn {
+                                                        background: linear-gradient(45deg, #4b3bad, #6a5acd);
+                                                        color: white;
+                                                        border: none;
+                                                        padding: 10px 20px;
+                                                        border-radius: 5px;
+                                                        cursor: pointer;
+                                                        font-size: 14px;
+                                                        font-weight: 500;
+                                                        transition: all 0.3s ease;
+                                                        display: inline-flex;
+                                                        align-items: center;
+                                                        gap: 8px;
+                                                        margin-top: 15px;
+                                                    }
+                                                    
+                                                    #read-more-btn:hover,
+                                                    #read-less-btn:hover {
+                                                        background: linear-gradient(45deg, #6a5acd, #4b3bad);
+                                                        transform: translateY(-2px);
+                                                        box-shadow: 0 4px 12px rgba(75, 59, 173, 0.3);
+                                                    }
+                                                    
+                                                    #read-more-btn:active,
+                                                    #read-less-btn:active {
+                                                        transform: translateY(0);
+                                                    }
+                                                    
+                                                    #read-more-btn i,
+                                                    #read-less-btn i {
+                                                        font-size: 12px;
+                                                        transition: transform 0.3s ease;
+                                                    }
+                                                    
+                                                    #read-more-btn:hover i {
+                                                        transform: translateY(2px);
+                                                    }
+                                                    
+                                                    #read-less-btn:hover i {
+                                                        transform: translateY(-2px);
+                                                    }
+                                                    </style>
 
 
                                                     <% if (projectDetails.amenities?.length) { %>
@@ -137,14 +551,14 @@
                                                 </div>
                                                 </div>
                                                 <div class="col-xl-4 ">
-                                                    <section class="renvia-contact_two pb-120" data-aos="fade-up" data-aos-duration="1000">
+                                                    <section class="renvia-contact_two pb-120" style="background-color: #f8f9f8; padding: 18px; border-radius: 14px;" data-aos="fade-up" data-aos-duration="1000">
                                                         <div class="container">
                                                             <div class="contact-wrapper" style="border-top: none; padding-top: 0;">
                                                                 <div class="row">
                                                                     <div class="col-lg-12">
                                                                         <!-- Section Title -->
                                                                         <div class="section-title  mb-30">
-                                                                            <h3>Enquire</h3>
+                                                                            <h3>Get in Touch</h3>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -214,7 +628,7 @@
                     <div class="col-xl-6 col-lg-8">
                         <div class="section-title text-white text-center mb-55">
                             <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">Project at a Glance</span>
-                            <h2 class="text-anm">Key visuals showcasing value, layout, and lifestyle appeal.</h2>
+                            <h2 class="text-anm">Key visuals of value & layout</h2>
                         </div>
                     </div>
                 </div>
@@ -227,7 +641,11 @@
                 <% projectDetails.projectPictures.forEach(picture => { %>
                     <div class="renvia-project-item style-two">
                         <div class="project-thumbnail">
+                            <a href="#" class="property-media-trigger" 
+                            data-type="image" 
+                            data-src="<%= process.env.S3_BASE_URL + picture %>">
                             <img src="<%= process.env.S3_BASE_URL + picture %>" alt="project thumbnail">
+                            </a>
                         </div>
                     </div>
                 <% }); %>
@@ -235,8 +653,13 @@
             <div class="container">
                 <!-- Counter Wrapper -->
                 <div class="counter-wrapper pt-80 text-white" data-aos="fade-up" data-aos-duration="1200">
-                    <div class="row" style="display: flex; justify-content: center;">
-                       <a class="theme-btn style-one" style="max-width: 280px;" href="https://api.whatsapp.com/send?phone=+919893651234&amp;text=Hello%20Tikariha%20Advisors,%20I'd%20like%20assistance%20with%20a%you%20or%20enquiry." target="_blank">Chat on WhatsApp<i class="far fa-arrow-right"></i></a>
+                    <div class="row" style="display: flex; justify-content: center; gap:12px">
+                        <button class="theme-btn style-one" style="max-width: 200px;" onclick="scrollToTop()">
+                            Enquire Now<i class="far fa-arrow-right"></i>
+                        </button>
+                        <a class="theme-btn style-one" style="max-width: 280px;" href="https://api.whatsapp.com/send?phone=+919893651234&amp;text=Hello%20Tikariha%20Advisors,%20I'd%20like%20assistance%20with%20a%20you%20or%20enquiry." target="_blank">
+                            Chat on WhatsApp<i class="far fa-arrow-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -256,8 +679,8 @@
         /* Solution 1 - Simple fixed height */
 .project-slider .project-thumbnail img {
     width: 100%;
-    height: 500px;
-    width: 700px;
+    height: 300px;
+    width: 450px;
     object-fit: cover;
     object-position: center;
 }
@@ -358,7 +781,9 @@ li::marker{
 }
     </style>
 
+
 <script>
+    
     document.getElementById('productform').addEventListener('submit', async function (e) { 
           e.preventDefault(); // Prevent the default form submission
       
@@ -420,4 +845,13 @@ li::marker{
               // Optionally, you can show an error message or log the error
           }
       });
+</script>
+
+<script>
+    function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth' // for smooth scrolling
+    });
+}
 </script>
