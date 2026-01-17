@@ -107,11 +107,19 @@
                                                         <div id="project-description-full" style="display: none;">
                                                             <!-- Full content will appear here -->
                                                         </div>
-                                                        <button id="read-more-btn" class="theme-btn style-one" style="margin-top: 15px; display: none;">
-                                                            Read More <i class="far fa-arrow-down"></i>
+                                                        <button id="read-more-btn"  style="color: #666666;
+                                                        font-size: 15px;
+                                                        font-style: italic;
+                                                        background: transparent;
+                                                        font-weight: 400; display: none;">
+                                                          ... Read More 
                                                         </button>
-                                                        <button id="read-less-btn" class="theme-btn style-one" style="margin-top: 15px; display: none;">
-                                                            Read Less <i class="far fa-arrow-up"></i>
+                                                        <button id="read-less-btn"  style="color: #666666;
+                                                        font-size: 15px;
+                                                        background: transparent;
+                                                        font-style: italic;
+                                                        font-weight: 400; display: none;">
+                                                           ... Read Less
                                                         </button>
                                                     </div>
                                                     
@@ -295,7 +303,7 @@
                                                             
                                                             // Add ellipsis if we truncated
                                                             if (charCount >= maxChars) {
-                                                                resultHtml += '...';
+                                                                resultHtml += '';
                                                                 
                                                                 // Close any unclosed tags (simple approach)
                                                                 const tagStack = [];
@@ -472,29 +480,8 @@
                                                     }
                                                     
                                                     /* Style for the buttons */
-                                                    #read-more-btn,
-                                                    #read-less-btn {
-                                                        background: linear-gradient(45deg, #4b3bad, #6a5acd);
-                                                        color: white;
-                                                        border: none;
-                                                        padding: 10px 20px;
-                                                        border-radius: 5px;
-                                                        cursor: pointer;
-                                                        font-size: 14px;
-                                                        font-weight: 500;
-                                                        transition: all 0.3s ease;
-                                                        display: inline-flex;
-                                                        align-items: center;
-                                                        gap: 8px;
-                                                        margin-top: 15px;
-                                                    }
-                                                    
-                                                    #read-more-btn:hover,
-                                                    #read-less-btn:hover {
-                                                        background: linear-gradient(45deg, #6a5acd, #4b3bad);
-                                                        transform: translateY(-2px);
-                                                        box-shadow: 0 4px 12px rgba(75, 59, 173, 0.3);
-                                                    }
+                                                   
+                                                  
                                                     
                                                     #read-more-btn:active,
                                                     #read-less-btn:active {
@@ -507,13 +494,7 @@
                                                         transition: transform 0.3s ease;
                                                     }
                                                     
-                                                    #read-more-btn:hover i {
-                                                        transform: translateY(2px);
-                                                    }
-                                                    
-                                                    #read-less-btn:hover i {
-                                                        transform: translateY(-2px);
-                                                    }
+                                                 
                                                     </style>
 
 
@@ -657,9 +638,7 @@
                         <button class="theme-btn style-one" style="max-width: 200px;" onclick="scrollToTop()">
                             Enquire Now<i class="far fa-arrow-right"></i>
                         </button>
-                        <a class="theme-btn style-one" style="max-width: 280px;" href="https://api.whatsapp.com/send?phone=+919893651234&amp;text=Hello%20Tikariha%20Advisors,%20I'd%20like%20assistance%20with%20a%20you%20or%20enquiry." target="_blank">
-                            Chat on WhatsApp<i class="far fa-arrow-right"></i>
-                        </a>
+                      
                     </div>
                 </div>
             </div>
@@ -729,8 +708,14 @@ li::marker{
             font-weight: 400;
         }
 
+        .amenities-list{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px 20px;
+        }
 
-        .highlights-list {
+
+ .highlights-list {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 10px 20px;
@@ -763,13 +748,13 @@ li::marker{
     .top-button{
             margin-bottom: 0px;
         }
-    .highlights-list {
-        
-            grid-template-columns: repeat(1, 1fr);
-          
+  
+        .amenities-list{
+            grid-template-columns: repeat(2, 1fr);
+
         }
 
-        .highlights-list {
+       .highlights-list {
             grid-template-columns: repeat(1, 1fr);
          
         }
