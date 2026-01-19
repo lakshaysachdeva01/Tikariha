@@ -175,7 +175,7 @@ Version: 1.0
             infinite: true,
             speed: 800,
             autoplay: true,
-            slidesToShow: 3,
+            slidesToShow: 4,
             slidesToScroll: 1,
             prevArrow: '<div class="prev"><i class="far fa-arrow-left"></i></div>',
             nextArrow: '<div class="next"><i class="far fa-arrow-right"></i></div>',

@@ -1,67 +1,5 @@
 
-
-<% if (projects && projects.length > 0) { %>
-                 
-
-<section class="renvia-service_one gray-bg pt-115 pb-80" data-src="assets/images/home-one/bg/service-bg.jpg">
-    <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-xxl-6 col-xl-8 col-lg-8">
-                <!-- Section Title -->
-                <div class="section-title text-center mb-55">
-                    <span class="sub-title" data-aos="fade-down" data-aos-duration="1000"><img src="assets/images/line1.png" alt="line">What we Offer<img src="assets/images/line2.png" alt="line"></span>
-                    <h2 class="text-anm">We Develop Excellent Real Estate And Infrastructural Projects.</h2>
-                </div>
-            </div>
-        </div>
-        <!-- Service Slider -->
-        <div class="service-slider" data-aos="fade-down" data-aos-duration="1000">
-            <!-- Renvia Service Card -->
-          
-
-
-        <% projects.forEach((project, index) => { %>
-            
-            <%
-            const titleCase = (str) =>
-              str
-                .replace(/_/g, ' ')
-                .toLowerCase()
-                .replace(/\b\w/g, char => char.toUpperCase());
-          %>
-          
-    <div class="renvia-service-card service-projects col-lg-4 col-md-6 col-sm-12 style-one mb-40" onclick="window.location.href='/project/<%= project._id %>'">
-        <div class="content">
-            <div class="title-wrap" style="margin-bottom: 20px; padding-bottom: 20px;">
-                <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
-                    <img src="<%= process.env.S3_BASE_URL + project.projectLogo %>" style="height: 45px; width: 45px; object-fit: cover; border-radius: 100%;" alt="<%= project.projectName %>">
-                    <div style="display: flex; flex-direction: column;">
-                        <h4><a href="/project/<%= project._id %>"><%= project.projectName %></a></h4>
-                        <p style="margin-bottom: 0px;"><%= titleCase(project.locality) %>, <%= titleCase(project.city) %></p>
-                    </div>
-                   
-                </div>
-              
-                <a href="/project/<%= project._id %>" class="icon-btn"><i class="far fa-arrow-right"></i></a>
-            </div>
-
-          <div class="project-description-block" style="margin-bottom: 22px; ">
-<%- project.projectDescrpition[0].description %>
-          </div>
-          
-         
-           <!-- <p><%= project.reraNo %></p> -->
-            <img src="<%= process.env.S3_BASE_URL + project.listingBanner %>" alt="<%= project.projectName %>">
-        </div>
-    </div>
-    
-<% }) %>
-        </div>
-    </div>
-</section>
-
-    
-<% } %>
+  
 
 
 <style>
@@ -120,3 +58,70 @@
     }
     
     </style>
+
+
+
+
+<% if (projects && projects.length > 0) { %>
+                 
+<section class="renvia-service_two gray-bg pt-115 pb-120">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-10">
+                <!-- Section Title -->
+                <div class="section-title text-center mb-55">
+                    <span class="sub-title" data-aos="fade-down" data-aos-duration="1000"><img src="/assets/images/line1.png" alt="line">REAL ESTATE PROJECTS<img src="/assets/images/line2.png" alt="line"></span>
+                    <h2 class="text-anm">Well-Planned Projects with Strong Potential</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- Service Slider -->
+        <div class="service-slider" data-aos="fade-up" data-aos-duration="1000">
+            <!-- Renvia Service Card -->
+
+
+            
+
+        <% projects.forEach((project, index) => { %>
+            <%
+            const titleCase = (str) =>
+              str
+                .replace(/_/g, ' ')
+                .toLowerCase()
+                .replace(/\b\w/g, char => char.toUpperCase());
+          %>
+          
+
+            <div class="renvia-service-card style-two" onclick="window.location.href='/project/<%= project._id %>'">
+                <div class="content">
+                   
+                   <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                    <img src="<%= process.env.S3_BASE_URL + project.projectLogo %>" style="max-height: 45px;  max-width: 45px; min-height: 45px;  min-width: 45px; object-fit: cover; border-radius: 100%;" alt="<%= project.projectName %>">
+
+                    <div style="display: flex; flex-direction: column; gap: 0;  ">
+                        <h4 class="title" style="margin-bottom: 0px;"><%= project.projectName %></h4><p style="margin: 0;"><%= titleCase(project.locality) %> , <%= titleCase(project.city) %></p>
+                    </div>
+    
+
+                   </div>
+                   
+                    <img style="border-radius: 16px;" src="<%= process.env.S3_BASE_URL + project.listingBanner %>" alt="<%= project.projectName %>">
+                    <div class="project-description-block" style="margin-bottom: 22px;">
+                        <%- project.projectDescrpition[0].description %>
+                                  </div>
+                    <a href="/project/<%= project._id %>" class="read-more style-two"> <span class="icon"><i class="far fa-arrow-right"></i></span> View Details</a>
+                </div>
+            </div>
+             
+<% }) %>
+
+
+
+
+        </div>
+    </div>
+</section>
+  
+<% } %>

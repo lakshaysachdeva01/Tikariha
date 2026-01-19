@@ -44,7 +44,7 @@ app.get('/', async (req, res) => {
     const blogs = await getBlog();
 //     const gallery= await getgallery();
 // //     const products = await getProducts();
-//     const clients = await getclientle();
+    const clients = await getclientle();
     const popupbanners = await getHomepopupBanner();
 //    const latestImages = await getLatestGalleryImages();
    const seoDetails = {
@@ -56,7 +56,7 @@ app.get('/', async (req, res) => {
 };
 
 
-    res.render('index', {body: "",websiteID,baseUrl,testimonial,seoDetails,projects,blogs,popupbanners,banners });
+    res.render('index', {body: "",websiteID,baseUrl,testimonial,seoDetails,projects,blogs,popupbanners,clients,banners });
 });
 
 

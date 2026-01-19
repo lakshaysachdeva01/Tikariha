@@ -4,88 +4,123 @@
  ================================================== -->
  
  <% if (testimonial && testimonial.length > 0) { %>
- <section class="renvia-testimonial_one">
-            <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-xl-6 col-lg-10">
-                        <!-- Renvia Image -->
-                        <div class="renvia-image mb-5 mb-xl-0" data-aos="fade-up" data-aos-duration="1000">
-                            <img src="assets/images/home-one/testimonial/testimonial-img1.jpg" alt="testimonial">
+    <section class="renvia-testimonial_two pt-115  overflow-hidden">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-5 col-lg-10">
+                    <!-- Renvia Content Box -->
+                    <div class="renvia-content-box">
+                        <!-- Section Title -->
+                        <div class="section-title">
+                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">Testimonial<img src="/assets/images/line2.png" alt="line"></span>
+                            <h2 class="text-anm">Confidence Backed by Experience</h2>
                         </div>
-                    </div>
-                    <div class="col-xl-6 col-lg-10">
-                        <!-- Renvia Content Box -->
-                        <div class="renvia-content-box bg_cover" data-src="assets/images/home-one/testimonial/testimonial-bg.jpg">
-                            <div class="section-title mb-30">
-                                <span class="sub-title" data-aos="fade-down" data-aos-duration="1000"><img src="assets/images/line1.png" alt="line">Testimonial</span>
-                                <h2 class="text-anm">Trusted by thousand of people & companies</h2>
+                        <p data-aos="fade-up" data-aos-duration="1200">Our clients value informed decisions, fair advice, and long-term outcomes—principles we stand by.</p>
+                        <div class="renvia-avatar-box mt-60" data-aos="fade-up" data-aos-duration="1400">
+                            <div class="avatar-list">
+                                <!-- <ul>
+                                    <li><img src="assets/images/home-two/gallery/avatar-img1.html" alt="avatar-img"></li>
+                                    <li><img src="assets/images/home-two/gallery/avatar-img2.html" alt="avatar-img"></li>
+                                    <li><img src="assets/images/home-two/gallery/avatar-img3.html" alt="avatar-img"></li>
+                                    <li><img src="assets/images/home-two/gallery/avatar-img4.html" alt="avatar-img"></li>
+                                    <li><img src="assets/images/home-two/gallery/avatar-img5.html" alt="avatar-img"></li>
+                                    <li><span>50+</span></li>
+                                </ul> -->
                             </div>
-                            <div class="testimonial-slider-wrap" data-aos="fade-up" data-aos-duration="1200">
-                                <div class="testimonial-slider">
-
-                                    <% testimonial.forEach((slide) => { %>
-                                        <div class="renvia-testimonial-item style-one">
-                                            <div class="testimonial-content">
-                                                <div class="quote">
-                                                    <img src="assets/images/home-one/testimonial/quote.png" alt="quote">
-                                                </div>
-                                                <p><%= slide.testimonial %></p>
-                                                <div class="author-thumb-item">
-                                                    <div class="author-thumb">
-                                                        <% if (slide.picture && slide.picture.trim() !== '') { %>
-                                                            <img src="<%= process.env.S3_BASE_URL + slide.picture %>" alt="<%= slide.name %>">
-                                                        <% } else { %>
-                                                            <% 
-                                                            // Get initials from name
-                                                            const nameParts = slide.name.split(' ');
-                                                            let initials = '';
-                                                            if (nameParts.length >= 2) {
-                                                                initials = nameParts[0].charAt(0) + nameParts[1].charAt(0);
-                                                            } else if (nameParts.length === 1) {
-                                                                initials = nameParts[0].charAt(0);
-                                                            }
-                                                            initials = initials.toUpperCase();
-                                                            %>
-                                                            <div class="avatar-initials" style="
-                                                                width: 60px;
-                                                                height: 60px;
-                                                                border-radius: 50%;
-                                                                background-color: var(--primary-color);
-                                                                color: white;
-                                                                display: flex;
-                                                                align-items: center;
-                                                                justify-content: center;
-                                                                font-size: 20px;
-                                                                font-weight: bold;
-                                                                text-transform: uppercase;
-                                                            ">
-                                                                <%= initials %>
-                                                            </div>
-                                                        <% } %>
-                                                    </div>
-                                                    <div class="author-info">
-                                                        <h5><%= slide.name %></h5>
-                                                        <span class="position"><%= slide.profile %></span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <% }) %>
-                                </div>
-                                <div class="testimonial-arrows"></div>
-                            </div>
-                            <div class="renvia-counter-box" data-aos="fade-up" data-aos-duration="1400">
-                                <div class="content">
-                                    <h2><span class="number">10</span><span class="symbol">+</span></h2>
-                                    <p>Professional and Experienced staff <br> ready to help you</p>
+                            <div class="text-wrap">
+                                <div class="number">4.9</div>
+                                <div class="text">
+                                    <div class="ratings">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <p> 5k+ satisfied customers</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-xl-7 col-lg-10">
+                    <!-- Testimonial Wrapper -->
+                    <div class="testimonial-wrapper" data-aos="fade-up" data-aos-duration="1200">
+                        <!-- Testimonial Slider -->
+                        <div class="testimonial-slider-two">
+                           
+
+                            <% testimonial.forEach((slide) => { %>
+                            <div class="renvia-testimonial-item style-two">
+                                <div class="testimonial-content">
+                                    <div class="quote-ratings-wrap">
+                                        <div class="quote">
+                                            <img src="/assets/images/quote.png" alt="quote">
+                                        </div>
+                                        <div class="ratings">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half"></i>
+                                        </div>
+                                    </div>
+                                    <p><%= slide.testimonial %></p>
+                                    <div class="author-thumb-item" >
+                                        <% if (slide.picture && slide.picture.trim() !== '') { %>
+                                            <img style="max-width: 60px; max-height: 60px; min-width: 60px; min-height: 60px; object-fit: cover; border-radius: 50%;" src="<%= process.env.S3_BASE_URL + slide.picture %>" alt="<%= slide.name %>">
+                                        <% } else { %>
+                                            <% 
+                                            // Get initials from name
+                                            const nameParts = slide.name.split(' ');
+                                            let initials = '';
+                                            if (nameParts.length >= 2) {
+                                                initials = nameParts[0].charAt(0) + nameParts[1].charAt(0);
+                                            } else if (nameParts.length === 1) {
+                                                initials = nameParts[0].charAt(0);
+                                            }
+                                            initials = initials.toUpperCase();
+                                            %>
+                                            <div class="avatar-initials" style="
+                                                    width: 60px;
+                                                    height: 60px;
+                                                    border-radius: 50%;
+                                                background-color: var(--primary-color);
+                                                color: white;
+                                                display: flex;
+                                                align-items: center;
+                                                justify-content: center;
+                                                font-size: 20px;
+                                                font-weight: bold;
+                                                text-transform: uppercase;
+                                            ">
+                                                <%= initials %>
+                                            </div>
+                                        <% } %>
+                                        <div class="author-info" style="margin-left: 18px;">
+                                            <h5><%= slide.name %></h5>
+                                            <span class="position"><%= slide.profile %></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                            <% }) %>
+                        </div>
+                        <!-- Testimonial Dots -->
+                        <div class="testimonial-dots mt-50"></div>
+                    </div>
+                </div>
             </div>
-        </section>
-    
+         
+
+            <%- include('./clientle.ejs') %>
+        </div>
+    </section>
+
+
+
+
                          
                                
                          
