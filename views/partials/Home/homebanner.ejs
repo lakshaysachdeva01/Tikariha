@@ -5,14 +5,16 @@
       <!-- Single Slider -->
 
       <% banners.forEach((banner, index) => { %>
-      <div class="single-slider">
+      <div class="single-slider" style="height: 100vh;">
           <div class="image-layer bg_cover" data-src="<%= process.env.S3_BASE_URL + banner.desktopbanner %>"></div>
-          <div class="container">
-              <div class="row">
+          <div class="container" style="    height: 100%;
+          display: flex;
+          align-items: center;">
+              <div class="row" style="width: 100%;">
                   <div class="col-xl-8 col-lg-10">
                       <!-- Hero Content -->
-                      <div class="hero-content">
-                          <span class="tag-line" data-aos="fade-down" data-aos-duration="2000"><%= banner.subtitle || '' %></span>
+                      <div class="hero-content margintop-90">
+                          <span class="tag-line" style="color: #f9d382;" data-aos="fade-down" data-aos-duration="2000"><%= banner.subtitle || '' %></span>
                           <h1 class="text-anm"><%= banner.bannerTitle %></h1>
                           <p data-aos="fade-up" data-aos-duration="2200"><%= banner.description || '' %></p>
                           <div class="renvia-button" data-aos="fade-up" data-aos-duration="2400">

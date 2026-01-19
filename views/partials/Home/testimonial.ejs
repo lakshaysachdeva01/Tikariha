@@ -65,7 +65,12 @@
                                             <i class="fas fa-star-half"></i>
                                         </div>
                                     </div>
-                                    <p><%= slide.testimonial %></p>
+                                    <p> <%= slide.testimonial && slide.testimonial.length > 120 ? slide.testimonial.slice(0, 120) + '...' : (slide.testimonial || '') %>
+                                        <% if (slide.testimonial && slide.testimonial.length > 120) { %>
+                                          <span class="read-more-btn" data-review="<%= slide.testimonial.replace(/"/g, '&quot;') %>" onclick="openReviewPopup(this.getAttribute('data-review'))">
+                                            Read More
+                                          </span>
+                                        <% } %></p>
                                     <div class="author-thumb-item" >
                                         <% if (slide.picture && slide.picture.trim() !== '') { %>
                                             <img style="max-width: 60px; max-height: 60px; min-width: 60px; min-height: 60px; object-fit: cover; border-radius: 50%;" src="<%= process.env.S3_BASE_URL + slide.picture %>" alt="<%= slide.name %>">
@@ -211,14 +216,12 @@
 
   /* Read More Button (Inside the Box) */
   .read-more-btn {
-      margin-top: 5px;
       background-color: transparent;
       color: #999999;
       font-size: 15px;
       font-style: italic;
       font-weight: 400;
       cursor: pointer;
-      padding: 5px 8px 5px 0;
       border-radius: 4px;
       transition: all 0.3s ease-in-out;
   }

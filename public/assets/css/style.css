@@ -1643,13 +1643,8 @@ label {
 .renvia-hero_one .single-slider {
   position: relative;
   z-index: 1;
-  padding: 235px 0 120px;
 }
-@media (max-width: 767.98px) {
-  .renvia-hero_one .single-slider {
-    padding: 200px 0 250px;
-  }
-}
+
 .renvia-hero_one .image-layer {
   position: absolute;
   top: 0;
@@ -1680,7 +1675,6 @@ label {
 .renvia-hero_one .hero-content .tag-line {
   font-size: 20px;
   font-weight: 700;
-  text-transform: uppercase;
   margin-bottom: 20px;
   color: var(--white-color);
 }
@@ -1710,7 +1704,7 @@ label {
 .renvia-hero_one .hero-content p {
   color: var(--white-color);
   max-width: 650px;
-  margin-bottom: 230px;
+  margin-bottom: 40px;
 }
 @media (max-width: 767.98px) {
   .renvia-hero_one .hero-content p {
@@ -2326,7 +2320,7 @@ label {
   position: absolute;
   bottom: 40px;
   left: 40px;
-  background-color: var(--primary-color);
+  background-color: #ff923fd6;
   padding: 10px;
   border-radius: 20px;
 }
@@ -6878,4 +6872,18 @@ label {
     #top-180-90{
       padding-top: 90px;
     }
+  }
+
+
+  .margintop-90{
+    margin-top: 90px;
+  }
+
+
+  @media (max-width: 768px) {
+
+    .margintop-90{
+      margin-top: 60px;
+    }
+
   }
