@@ -402,7 +402,7 @@ Version: 1.0
             infinite: true,
             speed: 800,
             autoplay: true,
-            slidesToShow: 6,
+            slidesToShow: 5,
             slidesToScroll: 1,
             prevArrow: '<div class="prev"><i class="far fa-angle-left"></i></div>',
             nextArrow: '<div class="next"><i class="far fa-angle-right"></i></div>',

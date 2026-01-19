@@ -12,31 +12,30 @@
                     <div class="renvia-content-box">
                         <!-- Section Title -->
                         <div class="section-title">
-                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">Testimonial<img src="/assets/images/line2.png" alt="line"></span>
+                            <span class="sub-title" data-aos="fade-down" data-aos-duration="1000">Testimonials<img src="/assets/images/line2.png" alt="line"></span>
                             <h2 class="text-anm">Confidence Backed by Experience</h2>
                         </div>
                         <p data-aos="fade-up" data-aos-duration="1200">Our clients value informed decisions, fair advice, and long-term outcomes—principles we stand by.</p>
                         <div class="renvia-avatar-box mt-60" data-aos="fade-up" data-aos-duration="1400">
                             <div class="avatar-list">
-                                <!-- <ul>
-                                    <li><img src="assets/images/home-two/gallery/avatar-img1.html" alt="avatar-img"></li>
-                                    <li><img src="assets/images/home-two/gallery/avatar-img2.html" alt="avatar-img"></li>
-                                    <li><img src="assets/images/home-two/gallery/avatar-img3.html" alt="avatar-img"></li>
-                                    <li><img src="assets/images/home-two/gallery/avatar-img4.html" alt="avatar-img"></li>
-                                    <li><img src="assets/images/home-two/gallery/avatar-img5.html" alt="avatar-img"></li>
+                                <ul style="padding-left: 0;">
+                                    <li><img src="/assets/images/home-two/testimonial/avatar-img1.jpg" alt="avatar-img"></li>
+                                    <li><img src="/assets/images/home-two/testimonial/avatar-img2.jpg" alt="avatar-img"></li>
+                                    <li><img src="/assets/images/home-two/testimonial/avatar-img3.jpg" alt="avatar-img"></li>
+                                    <li><img src="/assets/images/home-two/testimonial/avatar-img4.jpg" alt="avatar-img"></li>
+                                    <li><img src="/assets/images/home-two/testimonial/avatar-img5.jpg" alt="avatar-img"></li>
                                     <li><span>50+</span></li>
-                                </ul> -->
+                                </ul>
                             </div>
+                            <style>
+                                .renvia-avatar-box .avatar-list ul li {
+                                    list-style: none;
+                                }
+                            </style>
                             <div class="text-wrap">
                                 <div class="number">4.9</div>
                                 <div class="text">
-                                    <div class="ratings">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
+                                    
                                     <p> 5k+ satisfied customers</p>
                                 </div>
                             </div>
@@ -57,16 +56,9 @@
                                         <div class="quote">
                                             <img src="/assets/images/quote.png" alt="quote">
                                         </div>
-                                        <div class="ratings">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star-half"></i>
-                                        </div>
                                     </div>
-                                    <p> <%= slide.testimonial && slide.testimonial.length > 120 ? slide.testimonial.slice(0, 120) + '...' : (slide.testimonial || '') %>
-                                        <% if (slide.testimonial && slide.testimonial.length > 120) { %>
+                                    <p> <%= slide.testimonial && slide.testimonial.length > 100 ? slide.testimonial.slice(0, 100) + '...' : (slide.testimonial || '') %>
+                                        <% if (slide.testimonial && slide.testimonial.length > 100) { %>
                                           <span class="read-more-btn" data-review="<%= slide.testimonial.replace(/"/g, '&quot;') %>" onclick="openReviewPopup(this.getAttribute('data-review'))">
                                             Read More
                                           </span>
@@ -90,8 +82,8 @@
                                                     width: 60px;
                                                     height: 60px;
                                                     border-radius: 50%;
-                                                background-color: var(--primary-color);
-                                                color: white;
+                                                background-color: #f2f0ff;
+                                                color: #4b3bad;
                                                 display: flex;
                                                 align-items: center;
                                                 justify-content: center;
@@ -112,8 +104,7 @@
                          
                             <% }) %>
                         </div>
-                        <!-- Testimonial Dots -->
-                        <div class="testimonial-dots mt-50"></div>
+                    
                     </div>
                 </div>
             </div>
@@ -131,13 +122,7 @@
                          
               
         
-<!-- Review Popup -->
-<div id="reviewPopup" class="review-popup">
-  <div class="review-popup-content">
-      <p id="fullReviewText" class="fullReviewText"></p>
-  </div>
-  <button class="close-popup" onclick="closeReviewPopup()">&times;</button>
-</div>
+
 
 <style>
   /* Glassy Popup Overlay */
@@ -195,6 +180,7 @@
       height: 40px;
       width: 40px;
       padding: 0;
+      border-radius: 100%;
       font-size: 24px;
       cursor: pointer;
       background: none;

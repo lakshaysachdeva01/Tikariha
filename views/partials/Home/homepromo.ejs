@@ -1,0 +1,153 @@
+<!--======  Start Intro Section  ======-->
+<section class="renvia-intro_one bg_cover" data-src="/assets/images/home-one/bg/intro-bg1.jpg">
+    <div class="container" style="margin: 0; max-width: 100%;">
+        <div class="row">
+            <div class="col-lg-12" style="padding: 0;">
+                <!-- BACKGROUND VIDEO (auto plays, loop, muted, scaled) -->
+                <div id="background-video-wrapper" style="position: relative; width: 100%; height: 0; padding-bottom: 56.25%; overflow: hidden; background: #000; filter:brightness(0.4)">
+                    <div class="youtube-overlay-blocker" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1000; pointer-events: all; background: transparent;"></div>
+                    <iframe id="background-youtube-player" 
+                            width="100%" 
+                            height="100%" 
+                            frameborder="0"
+                            allow="autoplay; encrypted-media" 
+                            style="position: absolute; top: 0; left: 0; transform: scale(2.4); transform-origin: center center; pointer-events: none;">
+                    </iframe>
+                </div>
+                
+                <!-- Play button to trigger your popup system -->
+                <div class="play-button text-center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1001;">
+                    <a href="javascript:void(0)" 
+                       class="property-media-trigger" 
+                       data-type="video" 
+                       data-src="https://www.youtube.com/watch?v=qTU8d2mmm7k">
+                        <i class="fa-solid fa-play"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// CONFIGURATION - PUT YOUR YOUTUBE VIDEO ID HERE
+const YOUTUBE_VIDEO_ID = "qTU8d2mmm7k"; // ← CHANGE THIS TO YOUR VIDEO ID
+
+// Background video settings (muted, loop, no controls)
+const BG_VIDEO_SETTINGS = {
+    autoplay: 1,      // Auto play
+    mute: 1,          // Muted
+    loop: 1,          // Loop video
+    controls: 0,      // No controls
+    showinfo: 0,      // No info
+    modestbranding: 1,// Minimal branding
+    rel: 0,           // No related videos
+    fs: 0,            // No fullscreen
+    disablekb: 1,     // Disable keyboard controls
+    iv_load_policy: 3,// Hide annotations
+    playsinline: 1,   // Play inline on mobile
+    vq: 'hd2160',     // Force 2160p quality
+    scale: 2.4        // Scale factor
+};
+
+// Create YouTube embed URL for background
+function createYouTubeEmbed(videoId, settings) {
+    const params = new URLSearchParams({
+        autoplay: settings.autoplay,
+        mute: settings.mute,
+        loop: settings.loop,
+        playlist: settings.loop ? videoId : '', // Required for loop
+        controls: settings.controls,
+        showinfo: settings.showinfo,
+        modestbranding: settings.modestbranding,
+        rel: settings.rel,
+        fs: settings.fs,
+        disablekb: settings.disablekb,
+        iv_load_policy: settings.iv_load_policy,
+        playsinline: settings.playsinline,
+        vq: settings.vq || 'hd2160'
+    });
+    
+    return `https://www.youtube.com/embed/${videoId}?${params.toString()}`;
+}
+
+// Initialize background video (auto plays on load)
+function initBackgroundVideo() {
+    const iframe = document.getElementById('background-youtube-player');
+    
+    // Create embed URL for background video
+    const embedUrl = createYouTubeEmbed(YOUTUBE_VIDEO_ID, BG_VIDEO_SETTINGS);
+    
+    // Set iframe source
+    iframe.src = embedUrl;
+    
+    // Apply scaling
+    iframe.style.transform = `scale(${BG_VIDEO_SETTINGS.scale})`;
+    iframe.style.webkitTransform = `scale(${BG_VIDEO_SETTINGS.scale})`;
+    iframe.style.transformOrigin = 'center center';
+    
+    // Ensure no interactions
+    const blocker = document.querySelector('.youtube-overlay-blocker');
+    if (blocker) {
+        blocker.style.pointerEvents = 'all';
+        blocker.style.cursor = 'default';
+    }
+    
+    // Force quality for background video
+    setTimeout(() => {
+        try {
+            if (iframe.contentWindow) {
+                iframe.src = iframe.src.includes('vq=hd2160') ? iframe.src : iframe.src + '&vq=hd2160';
+            }
+        } catch (e) {
+            // Cross-origin restrictions
+        }
+    }, 2000);
+}
+
+// Initialize everything
+document.addEventListener('DOMContentLoaded', function() {
+    // Start background video immediately
+    initBackgroundVideo();
+    
+    // Add the play button as a property-media-trigger
+    const playButton = document.querySelector('.play-button a');
+    if (playButton) {
+        // Make sure it has the right classes and data attributes
+        playButton.classList.add('property-media-trigger');
+        
+        // Set the data attributes for your popup system
+        playButton.setAttribute('data-type', 'video');
+        playButton.setAttribute('data-src', `https://www.youtube.com/watch?v=${YOUTUBE_VIDEO_ID}`);
+        
+        // Clean up any conflicting attributes
+        playButton.removeAttribute('id');
+        playButton.removeAttribute('href');
+        playButton.setAttribute('href', 'javascript:void(0)');
+        
+        // The click event will be handled by your propertyMediaPopup system automatically
+        // because it has the 'property-media-trigger' class
+        
+        // Force re-initialization of your popup system to pick up this new trigger
+        setTimeout(() => {
+            if (typeof propertyMediaPopup !== 'undefined' && propertyMediaPopup._setupMediaItems) {
+                propertyMediaPopup._setupMediaItems();
+            }
+        }, 500);
+    }
+    
+    // Monitor and maintain background video quality
+    setInterval(() => {
+        const bgIframe = document.getElementById('background-youtube-player');
+        if (bgIframe && bgIframe.src && !bgIframe.src.includes('vq=hd2160')) {
+            bgIframe.src = bgIframe.src + '&vq=hd2160';
+        }
+    }, 5000);
+});
+
+// Window load as backup
+window.addEventListener('load', function() {
+    // Re-check background video
+    setTimeout(initBackgroundVideo, 1000);
+});
+</script>
