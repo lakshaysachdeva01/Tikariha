@@ -255,11 +255,7 @@
       const popup = document.getElementById("reviewPopup");
       popup.style.display = "flex";
       setTimeout(() => popup.classList.add("show"), 10);
-      
-      // Freeze background at current position
-      document.body.style.top = '-' + scrollPosition + 'px';
-      document.body.classList.add("modal-open");
-      
+     
       // Prevent spacebar scrolling
       window.addEventListener('keydown', preventSpaceScroll, false);
   }
@@ -272,7 +268,6 @@
       // Restore scroll position
       document.body.classList.remove("modal-open");
       document.body.style.top = '';
-      window.scrollTo(0, scrollPosition);
       
       // Re-enable spacebar
       window.removeEventListener('keydown', preventSpaceScroll, false);

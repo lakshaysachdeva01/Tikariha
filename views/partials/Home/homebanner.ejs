@@ -16,9 +16,9 @@
                       <div class="hero-content margintop-90">
                           <span class="tag-line" style="color: #f9d382;" data-aos="fade-down" data-aos-duration="2000"><%= banner.subtitle || '' %></span>
                           <h1 class="text-anm"><%= banner.bannerTitle %></h1>
-                          <p data-aos="fade-up" data-aos-duration="2200"><%= banner.description || '' %></p>
+                          <p data-aos="fade-up" data-aos-duration="2200" style="line-height: 28px; font-weight: 300;"><%= banner.description || '' %></p>
                           <div class="renvia-button" data-aos="fade-up" data-aos-duration="2400">
-                              <a href="/" class="theme-btn style-one">View All Services<i class="far fa-arrow-right"></i></a>
+                              <a style="padding: 12px 20px;" href="<%= banner.backlink || '/projects' %>" class="theme-btn style-one">Project Details<i class="far fa-arrow-right"></i></a>
                           </div>
                       </div>
                   </div>

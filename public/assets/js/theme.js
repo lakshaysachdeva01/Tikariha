@@ -173,7 +173,7 @@ Version: 1.0
             dots: false,
             arrows: false,
             infinite: true,
-            speed: 800,
+            speed: 500,
             autoplay: true,
             slidesToShow: 4,
             slidesToScroll: 1,
@@ -443,7 +443,7 @@ Version: 1.0
 				if (entry.isIntersecting) {
 					$(entry.target).counterUp({
 						delay: 100,
-						time: 4000
+						time: 2000
 					});
 					observer.unobserve(entry.target);
 				}
