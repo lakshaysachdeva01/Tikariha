@@ -7,7 +7,14 @@
                 <!-- Renvia Image Box -->
                 <div class="renvia-image-box mb-5 mb-xl-0" data-aos="fade-up" data-aos-duration="1000">
                     <div class="renvia-image">
-                        <img src="/assets/images/about-img1.jpg" alt="about image">
+                        <% promobanners
+                        .filter(banner => banner._id === "696f97ba117cb325a078e8eb")
+                        .forEach(banner => { %>
+                    
+                        <img src="<%= process.env.S3_BASE_URL + banner.image %>" alt="about">
+                    
+                    <% }) %>
+                    
                     </div>
                     <div class="renvia-content-box">
                         <div class="content text-center text-white">
@@ -57,7 +64,7 @@
                         <div class="tab-pane fade" id="vision">
                             <div class="content-box">
                                 <div class="renvia-image">
-                                    <img src="/assets/images/about-img2.jpg" alt="about">
+                                    <img src="/assets/images/vision.jpg" alt="about">
                                 </div>
                                 <div class="content">
                                     <p>To build a nationally respected advisory institution, trusted across generations for clarity, 
@@ -68,7 +75,7 @@
                         <div class="tab-pane fade" id="history">
                             <div class="content-box">
                                 <div class="renvia-image">
-                                    <img src="/assets/images/about-img2.jpg" alt="about">
+                                    <img src="/assets/images/experience.png" alt="about">
                                 </div>
                                 <div class="content">
                                     <p>With more than 20 years of industry presence, Tikariha Advisors has evolved from a focused 
@@ -84,12 +91,12 @@
                             <a href="/about" class="theme-btn style-one">Know More <i class="far fa-arrow-right"></i></a>
                         </div>
                         <div class="call-support-box">
-                            <div class="icon" style="background-color: #d3af63;">
+                            <div class="icon" onclick="window.location.href='tel:+919039931234'">
                                 <i class="far fa-phone-alt"></i>
                             </div>
                             <div class="content">
                                 <span class="title">Call Us For Any Inquiry</span>
-                                <h6 style="font-size: 20px;"><a href="tel:+919039931234">+91 9039931234</a></h6>
+                                <h6 style="font-size: 20px;"><a class="phonenumberabout" href="tel:+919039931234">+91 9039931234</a></h6>
                             </div>
                         </div>
                     </div>
@@ -98,3 +105,18 @@
         </div>
     </div>
 </section>
+
+
+<style>
+    .renvia-about_two .call-support-box .icon{
+        background-color: #d3af63 ;
+        cursor: pointer;
+    }
+    .renvia-about_two .call-support-box .phonenumberabout:hover{
+        color: #4b3bad !important;
+    }
+    .renvia-about_two .call-support-box:hover .icon{
+        background-color: #4b3bad;
+    }
+
+</style>

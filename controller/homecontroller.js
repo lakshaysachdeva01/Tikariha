@@ -15,6 +15,17 @@ exports.getAdBanner = async(req, res) => {
      
 };
 
+
+
+exports.getPromoBanner = async(req, res) => {  
+    const websiteID = await getWebsiteID(); 
+     const data = await fetchData(`${API_BASE_URL}/website/${websiteID}/promo-assets/get-all`);
+     return data || null
+     
+};
+
+
+
 exports.getHomepopupBanner = async () => {
     try {
         const websiteID = await getWebsiteID();

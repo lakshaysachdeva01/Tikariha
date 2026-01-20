@@ -1,7 +1,7 @@
 require('dotenv').config();  // Load environment variables from .env file
 const { API_BASE_URL , WEBSITE_ID_KEY, S3_BASE_URL} = require('./config/config');
 const { getWebsiteID } = require('./utils/helper');
-const { getHomeDesktopBanner ,gettestimonial ,getAdBanner,getHomepopupBanner ,getclientle  } = require('./controller/homecontroller');
+const { getHomeDesktopBanner ,gettestimonial ,getPromoBanner,getHomepopupBanner ,getclientle  } = require('./controller/homecontroller');
 const { getBlog ,getBlogfull, getlatestblogs} = require('./controller/blogcontroller');
 const { getgallery,getLatestGalleryImages} = require('./controller/gallerycontroller');
 const { getProducts, getProductDetails, getProductsByCategory, getCategories ,getjobs,getjobdetails,getotherjobs} = require('./controller/productcontroller');
@@ -46,6 +46,7 @@ app.get('/', async (req, res) => {
 // //     const products = await getProducts();
     const clients = await getclientle();
     const popupbanners = await getHomepopupBanner();
+    const promobanners = await getPromoBanner();
 //    const latestImages = await getLatestGalleryImages();
    const seoDetails = {
     title: " ",
@@ -56,7 +57,7 @@ app.get('/', async (req, res) => {
 };
 
 
-    res.render('index', {body: "",websiteID,baseUrl,testimonial,seoDetails,projects,blogs,popupbanners,clients,banners });
+    res.render('index', {body: "",websiteID,baseUrl,testimonial,promobanners,seoDetails,projects,blogs,popupbanners,clients,banners });
 });
 
 
@@ -74,6 +75,24 @@ app.get('/about', async (req, res) => {
     
    
     res.render('about', {body: "",baseUrl, seoDetails,clients,projects});
+});
+
+
+
+app.get('/privacy-policy', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const clients = await getclientle();
+    const projects = await getProducts();
+    const seoDetails = {
+        title: "",
+        metaDescription: "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: "",
+        canonical: `${baseUrl}/privacy-policy`,
+    };
+    
+   
+    res.render('privacy', {body: "",baseUrl, seoDetails,clients,projects});
 });
 
 

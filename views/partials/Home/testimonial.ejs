@@ -56,7 +56,7 @@
                                             <img style="width: 40px;" src="/assets/images/quote.png" alt="quote">
                                         </div>
                                     </div>
-                                    <p> <%= slide.testimonial && slide.testimonial.length > 100 ? slide.testimonial.slice(0, 100) + '...' : (slide.testimonial || '') %>
+                                    <p style="height: 151px;"> <%= slide.testimonial && slide.testimonial.length > 100 ? slide.testimonial.slice(0, 100) + '...' : (slide.testimonial || '') %>
                                         <% if (slide.testimonial && slide.testimonial.length > 100) { %>
                                           <span class="read-more-btn" data-review="<%= slide.testimonial.replace(/"/g, '&quot;') %>" onclick="openReviewPopup(this.getAttribute('data-review'))">
                                             Read More
@@ -95,7 +95,7 @@
                                         <% } %>
                                         <div class="author-info" style="margin-left: 18px;">
                                             <h5><%= slide.name %></h5>
-                                            <span class="position"><%= slide.profile %></span>
+                                            <span class="position" style="color: #d3af63;"><%= slide.profile %></span>
                                         </div>
                                     </div>
                                 </div>

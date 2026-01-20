@@ -503,7 +503,7 @@ Version: 1.0
             markers: false
         });
         let cards = gsap.utils.toArray(".renvia-proiect-list .renvia-project-item");
-        let stickDistance = 400;
+        let stickDistance = 500;
         let lastCardST = ScrollTrigger.create({
             trigger: cards[cards.length - 1],
             start: "bottom bottom",
