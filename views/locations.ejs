@@ -22,19 +22,19 @@
                                     .replace(/\b\w/g, char => char.toUpperCase());
                               %>
                               
-                        <div class="renvia-service-card col-sm-12 style-one " onclick="window.location.href='/project/<%= project._id %>'">
+                        <div class="renvia-service-card col-sm-12 style-one " onclick="window.location.href='/project/<%= project.seoConfig.slug %>'">
                             <div class="content">
                                 <div class="title-wrap" style="margin-bottom: 20px; padding-bottom: 20px;">
                                     <div style="display: flex; align-items: center; justify-content: center; gap: 15px;">
                                         <img src="<%= process.env.S3_BASE_URL + project.projectLogo %>" style="height: 51px; width: 51px; object-fit: contain; border-radius: 100%;" alt="<%= project.projectName %>">
                                         <div style="display: flex; flex-direction: column;">
-                                            <h4><a href="/project/<%= project._id %>"><%= project.projectName %></a></h4>
+                                            <h4><a href="/project/<%= project.seoConfig.slug %>"><%= project.projectName %></a></h4>
                                             <p style="margin-bottom: 0px;"><%= titleCase(project.locality) %>, <%= titleCase(project.city) %></p>
                                         </div>
                                        
                                     </div>
                                   
-                                    <a href="/project/<%= project._id %>" class="icon-btn"><i class="far fa-arrow-right"></i></a>
+                                    <a href="/project/<%= project.seoConfig.slug %>" class="icon-btn"><i class="far fa-arrow-right"></i></a>
                                 </div>
 
                               <div class="project-description-block" style="margin-bottom: 22px; height: 81px; overflow: hidden;">

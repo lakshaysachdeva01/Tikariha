@@ -95,6 +95,37 @@ app.get('/privacy-policy', async (req, res) => {
     res.render('privacy', {body: "",baseUrl, seoDetails,clients,projects});
 });
 
+app.get('/cookie-policy', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const clients = await getclientle();
+    const projects = await getProducts();
+    const seoDetails = {
+        title: "",
+        metaDescription: "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: "",
+        canonical: `${baseUrl}/cookie-policy`,
+    };
+    
+    res.render('cookiep', {body: "",baseUrl, seoDetails,clients,projects});
+});
+
+
+app.get('/terms-of-service', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const clients = await getclientle();
+    const projects = await getProducts();
+    const seoDetails = {
+        title: "",
+        metaDescription: "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: "",
+        canonical: `${baseUrl}/terms-of-service`,
+    };
+    
+    res.render('tandc', {body: "",baseUrl, seoDetails,clients,projects});
+});
+
 
 app.get('/projects', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
@@ -114,10 +145,9 @@ app.get('/projects', async (req, res) => {
 });
 
 
-
-app.get('/project/:id', async (req, res) => {
+app.get('/project/:id/:leadid?', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
-    const { id } = req.params;
+    const { id, leadid } = req.params;
     const projectDetails = await getProductDetails(id);
     const projects = await getProducts();
     const websiteID = await getWebsiteID();
@@ -125,6 +155,9 @@ app.get('/project/:id', async (req, res) => {
     if (!projectDetails) {
         return res.redirect('/projects');
     }
+
+    // Set leadId to "00000" if not provided, otherwise use the provided leadid
+    const leadId = leadid || "00000";
 
     const seoDetails = {
         title: projectDetails.title || "Project Details",
@@ -138,17 +171,17 @@ app.get('/project/:id', async (req, res) => {
         body: "",
         baseUrl,
         project: projectDetails,
-PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS,
+        PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS,
         seoDetails,
         S3_BASE_URL,
         API_BASE_URL,
         WEBSITE_ID_KEY,
         websiteID,
         projectDetails,
-        projects
+        projects,
+        leadId  // Pass the leadId to the template
     });
 });
-
 
 
 
@@ -459,6 +492,7 @@ app.get('/job/:slug', async (req, res) => {
 
 app.get('/thankyou', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
+    const projects = await getProducts();   
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -466,7 +500,7 @@ app.get('/thankyou', async (req, res) => {
         keywords: "",
         canonical: "",
     } 
-    res.render('thankyou', {body: "",seoDetails});
+    res.render('thankyou', {body: "",seoDetails ,projects });
 });
 
 
@@ -541,6 +575,7 @@ app.get('/post/:id', async (req, res) => {
 
 app.use(async (req, res, next) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
+    const projects = await getProducts();   
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -550,7 +585,7 @@ app.use(async (req, res, next) => {
     };
     
 
-    res.status(404).render('404', { seoDetails });
+    res.status(404).render('404', { seoDetails,projects });
 });
 
 

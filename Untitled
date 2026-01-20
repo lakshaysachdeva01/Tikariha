@@ -1,0 +1,37 @@
+app.get('/project/:id/:leadid?', async (req, res) => {
+    const baseUrl = req.protocol + '://' + req.get('Host');
+    const { id, leadid } = req.params;
+    const projectDetails = await getProductDetails(id);
+    const projects = await getProducts();
+    const websiteID = await getWebsiteID();
+
+    if (!projectDetails) {
+        return res.redirect('/projects');
+    }
+
+    // Set leadId to "00000" if not provided, otherwise use the provided leadid
+    const leadId = leadid || "00000";
+
+    const seoDetails = {
+        title: projectDetails.title || "Project Details",
+        metaDescription: projectDetails.description ? projectDetails.description.replace(/<[^>]*>/g, '').substring(0, 160) : "",
+        metaImage: `${baseUrl}/${metaLogoPath}`,
+        keywords: projectDetails.keywords || "",
+        canonical: `${baseUrl}/project/${id}`,
+    };
+
+    res.render('details', {
+        body: "",
+        baseUrl,
+        project: projectDetails,
+        PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS,
+        seoDetails,
+        S3_BASE_URL,
+        API_BASE_URL,
+        WEBSITE_ID_KEY,
+        websiteID,
+        projectDetails,
+        projects,
+        leadId  // Pass the leadId to the template
+    });
+});

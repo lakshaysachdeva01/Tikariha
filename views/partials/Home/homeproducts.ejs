@@ -85,43 +85,63 @@
         <div class="service-slider" data-aos="fade-up" data-aos-duration="1000">
             <!-- Renvia Service Card -->
 
-
-            
-
-        <% projects.forEach((project, index) => { %>
             <%
-            const titleCase = (str) =>
-              str
-                .replace(/_/g, ' ')
-                .toLowerCase()
-                .replace(/\b\w/g, char => char.toUpperCase());
-          %>
-          
-
-            <div class="renvia-service-card style-two" onclick="window.location.href='/project/<%= project._id %>'">
-                <div class="content">
-                   
-                   <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
-                    <img src="<%= process.env.S3_BASE_URL + project.projectLogo %>" style="max-height: 51px;  max-width: 51px; min-height: 51px;  min-width: 51px;     background: #fff8f2;
-    object-fit: contain; border-radius: 100%;" alt="<%= project.projectName %>">
-
-                    <div style="display: flex; flex-direction: column; gap: 0;  ">
-                        <h4 class="title" style="margin-bottom: 0px; font-size:20px; line-height: 0.9em;"><%= project.projectName %></h4><p style="margin: 0;"><%= titleCase(project.locality) %> , <%= titleCase(project.city) %></p>
+            const safeCurrentSlug =
+                typeof currentSlug !== "undefined" ? currentSlug : null;
+            
+            const filteredProjects = safeCurrentSlug
+                ? projects.filter(p => p.seoConfig.slug !== safeCurrentSlug)
+                : projects;
+            %>
+            
+            
+            
+            <% filteredProjects.forEach((project, index) => { %>
+                <%
+                    const titleCase = (str) =>
+                        str
+                            .replace(/_/g, ' ')
+                            .toLowerCase()
+                            .replace(/\b\w/g, char => char.toUpperCase());
+                %>
+            
+                <div class="renvia-service-card style-two"
+                     onclick="window.location.href='/project/<%= project.seoConfig.slug %>'">
+                    <div class="content">
+            
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:20px;">
+                            <img src="<%= process.env.S3_BASE_URL + project.projectLogo %>"
+                                 style="max-height:51px;max-width:51px;min-height:51px;min-width:51px;
+                                        background:#fff8f2;object-fit:contain;border-radius:100%;"
+                                 alt="<%= project.projectName %>">
+            
+                            <div>
+                                <h4 style="margin-bottom:0;font-size:20px;line-height:0.9em;">
+                                    <%= project.projectName %>
+                                </h4>
+                                <p style="margin:0;">
+                                    <%= titleCase(project.locality) %>, <%= titleCase(project.city) %>
+                                </p>
+                            </div>
+                        </div>
+            
+                        <img style="border-radius:16px;height:168px;"
+                             src="<%= process.env.S3_BASE_URL + project.listingBanner %>"
+                             alt="<%= project.projectName %>">
+            
+                        <div class="project-description-block" style="margin-bottom:22px;">
+                            <%- project.projectDescrpition[0].description %>
+                        </div>
+            
+                        <a href="/project/<%= project.seoConfig.slug %>" class="read-more style-two">
+                            <span class="icon"><i class="far fa-arrow-right"></i></span>
+                            View Details
+                        </a>
+            
                     </div>
-    
-
-                   </div>
-                   
-                    <img style="border-radius: 16px; height: 168px; " src="<%= process.env.S3_BASE_URL + project.listingBanner %>" alt="<%= project.projectName %>">
-                    <div class="project-description-block" style="margin-bottom: 22px;">
-                        <%- project.projectDescrpition[0].description %>
-                                  </div>
-                    <a href="/project/<%= project._id %>" class="read-more style-two"> <span class="icon"><i class="far fa-arrow-right"></i></span> View Details</a>
                 </div>
-            </div>
-             
-<% }) %>
-
+            <% }) %>
+            
 
 
 

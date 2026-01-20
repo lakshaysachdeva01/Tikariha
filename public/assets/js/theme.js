@@ -270,6 +270,7 @@ Version: 1.0
 				{
                     breakpoint: 767,
                     settings: {
+                        
                         arrows: false,
                     }
                 }
@@ -291,9 +292,17 @@ Version: 1.0
             nextArrow: '<div class="next"><i class="far fa-arrow-right"></i></div>',
             responsive: [
 				{
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                },
+				{
                     breakpoint: 767,
                     settings: {
-                        slidesToShow: 1
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
                     }
                 }
             ]
@@ -414,13 +423,13 @@ Version: 1.0
                     }
                 },
                 {
-                    breakpoint: 600,
+                    breakpoint: 768,
                     settings: {
                         slidesToShow: 2
                     }
                 },
                 {
-                    breakpoint: 570,
+                    breakpoint: 576,
                     settings: {
                         slidesToShow: 1
                     }

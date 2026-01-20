@@ -97,7 +97,7 @@
                                             <%= titleCase(project.locality) %> , <%= titleCase(project.city) %>
                                         </span>
                                         <h4 class="title">
-                                            <a href="/project/<%= project._id %>"><%= project.projectName %></a>
+                                            <a href="/project/<%= project.seoConfig.slug %>"><%= project.projectName %></a>
                                         </h4>
                                     </div>
                                 </div>
@@ -126,7 +126,7 @@
                     <div class="primary-menu">
                         <!--====  Site Branding  ===-->
                         <div class="site-branding">
-                            <a href="/" class="brand-logo" style="filter: brightness(4);"><img src="/assets/images/Logo/Tikariha_Logo.png" alt="Brand Logo"></a>
+                            <a href="/" class="brand-logo headerlogob" ><img src="/assets/images/Logo/Tikariha_Logo.png" alt="Brand Logo"></a>
                         </div>
                         <!--=== Main Menu ===-->
                         <div class="theme-nav-menu">
