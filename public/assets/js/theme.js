@@ -142,13 +142,7 @@ Version: 1.0
 
     //===== Magnific-popup js
     
-    if ($('.video-popup').length){
-        $('.video-popup').magnificPopup({
-            type: 'iframe',
-            removalDelay: 300,
-            mainClass: 'mfp-fade'
-        });
-    }
+   
 
     //===== Slick Slider
     if ($('.hero-slider').length) {
@@ -509,7 +503,7 @@ Version: 1.0
             markers: false
         });
         let cards = gsap.utils.toArray(".renvia-proiect-list .renvia-project-item");
-        let stickDistance = 530;
+        let stickDistance = 400;
         let lastCardST = ScrollTrigger.create({
             trigger: cards[cards.length - 1],
             start: "bottom bottom",
