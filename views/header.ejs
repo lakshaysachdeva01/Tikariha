@@ -65,49 +65,51 @@
                 <div class="offcanvas-body">
                     <!-- Panel Box -->
                     <div class="panel-box mb-40">
-                        <h4 class="panel-widget-title mb-10">Tikariha Advisors</h4>
-                        <p>We turn your dream vacations into unforgettable realities. Whether you're seeking a relaxing beach escape, a thrilling adventure</p>
+                        <h4 class="panel-widget-title mb-10">Tikariha Advisors Pvt. Ltd.</h4>
+                        <p>A trusted real estate consultancy delivering high-return property solutions and advisory services in Raipur, Chhattisgarh.</p>
                     </div>
                     <!-- Panel Box -->
                     <div class="panel-box mb-40">
-                        <h4 class="panel-widget-title mb-20">Popular Rent</h4>
+                        <h4 class="panel-widget-title mb-20">Top picks</h4>
                         <!-- Renvia Project Item -->
+                       
+                        <% projects
+                        .filter(project => project.projectTag === "RECOMMENDED")
+                        .forEach((project, index) => { %>
+                      
+  
+                            <%
+                            const titleCase = (str) =>
+                              str
+                                .replace(/_/g, ' ')
+                                .toLowerCase()
+                                .replace(/\b\w/g, char => char.toUpperCase());
+                          %>
+
+
                         <div class="renvia-project-item mb-20">
                             <div class="project-thumbnail">
-                                <img src="/assets/images/offcanvas/project-img1.jpg" alt="tour image">
+                                <img style="max-w-[300px] max-h-[190px]" src="<%= process.env.S3_BASE_URL + project.listingBanner %>" alt="<%= project.projectName %>">
                                 <div class="hover-content">
                                     <div class="project-content">
-                                        <span class="location"><i class="far fa-map-marker-alt"></i>New York, NY</span>
-                                        <h4 class="title"><a href="project-details.html">Apartment Building</a></h4>
+                                        <span class="location">
+                                            <i class="far fa-map-marker-alt"></i>
+                                            <%= titleCase(project.locality) %> , <%= titleCase(project.city) %>
+                                        </span>
+                                        <h4 class="title">
+                                            <a href="/project/<%= project._id %>"><%= project.projectName %></a>
+                                        </h4>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- Renvia Project Item -->
-                        <div class="renvia-project-item">
-                            <div class="project-thumbnail">
-                                <img src="/assets/images/offcanvas/project-img2.jpg" alt="tour image">
-                                <div class="hover-content">
-                                    <div class="project-content">
-                                        <span class="location"><i class="far fa-map-marker-alt"></i>New York, NY</span>
-                                        <h4 class="title"><a href="project-details.html">Commercial Space</a></h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    
+                    <% }) %>
+                    
+
                     </div>
                 </div>
-                <!-- Panel Box -->
-                <div class="panel-box">
-                    <h4>Newsletter</h4>
-                    <p class="mb-15">Get every travel news update</p>
-                    <form autocomplete="off">
-                        <div class="form-group">
-                            <input type="text" class="form_control" placeholder="Email address" name="search">
-                            <button class="theme-btn style-one">Subscribe</button>
-                        </div>
-                    </form>
-                </div>
+               
             </div>
         </div>
         <!--====== Start Overlay ======-->

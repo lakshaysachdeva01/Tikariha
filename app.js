@@ -63,6 +63,7 @@ app.get('/', async (req, res) => {
 app.get('/about', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const clients = await getclientle();
+    const projects = await getProducts();
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -72,7 +73,7 @@ app.get('/about', async (req, res) => {
     };
     
    
-    res.render('about', {body: "",baseUrl, seoDetails,clients});
+    res.render('about', {body: "",baseUrl, seoDetails,clients,projects});
 });
 
 
@@ -80,6 +81,7 @@ app.get('/projects', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const websiteID = await getWebsiteID();
     const projects = await getProducts();
+
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -98,6 +100,7 @@ app.get('/project/:id', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const { id } = req.params;
     const projectDetails = await getProductDetails(id);
+    const projects = await getProducts();
     const websiteID = await getWebsiteID();
 
     if (!projectDetails) {
@@ -122,7 +125,8 @@ PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS,
         API_BASE_URL,
         WEBSITE_ID_KEY,
         websiteID,
-        projectDetails
+        projectDetails,
+        projects
     });
 });
 
@@ -133,7 +137,7 @@ PROJECT_ENQUIRY_DYNAMIC_FIELDS_KEYS,
 app.get('/services', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const websiteID = await getWebsiteID(); 
-
+    const projects = await getProducts();
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -155,7 +159,8 @@ app.get('/services', async (req, res) => {
         API_BASE_URL,
         WEBSITE_ID_KEY,
         websiteID,
-        query // Pass the normalized query object
+        query, // Pass the normalized query object
+        projects
     });
 });
 
@@ -163,6 +168,7 @@ app.get('/services', async (req, res) => {
 app.get('/service/insurance-advisory', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const websiteID = await getWebsiteID();
+    const projects = await getProducts();
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -175,7 +181,7 @@ app.get('/service/insurance-advisory', async (req, res) => {
     res.render('service-detail1', {body: "",baseUrl,  SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,
         API_BASE_URL,
         WEBSITE_ID_KEY,
-        websiteID,seoDetails,websiteID});
+        websiteID,seoDetails,websiteID,projects});
 });
 
 
@@ -183,6 +189,7 @@ app.get('/service/insurance-advisory', async (req, res) => {
 app.get('/service/projects-consultancy-sales', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const websiteID = await getWebsiteID();
+    const projects = await getProducts();
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -195,7 +202,7 @@ app.get('/service/projects-consultancy-sales', async (req, res) => {
     res.render('service-detail2', {body: "",baseUrl,  SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,
         API_BASE_URL,
         WEBSITE_ID_KEY,
-        websiteID,seoDetails,websiteID});
+        websiteID,seoDetails,websiteID,projects});
 });
 
 
@@ -203,6 +210,7 @@ app.get('/service/projects-consultancy-sales', async (req, res) => {
 app.get('/service/investment-consultancy', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const websiteID = await getWebsiteID();
+    const projects = await getProducts();
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -215,7 +223,7 @@ app.get('/service/investment-consultancy', async (req, res) => {
     res.render('service-detail3', {body: "",baseUrl,  SERVICE_ENQUIRY_DYNAMIC_FIELDS_KEYS,
         API_BASE_URL,
         WEBSITE_ID_KEY,
-        websiteID,seoDetails,websiteID});
+        websiteID,seoDetails,websiteID,projects});
 });
 
 
@@ -223,7 +231,7 @@ app.get('/service/investment-consultancy', async (req, res) => {
 
 app.get('/gallery', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
-    
+    const projects = await getProducts();
     try {
         const rawGallery = await getgallery();
         
@@ -258,7 +266,8 @@ app.get('/gallery', async (req, res) => {
             body: "", 
             gallery: rawGallery || [], 
             normalizedGallery: normalizedGallery || [],
-            seoDetails 
+                seoDetails,
+            projects
         });
     } catch (error) {
         console.error("Error in /gallery route:", error);
@@ -282,7 +291,7 @@ app.get('/gallery', async (req, res) => {
 app.get('/contact', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const websiteID = await getWebsiteID(); 
-    
+    const projects = await getProducts();
     const seoDetails = {
         title: "",
         metaDescription: "",
@@ -291,7 +300,7 @@ app.get('/contact', async (req, res) => {
         canonical: `${baseUrl}/contact`,
     };
 
-    res.render('contact', { body: "", websiteID, API_BASE_URL, WEBSITE_ID_KEY, CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS, seoDetails });
+    res.render('contact', { body: "", websiteID,projects, API_BASE_URL, WEBSITE_ID_KEY, CONTACT_ENQUIRY_DYNAMIC_FIELDS_KEYS, seoDetails });
 });
 
 
@@ -314,7 +323,7 @@ app.get('/contact', async (req, res) => {
 
 app.get('/posts', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
-  
+    const projects = await getProducts();
     const blogs = await getBlog();
     const seoDetails = {
         title: "",
@@ -324,11 +333,12 @@ app.get('/posts', async (req, res) => {
         canonical: `${baseUrl}/blogs`,
     };
 
-    res.render('blogs', { body: "", blogs, baseUrl, seoDetails });
+    res.render('blogs', { body: "", blogs, baseUrl, seoDetails,projects });
 });
 
 app.get('/jobs', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
+    const projects = await getProducts();
     const jobs = await getjobs();
     const seoDetails = {
         title: "",
@@ -338,7 +348,7 @@ app.get('/jobs', async (req, res) => {
         canonical: `${baseUrl}/jobs`,
     };
     
-    res.render('jobs', { body: "", baseUrl, seoDetails, jobs });
+    res.render('jobs', { body: "", baseUrl, seoDetails, jobs,projects });
 });
 
 
@@ -346,6 +356,7 @@ app.get('/job/:slug', async (req, res) => {
     const baseUrl = req.protocol + '://' + req.get('Host');
     const { slug } = req.params;
     const websiteID = await getWebsiteID();
+    const projects = await getProducts();
     const job = await getjobdetails(slug);
     // const otherJobs = await getotherjobs(slug);
     const jobDescription = job?.description?.replace(/<[^>]*>/g, '').substring(0, 160) || '';
@@ -366,7 +377,7 @@ app.get('/job/:slug', async (req, res) => {
         API_BASE_URL,
         WEBSITE_ID_KEY,
         S3_BASE_URL,
-       
+        projects
     });
 });
 
@@ -448,7 +459,7 @@ app.get('/post/:id', async (req, res) => {
     const blogDetails = await getBlogfull(id);
     console.log("BLOG DETAILS 👉", blogDetails);
     const websiteID = await getWebsiteID(); 
-   
+    const projects = await getProducts();   
     const latestblog = await getlatestblogs(id);
     // Extract the first 50 words from the description
     const truncateToWords = (text, wordCount) => {
@@ -474,7 +485,7 @@ app.get('/post/:id', async (req, res) => {
        blogDetails,
         seoDetails,
         latestblog,
-       websiteID,API_BASE_URL,WEBSITE_ID_KEY
+       websiteID,API_BASE_URL,WEBSITE_ID_KEY,projects   
     });
 });
 
